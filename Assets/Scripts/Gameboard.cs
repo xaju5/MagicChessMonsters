@@ -14,6 +14,7 @@ public class Gameboard : MonoBehaviour
     private float TILE_SIZE = 1f;
     private GameObject[,] tiles;
     private Camera currentCamera;
+    private Vector2Int currentHover;
 
     private void Awake()
     {
@@ -21,7 +22,7 @@ public class Gameboard : MonoBehaviour
     }
     private void Update() {
         if(!currentCamera){
-            currentCamera = Camera.current;
+            currentCamera = Camera.main;
             return;
         }
 
@@ -29,17 +30,26 @@ public class Gameboard : MonoBehaviour
         Ray ray= currentCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out info, 100, LayerMask.GetMask("Tile"))){
             Vector2Int hitPosition = LookupTileIndex(info.transform.gameObject);
+
+            //Set up a new hover
+            if(currentHover == -Vector2Int.one){
+                currentHover = hitPosition;
+                tiles[hitPosition.x,hitPosition.y].layer = LayerMask.NameToLayer("Hover");
+            }
+            //Change to other tile hover
+            if(currentHover != hitPosition){
+                tiles[currentHover.x,currentHover.y].layer = LayerMask.NameToLayer("Tile");
+                currentHover = hitPosition;
+                tiles[hitPosition.x,hitPosition.y].layer = LayerMask.NameToLayer("Hover");  
+            }
         }
-    }
-
-    private Vector2Int LookupTileIndex(GameObject hitInfo)
-    {
-        for (int x = 0; x < TILE_COUNT_X; x++)
-            for (int y = 0; y < TILE_COUNT_Y; y++)
-                if (tiles[x, y] == hitInfo)
-                    return new Vector2Int(x, y);
-
-        throw new Exception("LookupTileIndex_NotFound");
+        else {
+            //Remove hover
+            if(currentHover != -Vector2Int.one){
+                tiles[currentHover.x,currentHover.y].layer = LayerMask.NameToLayer("Tile");
+                currentHover = -Vector2Int.one;
+            }
+        }
     }
 
     private void GenerateBattleGround()
@@ -75,4 +85,13 @@ public class Gameboard : MonoBehaviour
         return tileObject;
     }
 
+    private Vector2Int LookupTileIndex(GameObject hitInfo)
+    {
+        for (int x = 0; x < TILE_COUNT_X; x++)
+            for (int y = 0; y < TILE_COUNT_Y; y++)
+                if (tiles[x, y] == hitInfo)
+                    return new Vector2Int(x, y);
+        return -Vector2Int.one;
+        // throw new Exception("LookupTileIndex_NotFound");
+    }
 }
