@@ -3,53 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Gameboard : MonoBehaviour
 {
     [Header("ART")]
     [SerializeField] private Material tileMaterial;
+    [SerializeField] private float tileSize = 1f;
+    [SerializeField] private Vector3 battlefieldOrigin = Vector3.zero;
 
     private int TILE_COUNT_X = 8;
     private int TILE_COUNT_Y = 8;
-    private float TILE_SIZE = 1f;
     private GameObject[,] tiles;
-    private Camera currentCamera;
     private Vector2Int currentHover;
 
     private void Awake()
     {
         GenerateBattleGround();
     }
-    private void Update() {
-        if(!currentCamera){
-            currentCamera = Camera.main;
-            return;
-        }
-
-        RaycastHit info;
-        Ray ray= currentCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out info, 100, LayerMask.GetMask("Tile"))){
-            Vector2Int hitPosition = LookupTileIndex(info.transform.gameObject);
-
-            //Set up a new hover
-            if(currentHover == -Vector2Int.one){
-                currentHover = hitPosition;
-                tiles[hitPosition.x,hitPosition.y].layer = LayerMask.NameToLayer("Hover");
-            }
-            //Change to other tile hover
-            if(currentHover != hitPosition){
-                tiles[currentHover.x,currentHover.y].layer = LayerMask.NameToLayer("Tile");
-                currentHover = hitPosition;
-                tiles[hitPosition.x,hitPosition.y].layer = LayerMask.NameToLayer("Hover");  
-            }
-        }
-        else {
-            //Remove hover
-            if(currentHover != -Vector2Int.one){
-                tiles[currentHover.x,currentHover.y].layer = LayerMask.NameToLayer("Tile");
-                currentHover = -Vector2Int.one;
-            }
-        }
+    private void Update()
+    {
+        HoverSelectedTile();
     }
 
     private void GenerateBattleGround()
@@ -57,22 +31,24 @@ public class Gameboard : MonoBehaviour
         tiles = new GameObject[TILE_COUNT_X, TILE_COUNT_Y];
         for (int x = 0; x < TILE_COUNT_X; x++)
             for (int y = 0; y < TILE_COUNT_Y; y++)
-                tiles[x,y] = GenerateSingleTile(TILE_SIZE,x,y);        
+                tiles[x,y] = GenerateSingleTile(x,y);        
     }
-    private GameObject GenerateSingleTile(float tileSize, int x, int y)
+    private GameObject GenerateSingleTile( int x, int y)
     {
-        GameObject tileObject = new GameObject(string.Format("X:{0},Y:{1}",x,y));
+        GameObject tileObject = new GameObject($"X:{x},Y:{y}");
         tileObject.transform.SetParent(transform);
         
         Mesh mesh = new Mesh();
         tileObject.AddComponent<MeshFilter>().mesh = mesh;
-        tileObject.AddComponent<MeshRenderer>().material = tileMaterial;
+        MeshRenderer tileObjectRender = tileObject.AddComponent<MeshRenderer>();
+        tileObjectRender.material = tileMaterial;
+        tileObjectRender.sortingOrder = GetComponent<TilemapRenderer>().sortingOrder + 1;
 
         Vector3[] vertices = new Vector3[4];
-        vertices[0] = new Vector3(x * tileSize, y * tileSize, 0);
-        vertices[1] = new Vector3(x * tileSize, (y + 1) * tileSize, 0);
-        vertices[2] = new Vector3((x + 1) * tileSize, y * tileSize, 0);
-        vertices[3] = new Vector3((x + 1) * tileSize, (y + 1) * tileSize, 0);
+        vertices[0] = new Vector3(x * tileSize, y * tileSize, 0) + battlefieldOrigin;
+        vertices[1] = new Vector3(x * tileSize, (y + 1) * tileSize, 0) + battlefieldOrigin;
+        vertices[2] = new Vector3((x + 1) * tileSize, y * tileSize, 0) + battlefieldOrigin;
+        vertices[3] = new Vector3((x + 1) * tileSize, (y + 1) * tileSize, 0) + battlefieldOrigin;
 
         int[] triangles = new int[] { 0, 1, 2, 1, 3, 2 };
         mesh.vertices = vertices;
@@ -85,6 +61,48 @@ public class Gameboard : MonoBehaviour
         return tileObject;
     }
 
+    private void HoverSelectedTile()
+    {
+        RaycastHit2D hitInfo = CastRayToBoard();
+
+        if (hitInfo.collider != null)
+        {
+            Vector2Int hitPosition = LookupTileIndex(hitInfo.transform.gameObject);
+
+            //Set up a new hover
+            if (currentHover == -Vector2Int.one)
+            {
+                currentHover = hitPosition;
+                tiles[hitPosition.x, hitPosition.y].layer = LayerMask.NameToLayer("Hover");
+            }
+            //Change to other tile hover
+            if (currentHover != hitPosition)
+            {
+                tiles[currentHover.x, currentHover.y].layer = LayerMask.NameToLayer("Tile");
+                currentHover = hitPosition;
+                tiles[hitPosition.x, hitPosition.y].layer = LayerMask.NameToLayer("Hover");
+            }
+        }
+        else
+        {
+            //Remove hover
+            if (currentHover != -Vector2Int.one)
+            {
+                tiles[currentHover.x, currentHover.y].layer = LayerMask.NameToLayer("Tile");
+                currentHover = -Vector2Int.one;
+            }
+        }
+    }
+
+    private RaycastHit2D CastRayToBoard()
+    {
+        float rayLength = 100f;
+        RaycastHit2D hitInfo;
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Ray ray = new Ray(mousePosition, Vector2.zero);
+        hitInfo = Physics2D.Raycast(ray.origin, ray.direction, rayLength, LayerMask.GetMask("Tile", "Hover"));
+        return hitInfo;
+    }
     private Vector2Int LookupTileIndex(GameObject hitInfo)
     {
         for (int x = 0; x < TILE_COUNT_X; x++)
