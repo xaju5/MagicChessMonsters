@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 45bc61dbc18721b46ba81538cdfb7045
+guid: a61591406d2e84347b58ba198780bee0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 80
+  spritePixelsToUnits: 20
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Warrior_Yellow_0
+      name: Boy_0
       rect:
         serializedVersion: 2
-        x: 63
-        y: 1400
-        width: 78
-        height: 91
+        x: 0
+        y: 224
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4cb4481d6351ac8428e461346a0d860e
-      internalID: 1119128030
+      spriteID: 1146e9d20e74fdc4a847343e83524b3b
+      internalID: 1328233679
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_1
+      name: Boy_1
       rect:
         serializedVersion: 2
-        x: 255
-        y: 1400
-        width: 78
-        height: 91
+        x: 16
+        y: 224
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f936711e08602334d97c38c071999fc8
-      internalID: 1351930101
+      spriteID: 0d7733941ceace7429e44572f525e832
+      internalID: 1563593500
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_2
+      name: Boy_2
       rect:
         serializedVersion: 2
-        x: 446
-        y: 1400
-        width: 80
-        height: 89
+        x: 32
+        y: 224
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5effdaba91b3acd4e95b9f0f0b687006
-      internalID: -1520154562
+      spriteID: f8d1136f42de28b4abde87d9f765912f
+      internalID: -2070926
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_3
+      name: Boy_3
       rect:
         serializedVersion: 2
-        x: 638
-        y: 1400
-        width: 80
-        height: 87
+        x: 48
+        y: 224
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,20 +182,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c32819c66f47ac419ae6a4bbe806f41
-      internalID: 103261458
+      spriteID: cc27ad66893f9204d9f80b85d9596c59
+      internalID: 1703448648
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_4
+      name: Boy_4
       rect:
         serializedVersion: 2
-        x: 831
-        y: 1400
-        width: 78
-        height: 88
+        x: 80
+        y: 224
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,20 +203,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f82953487d8a1146bbff6b7b532fe4d
-      internalID: -1631809014
+      spriteID: a558a590373ab824a86a11375c32b2f3
+      internalID: 793839486
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_5
+      name: Boy_5
       rect:
         serializedVersion: 2
-        x: 1023
-        y: 1400
-        width: 78
-        height: 91
+        x: 96
+        y: 224
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,20 +224,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa7343bad37570a46886ce55ac43a3a6
-      internalID: -1304901797
+      spriteID: d49395cd3972dd549a8732c8022ac8d6
+      internalID: -603112961
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_6
+      name: Boy_6
       rect:
         serializedVersion: 2
-        x: 71
-        y: 1208
-        width: 60
-        height: 93
+        x: 112
+        y: 224
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,20 +245,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf6b9b93448d67f47b33d3200af550ed
-      internalID: -1128602637
+      spriteID: 2e679990d9c90f24d8b3d3f917d060b2
+      internalID: 1845829199
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_7
+      name: Boy_7
       rect:
         serializedVersion: 2
-        x: 260
-        y: 1208
-        width: 69
-        height: 94
+        x: 144
+        y: 224
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,20 +266,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4dc6847e7404264aab08c9f0035aca8
-      internalID: 47576811
+      spriteID: b7a120a382ef2b74daad36a532534e82
+      internalID: 1053480173
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_8
+      name: Boy_8
       rect:
         serializedVersion: 2
-        x: 448
-        y: 1208
-        width: 78
-        height: 80
+        x: 160
+        y: 224
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,20 +287,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3145c333101fa294abff1a3866ab0c91
-      internalID: -564972526
+      spriteID: 7e43e15773aea404f9c9a1671f8371ab
+      internalID: -1588387242
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_9
+      name: Boy_9
       rect:
         serializedVersion: 2
-        x: 630
-        y: 1208
-        width: 62
-        height: 93
+        x: 176
+        y: 224
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -308,20 +308,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d3b91a99ce92c349a2b996d588c9f77
-      internalID: -46170823
+      spriteID: 3bd5aff67a16ed7429b8c7c89afd0c46
+      internalID: -1637346349
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_10
+      name: Boy_10
       rect:
         serializedVersion: 2
-        x: 695
-        y: 1233
-        width: 30
-        height: 55
+        x: 192
+        y: 224
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -329,20 +329,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e18054599fba704488677e809ad980a
-      internalID: 1085461139
+      spriteID: c1680569aa9462141b3334c5ce63db8e
+      internalID: 1900072671
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_11
+      name: Boy_11
       rect:
         serializedVersion: 2
-        x: 825
-        y: 1208
-        width: 59
-        height: 94
+        x: 208
+        y: 224
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -350,272 +350,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2842305f9e0d0d544a70384f28e4a380
-      internalID: 641641045
+      spriteID: 3e04d3ab2429a344da8ff01b6234eebc
+      internalID: -1866567526
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_12
-      rect:
-        serializedVersion: 2
-        x: 884
-        y: 1228
-        width: 30
-        height: 55
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7a8c86ca8a52bde4abf898eb8e84d248
-      internalID: -1966950207
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Warrior_Yellow_13
-      rect:
-        serializedVersion: 2
-        x: 1023
-        y: 1208
-        width: 79
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9b5c54e26d0c68f4b89b47a1e945fdec
-      internalID: -1941601166
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Warrior_Yellow_14
-      rect:
-        serializedVersion: 2
-        x: 58
-        y: 1016
-        width: 71
-        height: 108
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 423c79259c2be264e815ac8eb133898b
-      internalID: -612225392
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Warrior_Yellow_15
-      rect:
-        serializedVersion: 2
-        x: 249
-        y: 1016
-        width: 62
-        height: 97
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a292941ae57ae0b4a94e3b06dcc7b402
-      internalID: -1256625133
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Warrior_Yellow_16
-      rect:
-        serializedVersion: 2
-        x: 297
-        y: 1068
-        width: 23
-        height: 60
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 47cd45da05bcabe4eb6f5f96c4ed9d49
-      internalID: 1543743902
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Warrior_Yellow_17
-      rect:
-        serializedVersion: 2
-        x: 441
-        y: 1016
-        width: 62
-        height: 97
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f0166bd6ed9d62f4d80db8851730b35e
-      internalID: 1235436821
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Warrior_Yellow_18
-      rect:
-        serializedVersion: 2
-        x: 489
-        y: 1068
-        width: 23
-        height: 60
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d25d16848bb3fdb499ce30dedaa922f7
-      internalID: 153721081
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Warrior_Yellow_19
-      rect:
-        serializedVersion: 2
-        x: 652
-        y: 1016
-        width: 51
-        height: 88
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8ecf772c6b1de4045a6daf4cf70c9ccf
-      internalID: -1968284392
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Warrior_Yellow_20
-      rect:
-        serializedVersion: 2
-        x: 697
-        y: 1015
-        width: 62
-        height: 112
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 28118424681e4924cb401a41766e3b60
-      internalID: -932709641
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Warrior_Yellow_21
-      rect:
-        serializedVersion: 2
-        x: 842
-        y: 1013
-        width: 107
-        height: 92
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4fd8f19fdcb2d6a44907a5c4fb6bbf27
-      internalID: -1435240270
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Warrior_Yellow_22
-      rect:
-        serializedVersion: 2
-        x: 1027
-        y: 1016
-        width: 100
-        height: 89
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: de6251ee02b3c534dafbcadfb57c6633
-      internalID: -1794217213
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Warrior_Yellow_23
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 824
-        width: 82
-        height: 89
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 427fff0a7a8135f4aa1c5a4b5c954fa2
-      internalID: -1991274340
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Warrior_Yellow_24
+      name: Boy_12
       rect:
         serializedVersion: 2
         x: 224
-        y: 824
-        width: 84
-        height: 89
+        y: 224
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -623,20 +371,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b69299f5bdd7e9240a0d65e72018a2b4
-      internalID: 1445692470
+      spriteID: 5630c7eee3d35df42a158e6578711fa9
+      internalID: -912956550
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_25
+      name: Boy_13
       rect:
         serializedVersion: 2
-        x: 416
-        y: 824
-        width: 84
-        height: 89
+        x: 0
+        y: 192
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -644,20 +392,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a61d4e2b605c4f42a2465d8e1b97e2d
-      internalID: 80218797
+      spriteID: ab05d2f3f1d472b45a5ceddf30d7629e
+      internalID: -888514369
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_26
+      name: Boy_14
       rect:
         serializedVersion: 2
-        x: 634
-        y: 814
-        width: 123
-        height: 100
+        x: 16
+        y: 192
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -665,20 +413,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6ebc174648dc264f8b778d0088d9fd1
-      internalID: -12236897
+      spriteID: 772e99de36e12f6499a55eef4f1570f3
+      internalID: -2062027927
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_27
+      name: Boy_15
       rect:
         serializedVersion: 2
-        x: 828
-        y: 824
-        width: 66
-        height: 94
+        x: 32
+        y: 192
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -686,20 +434,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 682d040cd3a915840a23989a2771dadb
-      internalID: 1339307769
+      spriteID: cdeff153e34095744965b9b5c7e8fa8f
+      internalID: -301402854
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_28
+      name: Boy_16
       rect:
         serializedVersion: 2
-        x: 897
-        y: 833
-        width: 53
-        height: 67
+        x: 48
+        y: 192
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -707,20 +455,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1cc523cd25ebbcd4499af504f2fa611c
-      internalID: -119332236
+      spriteID: e360abcf765ca4a4d91c419316f1b616
+      internalID: 583465329
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_29
+      name: Boy_17
       rect:
         serializedVersion: 2
-        x: 905
-        y: 825
-        width: 14
-        height: 34
+        x: 80
+        y: 192
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -728,20 +476,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7a987205f513fa4fa7070a28792b0cd
-      internalID: -2001472292
+      spriteID: 2b48a482f96a9f64aa5236a1fc54984c
+      internalID: 1061346352
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_30
+      name: Boy_18
       rect:
         serializedVersion: 2
-        x: 1022
-        y: 824
-        width: 85
-        height: 88
+        x: 96
+        y: 192
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -749,20 +497,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9710d1af6cf0eb4987838a6b84d8cdf
-      internalID: -192899289
+      spriteID: c9f05d7d0b46cd342a8340e625fc9251
+      internalID: 1891585252
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_31
+      name: Boy_19
       rect:
         serializedVersion: 2
-        x: 58
-        y: 632
-        width: 78
-        height: 101
+        x: 112
+        y: 192
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -770,20 +518,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57fa8446b4f137c4faa2cf3b95db5bbd
-      internalID: -2086098080
+      spriteID: acca80b81c575a04f856cf5b94996061
+      internalID: 1699464129
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_32
+      name: Boy_20
       rect:
         serializedVersion: 2
-        x: 247
-        y: 632
-        width: 64
-        height: 103
+        x: 144
+        y: 192
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -791,20 +539,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38961d91c7a4598439862194e8867064
-      internalID: 1617353874
+      spriteID: ca8b7a21ebe6e4445b9d40f4ad2c7c95
+      internalID: 1683316665
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_33
+      name: Boy_21
       rect:
         serializedVersion: 2
-        x: 307
-        y: 675
-        width: 23
-        height: 60
+        x: 160
+        y: 192
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -812,20 +560,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 29b002245bc355e4b90caa1b74d6b526
-      internalID: -2076941073
+      spriteID: a2deb487d9752324d998cd7806db7928
+      internalID: 1275898038
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_34
+      name: Boy_22
       rect:
         serializedVersion: 2
-        x: 439
-        y: 632
-        width: 64
-        height: 103
+        x: 176
+        y: 192
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -833,20 +581,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa8e9409fb8946645bd14c72e9caff8e
-      internalID: 380132162
+      spriteID: c30715b76daf8cc45ae257b745b14511
+      internalID: 17394079
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_35
+      name: Boy_23
       rect:
         serializedVersion: 2
-        x: 499
-        y: 675
-        width: 23
-        height: 60
+        x: 192
+        y: 192
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -854,20 +602,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bfed915a755f81a4eb8345aa16f9e814
-      internalID: 1454403359
+      spriteID: da82a0e4df6f41e418c3ce39c1db683a
+      internalID: 658503165
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_36
+      name: Boy_24
       rect:
         serializedVersion: 2
-        x: 622
-        y: 589
-        width: 118
-        height: 137
+        x: 0
+        y: 160
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -875,20 +623,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 251a19fa00d120c4b9b74d0c1db611c6
-      internalID: 1471181876
+      spriteID: ef6867a0f4b359249896eb790439381c
+      internalID: 1000534956
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_37
+      name: Boy_25
       rect:
         serializedVersion: 2
-        x: 809
-        y: 601
-        width: 89
-        height: 124
+        x: 16
+        y: 160
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -896,20 +644,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2bd2f4eac5b5f8b4280744b7eca0f3be
-      internalID: -1732864286
+      spriteID: eb7a2c8f524aadd42908ffa613184616
+      internalID: -1446857344
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_38
+      name: Boy_26
       rect:
         serializedVersion: 2
-        x: 1014
-        y: 628
-        width: 66
-        height: 99
+        x: 32
+        y: 160
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -917,20 +665,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57d80fd55acc8624d8e8a5e8aff3da62
-      internalID: -1537195313
+      spriteID: 1e9cbf6d65a2f3743a90bb7dc87cb7c5
+      internalID: 1796826144
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_39
+      name: Boy_27
       rect:
         serializedVersion: 2
-        x: 36
-        y: 440
-        width: 80
-        height: 93
+        x: 48
+        y: 160
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -938,20 +686,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b03e0f9c07da394b9fe13176132f8b5
-      internalID: -632353209
+      spriteID: a741ff084c2637540b3cda62acb0de61
+      internalID: -930246212
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_40
+      name: Boy_28
       rect:
         serializedVersion: 2
-        x: 227
-        y: 440
-        width: 81
-        height: 94
+        x: 80
+        y: 160
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -959,20 +707,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 242b5b712c185e840b81a363840e1f7f
-      internalID: 498932768
+      spriteID: 286e73cf6920dee4095f489884789e66
+      internalID: -2131716140
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_41
+      name: Boy_29
       rect:
         serializedVersion: 2
-        x: 419
-        y: 440
-        width: 81
-        height: 94
+        x: 96
+        y: 160
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -980,20 +728,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fdc4ba187cdaaa94cbd4f8f0cc2a40ef
-      internalID: 475221396
+      spriteID: 3beef325664ce43409cd3cf46a30c5db
+      internalID: -1643365777
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_42
+      name: Boy_30
       rect:
         serializedVersion: 2
-        x: 615
-        y: 412
-        width: 146
-        height: 117
+        x: 112
+        y: 160
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1001,20 +749,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5e108a52369f2444ba5fa0c5b719e662
-      internalID: 930470598
+      spriteID: 66d3eda417186094c811f2864db82a20
+      internalID: 1845727751
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_43
+      name: Boy_31
       rect:
         serializedVersion: 2
-        x: 836
-        y: 415
-        width: 116
-        height: 115
+        x: 144
+        y: 160
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1022,20 +770,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d29c79d486f595428393d6c1d7ecfb3
-      internalID: -538032217
+      spriteID: fc6446297b4f3e84fb7200f760c38f1d
+      internalID: 1032409433
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_44
+      name: Boy_32
       rect:
         serializedVersion: 2
-        x: 1022
-        y: 440
-        width: 59
-        height: 94
+        x: 160
+        y: 160
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1043,20 +791,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1cda1e18fff49c4cbd4e8d763288959
-      internalID: -2059983580
+      spriteID: f9068176bfb4c1542a38b4718160f6f4
+      internalID: -957371910
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_45
+      name: Boy_33
       rect:
         serializedVersion: 2
-        x: 1076
-        y: 455
-        width: 45
-        height: 43
+        x: 176
+        y: 160
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1064,20 +812,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8bf608bc956801c4fb818946c2cf791a
-      internalID: -1292893018
+      spriteID: 50c70f49376930a41ace17ad682a126c
+      internalID: 1190464681
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_46
+      name: Boy_34
       rect:
         serializedVersion: 2
-        x: 883
-        y: 413
-        width: 27
-        height: 24
+        x: 192
+        y: 160
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1085,20 +833,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe8de326e20ab1e4aa92aab1da503c2b
-      internalID: -1151062006
+      spriteID: c6cf0b45a946130488749b39e0fb6cce
+      internalID: 943152608
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_47
+      name: Boy_35
       rect:
         serializedVersion: 2
-        x: 75
-        y: 248
-        width: 62
-        height: 99
+        x: 0
+        y: 128
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1106,20 +854,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 20c1556c4f2138848a96b08c2f7bff87
-      internalID: -944776620
+      spriteID: 1bbb145eea807f240a495fe15dadbab4
+      internalID: 549550334
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_48
+      name: Boy_36
       rect:
         serializedVersion: 2
-        x: 265
-        y: 248
-        width: 66
-        height: 101
+        x: 16
+        y: 128
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1127,20 +875,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a55ec0ba6d309cf46a0c55e341434ffa
-      internalID: 2101335486
+      spriteID: 59139d117de217e448c272d06148259f
+      internalID: 305225492
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_49
+      name: Boy_37
       rect:
         serializedVersion: 2
-        x: 457
-        y: 248
-        width: 66
-        height: 101
+        x: 32
+        y: 128
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1148,20 +896,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f539c0e2b3dacf04eb4e8e78e1ab465c
-      internalID: -2071220384
+      spriteID: 7c17f5d32038349418936a72f4778a3a
+      internalID: 573870779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_50
+      name: Boy_38
       rect:
         serializedVersion: 2
-        x: 623
-        y: 249
-        width: 116
-        height: 107
+        x: 48
+        y: 128
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1169,20 +917,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c25c7b643713fc44a360a23e3022b94
-      internalID: 313042710
+      spriteID: d755fe1023422ee4b95ab610e03b3bbe
+      internalID: -7336342
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_51
+      name: Boy_39
       rect:
         serializedVersion: 2
-        x: 838
-        y: 346
-        width: 45
-        height: 10
+        x: 80
+        y: 128
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1190,20 +938,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 834cde15f6d6b7a4190e33d0c75c45e8
-      internalID: -1210102546
+      spriteID: 67328462f50ef914ab68d6296ceea1f7
+      internalID: 1002826093
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_52
+      name: Boy_40
       rect:
         serializedVersion: 2
-        x: 852
-        y: 249
-        width: 84
-        height: 101
+        x: 96
+        y: 128
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1211,20 +959,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59f635552990b3647be8f68b707cba61
-      internalID: 796486743
+      spriteID: e408c07044030e848a18be49e3656700
+      internalID: 393101828
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_53
+      name: Boy_41
       rect:
         serializedVersion: 2
-        x: 604
-        y: 291
-        width: 8
-        height: 25
+        x: 112
+        y: 128
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1232,20 +980,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6a25b3664dd3ae45adaa3e0aeb78e00
-      internalID: 211909146
+      spriteID: 977a5d34f9035bb4fa9703feeda9a417
+      internalID: 359779559
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_54
+      name: Boy_42
       rect:
         serializedVersion: 2
-        x: 614
-        y: 308
-        width: 15
-        height: 33
+        x: 144
+        y: 128
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1253,20 +1001,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ddbfd4822447c344cbe88f87cfcca468
-      internalID: -1730520101
+      spriteID: df1c9e661f11b844aa85524c3523ef38
+      internalID: 14509801
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_55
+      name: Boy_43
       rect:
         serializedVersion: 2
-        x: 1036
-        y: 248
-        width: 79
-        height: 96
+        x: 160
+        y: 128
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1274,20 +1022,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03e51ab1fc0d8bd42bbf40c2e33988a1
-      internalID: -526144461
+      spriteID: 7641ffc626071fd48857a287a3599f35
+      internalID: 1801571091
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_56
+      name: Boy_44
       rect:
         serializedVersion: 2
-        x: 19
-        y: 271
-        width: 57
-        height: 24
+        x: 176
+        y: 128
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1295,20 +1043,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ea5b64a7634d3342853db3c118fa031
-      internalID: 186978449
+      spriteID: 312fa6751fa93934e8c039c35640d169
+      internalID: -332582107
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_57
+      name: Boy_45
       rect:
         serializedVersion: 2
-        x: 213
-        y: 255
-        width: 54
-        height: 31
+        x: 192
+        y: 128
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1316,20 +1064,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e767efb212f524a4ea6c26e0cd277600
-      internalID: 1003507821
+      spriteID: 4799e7f83fd37544a82b78572fd73310
+      internalID: 1018113247
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_58
+      name: Boy_46
       rect:
         serializedVersion: 2
-        x: 405
-        y: 255
-        width: 54
-        height: 31
+        x: 0
+        y: 96
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1337,20 +1085,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 300be01395013e944ab136b2e9bea880
-      internalID: 915300292
+      spriteID: ff0d04b730d45ab4197cad40bc52b519
+      internalID: 105556710
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_59
+      name: Boy_47
       rect:
         serializedVersion: 2
-        x: 76
-        y: 56
-        width: 97
-        height: 92
+        x: 16
+        y: 96
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1358,20 +1106,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: acc98409d722fdc43a74b81d36d74024
-      internalID: -47797581
+      spriteID: 71227f48a11f6f04283b97ab51a9129e
+      internalID: -1718518170
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_60
+      name: Boy_48
       rect:
         serializedVersion: 2
-        x: 268
-        y: 56
-        width: 99
-        height: 91
+        x: 32
+        y: 96
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1379,20 +1127,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: daa1e822e5d7cd640bc0bcb31036ad34
-      internalID: -1964624674
+      spriteID: d0c57da548ec040448108e118d634bc5
+      internalID: 1645384241
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_61
+      name: Boy_49
       rect:
         serializedVersion: 2
-        x: 460
-        y: 56
-        width: 99
-        height: 91
+        x: 48
+        y: 96
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1400,20 +1148,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad328438871e062488fd80fe1deb8e30
-      internalID: 156454707
+      spriteID: 0d3b6762ee8828346985174acba3479b
+      internalID: -971671924
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_62
+      name: Boy_50
       rect:
         serializedVersion: 2
-        x: 585
-        y: 57
-        width: 146
-        height: 100
+        x: 64
+        y: 96
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1421,20 +1169,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb09fbc710183c24b80932250ba3e817
-      internalID: 2021989376
+      spriteID: 53bb022aa6e89cb4d932893551b4987b
+      internalID: 195885967
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_63
+      name: Boy_51
       rect:
         serializedVersion: 2
-        x: 725
-        y: 93
-        width: 20
-        height: 20
+        x: 80
+        y: 96
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1442,20 +1190,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 28ef86de414f96542a3752af7d3d67e3
-      internalID: 1587420755
+      spriteID: 67f8c6c7f70e241458064ae32208f2cb
+      internalID: -1553179702
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_64
+      name: Boy_52
       rect:
         serializedVersion: 2
-        x: 773
-        y: 95
-        width: 70
-        height: 59
+        x: 96
+        y: 96
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1463,20 +1211,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c2201e097e86aff4f8e9e607166493d2
-      internalID: 1627102641
+      spriteID: 375b252951f454940a710509f52eb177
+      internalID: 451925741
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_65
+      name: Boy_53
       rect:
         serializedVersion: 2
-        x: 827
-        y: 57
-        width: 72
-        height: 95
+        x: 112
+        y: 96
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1484,20 +1232,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de71b742cd03fce42baa27b0d252650b
-      internalID: -622331478
+      spriteID: 9b971f2096fe24740b3369421db675b6
+      internalID: -1842179219
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_66
+      name: Boy_54
       rect:
         serializedVersion: 2
-        x: 1001
-        y: 87
-        width: 29
-        height: 55
+        x: 0
+        y: 64
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1505,20 +1253,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4bd95be6a5849c7409899c1c45706e00
-      internalID: -2135440598
+      spriteID: a9f7694e5febc3f45b6a6e3f9943fa6f
+      internalID: -521150225
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Yellow_67
+      name: Boy_55
       rect:
         serializedVersion: 2
-        x: 1033
-        y: 56
-        width: 60
-        height: 95
+        x: 16
+        y: 64
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1526,8 +1274,470 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6b5e86fc6c410d4c9c35d782caecb24
-      internalID: 1433628625
+      spriteID: 8ad051c50bf62454cb8db5f717ea052f
+      internalID: -48345755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_56
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 865033618ad78c3439ed011a2126d63f
+      internalID: 121834181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_57
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 64
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc64e044fba8f9645ad9a2146788253e
+      internalID: -1692197812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_58
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c61863478eef564b82cbbfafef46ec0
+      internalID: 1847911359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_59
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 64
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d11d5d042080bcb4fadd29faef6a06bb
+      internalID: 1004799150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_60
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 623a2d977a5515544b80eb2efd43c501
+      internalID: 1972884946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_61
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 64
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1aa4a8c6bdb853449bba3cf57fdb44f8
+      internalID: 969386732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_62
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 918dacf090fd076498237aac8ca7ce75
+      internalID: -2061159527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_63
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5d3c0a851bec0942b4f4d8b2c79cd6d
+      internalID: -1372086633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_64
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94fcb9c9a70bb3f49a6e5323e9250520
+      internalID: -199918660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_65
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 32
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e11626f4a3fca7547a54dbcaa8ac4875
+      internalID: -1616366043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_66
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acc9035ad0ff53b4d874dd8006f16b0d
+      internalID: 267779030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_67
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 32
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e834c0ba3791fde4caa5db87163fafb4
+      internalID: 367227944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_68
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c9d19e3fd1c48b43a1381ab8f317be8
+      internalID: 527701173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_69
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 32
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 823e3f53240c04e4181856eb68f038bd
+      internalID: -1428488607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_70
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f940a84ea571a147afb5c7d5a75923d
+      internalID: 1039795122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_71
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d20e77ce031e5734f8b9669b43666c52
+      internalID: -1891404138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_72
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a56b56d30cacdf641a2aec3a873b9b64
+      internalID: -2101397257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_73
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61fb7497743b8d74f82b2ceaed0d09fa
+      internalID: -139196196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_74
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2b49424305e1594f9509b0967bd6533
+      internalID: 979865728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_75
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1d352e39bff86f4792203793bd388a5
+      internalID: 606266840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_76
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 045d6667df0e3f94d896c03fc7190b73
+      internalID: 1714844920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boy_77
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a850f816c1fd083449055ae484b756bd
+      internalID: 2127270562
       vertices: []
       indices: 
       edges: []
@@ -1543,74 +1753,84 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Warrior_Yellow_6: -1128602637
-      Warrior_Yellow_41: 475221396
-      Warrior_Yellow_44: -2059983580
-      Warrior_Yellow_2: -1520154562
-      Warrior_Yellow_52: 796486743
-      Warrior_Yellow_31: -2086098080
-      Warrior_Yellow_13: -1941601166
-      Warrior_Yellow_3: 103261458
-      Warrior_Yellow_38: -1537195313
-      Warrior_Yellow_22: -1794217213
-      Warrior_Yellow_24: 1445692470
-      Warrior_Yellow_33: -2076941073
-      Warrior_Yellow_18: 153721081
-      Warrior_Yellow_45: -1292893018
-      Warrior_Yellow_57: 1003507821
-      Warrior_Yellow_4: -1631809014
-      Warrior_Yellow_30: -192899289
-      Warrior_Yellow_26: -12236897
-      Warrior_Yellow_58: 915300292
-      Warrior_Yellow_16: 1543743902
-      Warrior_Yellow_29: -2001472292
-      Warrior_Yellow_62: 2021989376
-      Warrior_Yellow_53: 211909146
-      Warrior_Yellow_36: 1471181876
-      Warrior_Yellow_60: -1964624674
-      Warrior_Yellow_1: 1351930101
-      Warrior_Yellow_67: 1433628625
-      Warrior_Yellow_64: 1627102641
-      Warrior_Yellow_59: -47797581
-      Warrior_Yellow_63: 1587420755
-      Warrior_Yellow_23: -1991274340
-      Warrior_Yellow_32: 1617353874
-      Warrior_Yellow_21: -1435240270
-      Warrior_Yellow_8: -564972526
-      Warrior_Yellow_55: -526144461
-      Warrior_Yellow_49: -2071220384
-      Warrior_Yellow_15: -1256625133
-      Warrior_Yellow_19: -1968284392
-      Warrior_Yellow_39: -632353209
-      Warrior_Yellow_40: 498932768
-      Warrior_Yellow_14: -612225392
-      Warrior_Yellow_28: -119332236
-      Warrior_Yellow_42: 930470598
-      Warrior_Yellow_54: -1730520101
-      Warrior_Yellow_50: 313042710
-      Warrior_Yellow_61: 156454707
-      Warrior_Yellow_12: -1966950207
-      Warrior_Yellow_20: -932709641
-      Warrior_Yellow_35: 1454403359
-      Warrior_Yellow_34: 380132162
-      Warrior_Yellow_11: 641641045
-      Warrior_Yellow_37: -1732864286
-      Warrior_Yellow_43: -538032217
-      Warrior_Yellow_47: -944776620
-      Warrior_Yellow_56: 186978449
-      Warrior_Yellow_0: 1119128030
-      Warrior_Yellow_66: -2135440598
-      Warrior_Yellow_65: -622331478
-      Warrior_Yellow_51: -1210102546
-      Warrior_Yellow_48: 2101335486
-      Warrior_Yellow_10: 1085461139
-      Warrior_Yellow_17: 1235436821
-      Warrior_Yellow_9: -46170823
-      Warrior_Yellow_46: -1151062006
-      Warrior_Yellow_5: -1304901797
-      Warrior_Yellow_27: 1339307769
-      Warrior_Yellow_7: 47576811
-      Warrior_Yellow_25: 80218797
+      Boy_30: 1845727751
+      Boy_62: -2061159527
+      Boy_9: -1637346349
+      Boy_4: 793839486
+      Boy_25: -1446857344
+      Boy_73: -139196196
+      Boy_54: -521150225
+      Boy_29: -1643365777
+      Boy_56: 121834181
+      Boy_13: -888514369
+      Boy_2: -2070926
+      Boy_61: 969386732
+      Boy_10: 1900072671
+      Boy_57: -1692197812
+      Boy_67: 367227944
+      Boy_34: 943152608
+      Boy_72: -2101397257
+      Boy_38: -7336342
+      Boy_22: 17394079
+      Boy_77: 2127270562
+      Boy_49: -971671924
+      Boy_37: 573870779
+      Boy_7: 1053480173
+      Boy_21: 1275898038
+      Boy_33: 1190464681
+      Boy_6: 1845829199
+      Boy_59: 1004799150
+      Boy_55: -48345755
+      Boy_31: 1032409433
+      Boy_1: 1563593500
+      Boy_19: 1699464129
+      Boy_15: -301402854
+      Boy_24: 1000534956
+      Boy_44: -332582107
+      Boy_17: 1061346352
+      Boy_40: 393101828
+      Boy_27: -930246212
+      Boy_23: 658503165
+      Boy_26: 1796826144
+      Boy_14: -2062027927
+      Boy_32: -957371910
+      Boy_42: 14509801
+      Boy_28: -2131716140
+      Boy_39: 1002826093
+      Boy_47: -1718518170
+      Boy_69: -1428488607
+      Boy_68: 527701173
+      Boy_64: -199918660
+      Boy_8: -1588387242
+      Boy_60: 1972884946
+      Boy_5: -603112961
+      Boy_71: -1891404138
+      Boy_16: 583465329
+      Boy_43: 1801571091
+      Boy_41: 359779559
+      Boy_12: -912956550
+      Boy_65: -1616366043
+      Boy_52: 451925741
+      Boy_76: 1714844920
+      Boy_36: 305225492
+      Boy_48: 1645384241
+      Boy_11: -1866567526
+      Boy_58: 1847911359
+      Boy_53: -1842179219
+      Boy_35: 549550334
+      Boy_20: 1683316665
+      Boy_0: 1328233679
+      Boy_46: 105556710
+      Boy_74: 979865728
+      Boy_75: 606266840
+      Boy_3: 1703448648
+      Boy_50: 195885967
+      Boy_63: -1372086633
+      Boy_70: 1039795122
+      Boy_45: 1018113247
+      Boy_66: 267779030
+      Boy_18: 1891585252
+      Boy_51: -1553179702
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

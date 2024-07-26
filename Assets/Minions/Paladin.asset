@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f99b2a046bc2eb4baceac98d16ab3de, type: 3}
-  m_Name: Girl
+  m_Name: Paladin
   m_EditorClassIdentifier: 
-  _name: Girl
-  _description: A strong girl
-  _type: 4
-  _healthBase: 10
-  _magicBase: 10
-  _strength: 10
-  _defense: 10
-  _magicStrenght: 10
-  _magicDefense: 10
-  _learnableActions: []
-  _sprite: {fileID: 1137532495, guid: 20b19613cd71559499eb7c2255c993e8, type: 3}
-  _animator: {fileID: 0}
+  name: Paladin
+  description: Follow the light
+  type: 5
+  healthBase: 10
+  magicBase: 10
+  strength: 10
+  defense: 10
+  magicStrenght: 10
+  magicDefense: 10
+  learnableActions: []
+  sprite: {fileID: 1119128030, guid: 45bc61dbc18721b46ba81538cdfb7045, type: 3}
+  animator: {fileID: 0}

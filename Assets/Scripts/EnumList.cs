@@ -4,7 +4,8 @@ public enum Type
     Fire,
     Water,
     Plant,
-    Eath
+    Earth,
+    Light
 }
 
 public enum Range
@@ -27,4 +28,10 @@ public enum Status
     Burn,
     Paralysis,
     Sleep
+}
+
+public enum Team
+{
+    Player1,
+    Player2
 }

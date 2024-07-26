@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f99b2a046bc2eb4baceac98d16ab3de, type: 3}
   m_Name: Boy
   m_EditorClassIdentifier: 
-  _name: Boy
-  _description: One happy child
-  _type: 1
-  _healthBase: 10
-  _magicBase: 10
-  _strength: 10
-  _defense: 10
-  _magicStrenght: 10
-  _magicDefense: 10
-  _learnableActions: []
-  _sprite: {fileID: 887365339, guid: a507dbc5b8ea2dc4bb169b93a658127e, type: 3}
-  _animator: {fileID: 0}
+  name: Boy
+  description: A strong trainer
+  type: 0
+  healthBase: 10
+  magicBase: 10
+  strength: 10
+  defense: 10
+  magicStrenght: 10
+  magicDefense: 10
+  learnableActions: []
+  sprite: {fileID: 1328233679, guid: a61591406d2e84347b58ba198780bee0, type: 3}
+  animator: {fileID: 0}
