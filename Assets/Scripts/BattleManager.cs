@@ -9,6 +9,8 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private MinionList[] team1, team2;
     [SerializeField] private MinionSO[] AllMinionSO;
 
+    private Minion[,] minionUnits;
+
     void Start()
     {
         SpawnAllMinions();
@@ -23,13 +25,13 @@ public class BattleManager : MonoBehaviour
             SpawnSingleMinion(AllMinionSO[(int)minionId],Team.Player2);
 
     }
-    private MinionDisplay SpawnSingleMinion(MinionSO minionInfo, Team team){
+    private MinionUnit SpawnSingleMinion(MinionSO minionInfo, Team team){
         GameObject minionGO = Instantiate(minionPrefab, transform);
         minionGO.name = minionInfo.MinionId.ToString();
         minionGO.GetComponent<SpriteRenderer>().sortingOrder = GetComponent<TilemapRenderer>().sortingOrder + 2;
-        MinionDisplay minionDisplay = minionGO.GetComponent<MinionDisplay>();
-        minionDisplay.SetUpData(minionInfo, team);
+        MinionUnit minionUnit = minionGO.GetComponent<MinionUnit>();
+        minionUnit.SetUpData(minionInfo, team);
 
-        return minionDisplay;
+        return minionUnit;
     }
 }
