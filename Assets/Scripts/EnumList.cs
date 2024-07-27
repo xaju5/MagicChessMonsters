@@ -35,3 +35,14 @@ public enum Team
     Player1,
     Player2
 }
+
+public enum MinionList
+{
+    None,
+    Boy,
+    Dwarf,
+    Girl,
+    Goblin,
+    Mermaid,
+    Paladin
+}

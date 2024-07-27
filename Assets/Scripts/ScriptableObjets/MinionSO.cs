@@ -4,7 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "Minion", menuName = "ScriptableObject/Minion", order = 1)]
 public class MinionSO : ScriptableObject {
-    [SerializeField] private new string name;
+    [SerializeField] private MinionList minionId;
     [SerializeField] private string description;
     [SerializeField] private Type type;
     [SerializeField] private float healthBase;
@@ -17,7 +17,7 @@ public class MinionSO : ScriptableObject {
     [SerializeField] private Sprite sprite;
     [SerializeField] private Animator animator;
 
-public string Name { get { return name; } }
+public MinionList MinionId { get { return minionId; } }
 public string Description { get { return description; } }
 public Type Type { get { return type; } }
 public float HealthBase { get { return healthBase; } }

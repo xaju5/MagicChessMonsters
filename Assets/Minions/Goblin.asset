@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f99b2a046bc2eb4baceac98d16ab3de, type: 3}
   m_Name: Goblin
   m_EditorClassIdentifier: 
-  name: Goblin
+  minionId: 4
   description: Fireee!
   type: 1
   healthBase: 10

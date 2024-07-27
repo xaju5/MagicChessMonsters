@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f99b2a046bc2eb4baceac98d16ab3de, type: 3}
   m_Name: Dwarf
   m_EditorClassIdentifier: 
-  name: Dwarf
+  minionId: 2
   description: Its always angry
   type: 4
   healthBase: 10

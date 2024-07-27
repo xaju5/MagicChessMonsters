@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 
 public class Gameboard : MonoBehaviour
 {
-    [Header("ART")]
+    [Header("Battlefield Art")]
     [SerializeField] private Material tileMaterial;
     [SerializeField] private float tileSize = 1f;
     [SerializeField] private Vector3 battlefieldOrigin = Vector3.zero;
@@ -93,7 +93,6 @@ public class Gameboard : MonoBehaviour
             }
         }
     }
-
     private RaycastHit2D CastRayToBoard()
     {
         float rayLength = 100f;

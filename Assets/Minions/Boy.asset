@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f99b2a046bc2eb4baceac98d16ab3de, type: 3}
   m_Name: Boy
   m_EditorClassIdentifier: 
-  name: Boy
+  minionId: 1
   description: A strong trainer
   type: 0
   healthBase: 10
