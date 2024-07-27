@@ -8,10 +8,16 @@ public class MinionUnit : MonoBehaviour
     [SerializeField] private Slider HealthBar;
 
     public Minion minion { get; private set; }
+    public Team Team { get; private set; }
+    public bool IsTrainer { get; private set; }
+
     private Vector2 targetPosition, targetScale;
     
     public void SetUpData(MinionSO minionInfo, Team team){
-        minion = new Minion(minionInfo, team);
+        Team = team;
+        IsTrainer = (minionInfo.MinionId == MinionList.Boy) || (minionInfo.MinionId == MinionList.Girl) ? true : false;
+        
+        minion = new Minion(minionInfo);
         GetComponent<SpriteRenderer>().sprite = minionInfo.Sprite;
         HealthBar.GetComponent<FloatingHealthBar>().SetMaxHealthBar(minion.MaxHealth());
     }

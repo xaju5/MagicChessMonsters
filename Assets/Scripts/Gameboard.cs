@@ -12,8 +12,8 @@ public class Gameboard : MonoBehaviour
     [SerializeField] private float tileSize = 1f;
     [SerializeField] private Vector3 battlefieldOrigin = Vector3.zero;
 
-    private int TILE_COUNT_X = 8;
-    private int TILE_COUNT_Y = 8;
+    public static readonly int TILE_COUNT_X = 8;
+    public static readonly int TILE_COUNT_Y = 8;
     private GameObject[,] tiles;
     private Vector2Int currentHover;
 
