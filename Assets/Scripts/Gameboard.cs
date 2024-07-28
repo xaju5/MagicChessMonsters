@@ -129,4 +129,8 @@ public class Gameboard : MonoBehaviour
         return new Vector3(x * TILE_SIZE, y * TILE_SIZE, 0) + battlefieldOrigin + new Vector3(TILE_SIZE / 2, TILE_SIZE / 2, 0);
     }
 
+    public Vector2Int GetCurrentHover(){
+        return currentHover;
+    }
+
 }

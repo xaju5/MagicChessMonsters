@@ -32,6 +32,7 @@ public enum Status
 
 public enum Team
 {
+    None,
     Player1,
     Player2
 }

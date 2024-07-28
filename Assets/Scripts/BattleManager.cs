@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -10,6 +11,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private MinionSO[] AllMinionSO;
 
     private MinionUnit[,] minionUnits;
+    private MinionUnit selectedMinion;
 
     public static BattleManager Instance;
 
@@ -17,6 +19,23 @@ public class BattleManager : MonoBehaviour
     {
         SetUpSingleton();
     }
+    void Start()
+    {
+        SpawnAllMinions();
+        PositionAllMinions();
+    }
+    void Update() {
+        //TODO: Select between move or attack
+        Vector2Int currentHover = Gameboard.Instance.GetCurrentHover();
+        if(Input.GetMouseButtonDown(0) && currentHover != -Vector2Int.one){
+            if(selectedMinion == null)
+                SelectMinion(currentHover.x, currentHover.y);
+            else
+                MoveSelectedMinionTo(currentHover.x, currentHover.y);
+        }
+    }
+
+
     private void SetUpSingleton()
     {
         if(Instance == null){
@@ -27,12 +46,6 @@ public class BattleManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void Start()
-    {
-        SpawnAllMinions();
-        PositionAllMinions();
-    }
-
     private void SpawnAllMinions(){
         //TODO: Initial Position Phase
         minionUnits = new MinionUnit[Gameboard.TILE_COUNT_X,Gameboard.TILE_COUNT_Y];
@@ -82,4 +95,41 @@ public class BattleManager : MonoBehaviour
             for (int y = 0; y < Gameboard.TILE_COUNT_Y; y++)
                 minionUnits[x,y]?.MoveMinionUnit(Gameboard.Instance.GetTileCenter(x,y), true);
     } 
+
+    private void MoveSelectedMinionTo(int x, int y){
+        if (minionUnits[x,y] != null)
+            return;
+        
+        Vector2Int currentPosition = LookupMinionIndex(selectedMinion);
+        if(currentPosition == new Vector2Int(x,y))
+            return;
+
+        minionUnits[currentPosition.x, currentPosition.y] = null;
+        minionUnits[x,y] = selectedMinion;
+        selectedMinion.MoveMinionUnit(Gameboard.Instance.GetTileCenter(x,y));
+        selectedMinion = null;
+    }
+    
+    private void SelectMinion(int x, int y)
+    {
+        if (minionUnits[x, y] == null)
+            return;
+
+        //TODO: Turn management
+        if (true)
+        {
+            selectedMinion = minionUnits[x,y];
+            Debug.Log(selectedMinion.name);
+        }
+    }
+
+    private Vector2Int LookupMinionIndex(MinionUnit minion){
+        for (int x = 0; x < Gameboard.TILE_COUNT_X; x++)
+            for (int y = 0; y < Gameboard.TILE_COUNT_Y; y++)
+                if(minionUnits[x,y] == minion)
+                    return new Vector2Int(x,y);
+
+        throw new System.Exception("LookupMinionIndex_NotFound");
+        // return -Vector2Int.one;
+    }
 }
