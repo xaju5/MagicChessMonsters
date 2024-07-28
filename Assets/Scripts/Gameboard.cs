@@ -9,9 +9,10 @@ public class Gameboard : MonoBehaviour
 {
     [Header("Battlefield Art")]
     [SerializeField] private Material tileMaterial;
-    [SerializeField] private float tileSize = 1f;
     [SerializeField] private Vector3 battlefieldOrigin = Vector3.zero;
 
+    public static Gameboard Instance;
+    public static readonly float TILE_SIZE = 1f;
     public static readonly int TILE_COUNT_X = 8;
     public static readonly int TILE_COUNT_Y = 8;
     private GameObject[,] tiles;
@@ -19,8 +20,20 @@ public class Gameboard : MonoBehaviour
 
     private void Awake()
     {
+        SetUpSingleton();
         GenerateBattleGround();
     }
+    private void SetUpSingleton()
+    {
+        if(Instance == null){
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else{
+            Destroy(gameObject);
+        }
+    }
+
     private void Update()
     {
         HoverSelectedTile();
@@ -45,10 +58,10 @@ public class Gameboard : MonoBehaviour
         tileObjectRender.sortingOrder = GetComponent<TilemapRenderer>().sortingOrder + 1;
 
         Vector3[] vertices = new Vector3[4];
-        vertices[0] = new Vector3(x * tileSize, y * tileSize, 0) + battlefieldOrigin;
-        vertices[1] = new Vector3(x * tileSize, (y + 1) * tileSize, 0) + battlefieldOrigin;
-        vertices[2] = new Vector3((x + 1) * tileSize, y * tileSize, 0) + battlefieldOrigin;
-        vertices[3] = new Vector3((x + 1) * tileSize, (y + 1) * tileSize, 0) + battlefieldOrigin;
+        vertices[0] = new Vector3(x * TILE_SIZE, y * TILE_SIZE, 0) + battlefieldOrigin;
+        vertices[1] = new Vector3(x * TILE_SIZE, (y + 1) * TILE_SIZE, 0) + battlefieldOrigin;
+        vertices[2] = new Vector3((x + 1) * TILE_SIZE, y * TILE_SIZE, 0) + battlefieldOrigin;
+        vertices[3] = new Vector3((x + 1) * TILE_SIZE, (y + 1) * TILE_SIZE, 0) + battlefieldOrigin;
 
         int[] triangles = new int[] { 0, 1, 2, 1, 3, 2 };
         mesh.vertices = vertices;
@@ -111,4 +124,9 @@ public class Gameboard : MonoBehaviour
         return -Vector2Int.one;
         // throw new Exception("LookupTileIndex_NotFound");
     }
+
+    public Vector3 GetTileCenter(int x, int y){
+        return new Vector3(x * TILE_SIZE, y * TILE_SIZE, 0) + battlefieldOrigin + new Vector3(TILE_SIZE / 2, TILE_SIZE / 2, 0);
+    }
+
 }

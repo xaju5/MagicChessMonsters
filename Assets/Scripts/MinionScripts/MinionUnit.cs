@@ -22,4 +22,11 @@ public class MinionUnit : MonoBehaviour
         HealthBar.GetComponent<FloatingHealthBar>().SetMaxHealthBar(minion.MaxHealth());
     }
 
+    public void MoveMinionUnit(Vector3 targetPosition, bool force = false){
+        Debug.Log($"Name: {transform.name} target: x:{targetPosition.x}, y:{targetPosition.y}");
+        if(force)
+            transform.position = targetPosition;
+
+    }
+
 }

@@ -11,9 +11,26 @@ public class BattleManager : MonoBehaviour
 
     private MinionUnit[,] minionUnits;
 
+    public static BattleManager Instance;
+
+    private void Awake()
+    {
+        SetUpSingleton();
+    }
+    private void SetUpSingleton()
+    {
+        if(Instance == null){
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else{
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
         SpawnAllMinions();
+        PositionAllMinions();
     }
 
     private void SpawnAllMinions(){
@@ -53,19 +70,16 @@ public class BattleManager : MonoBehaviour
     private MinionUnit SpawnSingleMinion(MinionSO minionInfo, Team team){
         GameObject minionGO = Instantiate(minionPrefab, transform);
         minionGO.name = minionInfo.MinionId.ToString();
-        minionGO.GetComponent<SpriteRenderer>().sortingOrder = GetComponent<TilemapRenderer>().sortingOrder + 2;
+        minionGO.GetComponent<SpriteRenderer>().sortingOrder = Gameboard.Instance.GetComponent<TilemapRenderer>().sortingOrder + 2;
 
         MinionUnit minionUnit = minionGO.GetComponent<MinionUnit>();
         minionUnit.SetUpData(minionInfo, team);
 
         return minionUnit;
     }
-
     private void PositionAllMinions(){
-
+        for (int x = 0; x < Gameboard.TILE_COUNT_X; x++)
+            for (int y = 0; y < Gameboard.TILE_COUNT_Y; y++)
+                minionUnits[x,y]?.MoveMinionUnit(Gameboard.Instance.GetTileCenter(x,y), true);
     } 
-
-    private void PositionSingleMinion(int x, int y, bool force = false){
-
-    }
 }
