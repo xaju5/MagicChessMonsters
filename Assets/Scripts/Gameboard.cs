@@ -9,7 +9,7 @@ public class Gameboard : MonoBehaviour
 {
     [Header("Battlefield Art")]
     [SerializeField] private Material tileMaterial;
-    [SerializeField] private Vector3 battlefieldOrigin = Vector3.zero;
+    [SerializeField] private TilemapRenderer tilemapRenderer;
 
     public static Gameboard Instance;
     public static readonly float TILE_SIZE = 1f;
@@ -55,13 +55,13 @@ public class Gameboard : MonoBehaviour
         tileObject.AddComponent<MeshFilter>().mesh = mesh;
         MeshRenderer tileObjectRender = tileObject.AddComponent<MeshRenderer>();
         tileObjectRender.material = tileMaterial;
-        tileObjectRender.sortingOrder = GetComponent<TilemapRenderer>().sortingOrder + 1;
+        tileObjectRender.sortingOrder = tilemapRenderer.sortingOrder + 1;
 
         Vector3[] vertices = new Vector3[4];
-        vertices[0] = new Vector3(x * TILE_SIZE, y * TILE_SIZE, 0) + battlefieldOrigin;
-        vertices[1] = new Vector3(x * TILE_SIZE, (y + 1) * TILE_SIZE, 0) + battlefieldOrigin;
-        vertices[2] = new Vector3((x + 1) * TILE_SIZE, y * TILE_SIZE, 0) + battlefieldOrigin;
-        vertices[3] = new Vector3((x + 1) * TILE_SIZE, (y + 1) * TILE_SIZE, 0) + battlefieldOrigin;
+        vertices[0] = new Vector3(x * TILE_SIZE, y * TILE_SIZE, 0) + transform.position;
+        vertices[1] = new Vector3(x * TILE_SIZE, (y + 1) * TILE_SIZE, 0) +  transform.position;
+        vertices[2] = new Vector3((x + 1) * TILE_SIZE, y * TILE_SIZE, 0) +  transform.position;
+        vertices[3] = new Vector3((x + 1) * TILE_SIZE, (y + 1) * TILE_SIZE, 0) +  transform.position;
 
         int[] triangles = new int[] { 0, 1, 2, 1, 3, 2 };
         mesh.vertices = vertices;
@@ -126,11 +126,14 @@ public class Gameboard : MonoBehaviour
     }
 
     public Vector3 GetTileCenter(int x, int y){
-        return new Vector3(x * TILE_SIZE, y * TILE_SIZE, 0) + battlefieldOrigin + new Vector3(TILE_SIZE / 2, TILE_SIZE / 2, 0);
+        return new Vector3(x * TILE_SIZE, y * TILE_SIZE, 0) +  transform.position + new Vector3(TILE_SIZE / 2, TILE_SIZE / 2, 0);
     }
 
     public Vector2Int GetCurrentHover(){
         return currentHover;
     }
 
+    public TilemapRenderer GetTilemapRenderer(){
+        return tilemapRenderer;
+    }
 }

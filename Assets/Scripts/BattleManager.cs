@@ -83,7 +83,7 @@ public class BattleManager : MonoBehaviour
     private MinionUnit SpawnSingleMinion(MinionSO minionInfo, Team team){
         GameObject minionGO = Instantiate(minionPrefab, transform);
         minionGO.name = minionInfo.MinionId.ToString();
-        minionGO.GetComponent<SpriteRenderer>().sortingOrder = Gameboard.Instance.GetComponent<TilemapRenderer>().sortingOrder + 2;
+        minionGO.GetComponent<SpriteRenderer>().sortingOrder = Gameboard.Instance.GetTilemapRenderer().sortingOrder + 2;
 
         MinionUnit minionUnit = minionGO.GetComponent<MinionUnit>();
         minionUnit.SetUpData(minionInfo, team);
