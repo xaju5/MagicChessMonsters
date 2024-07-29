@@ -35,7 +35,6 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-
     private void SetUpSingleton()
     {
         if(Instance == null){
@@ -109,7 +108,6 @@ public class BattleManager : MonoBehaviour
         selectedMinion.MoveMinionUnit(Gameboard.Instance.GetTileCenter(x,y));
         selectedMinion = null;
     }
-    
     private void SelectMinion(int x, int y)
     {
         if (minionUnits[x, y] == null)
@@ -122,7 +120,6 @@ public class BattleManager : MonoBehaviour
             Debug.Log($"{selectedMinion.name} Selected");
         }
     }
-
     private Vector2Int LookupMinionIndex(MinionUnit minion){
         for (int x = 0; x < Gameboard.TILE_COUNT_X; x++)
             for (int y = 0; y < Gameboard.TILE_COUNT_Y; y++)
@@ -131,5 +128,10 @@ public class BattleManager : MonoBehaviour
 
         throw new System.Exception("LookupMinionIndex_NotFound");
         // return -Vector2Int.one;
+    }
+    
+    //Public methods
+    public MinionUnit GetSelectedMinion(){
+        return selectedMinion;
     }
 }

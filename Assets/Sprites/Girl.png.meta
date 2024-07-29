@@ -108,10 +108,10 @@ TextureImporter:
       name: Girl_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 295
-        width: 32
-        height: 32
+        x: 7
+        y: 300
+        width: 17
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -129,10 +129,10 @@ TextureImporter:
       name: Girl_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 295
-        width: 32
-        height: 32
+        x: 40
+        y: 300
+        width: 15
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,10 +150,10 @@ TextureImporter:
       name: Girl_2
       rect:
         serializedVersion: 2
-        x: 64
-        y: 295
-        width: 32
-        height: 32
+        x: 74
+        y: 300
+        width: 13
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,10 +171,10 @@ TextureImporter:
       name: Girl_3
       rect:
         serializedVersion: 2
-        x: 96
-        y: 295
-        width: 32
-        height: 32
+        x: 103
+        y: 300
+        width: 17
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,10 +192,10 @@ TextureImporter:
       name: Girl_4
       rect:
         serializedVersion: 2
-        x: 128
-        y: 295
-        width: 32
-        height: 32
+        x: 134
+        y: 301
+        width: 18
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,10 +213,10 @@ TextureImporter:
       name: Girl_5
       rect:
         serializedVersion: 2
-        x: 160
-        y: 295
-        width: 32
-        height: 32
+        x: 166
+        y: 300
+        width: 18
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,10 +234,10 @@ TextureImporter:
       name: Girl_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 263
-        width: 32
-        height: 32
+        x: 10
+        y: 269
+        width: 15
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,10 +255,10 @@ TextureImporter:
       name: Girl_7
       rect:
         serializedVersion: 2
-        x: 32
-        y: 263
-        width: 32
-        height: 32
+        x: 42
+        y: 267
+        width: 14
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -276,10 +276,10 @@ TextureImporter:
       name: Girl_8
       rect:
         serializedVersion: 2
-        x: 64
-        y: 263
-        width: 32
-        height: 32
+        x: 75
+        y: 267
+        width: 18
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -297,10 +297,10 @@ TextureImporter:
       name: Girl_9
       rect:
         serializedVersion: 2
-        x: 96
-        y: 263
-        width: 32
-        height: 32
+        x: 106
+        y: 269
+        width: 22
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -318,10 +318,10 @@ TextureImporter:
       name: Girl_10
       rect:
         serializedVersion: 2
-        x: 128
-        y: 263
-        width: 32
-        height: 32
+        x: 140
+        y: 267
+        width: 17
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -339,10 +339,10 @@ TextureImporter:
       name: Girl_11
       rect:
         serializedVersion: 2
-        x: 160
-        y: 263
-        width: 32
-        height: 32
+        x: 171
+        y: 267
+        width: 13
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -360,10 +360,10 @@ TextureImporter:
       name: Girl_12
       rect:
         serializedVersion: 2
-        x: 0
-        y: 231
-        width: 32
-        height: 32
+        x: 11
+        y: 235
+        width: 13
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -381,10 +381,10 @@ TextureImporter:
       name: Girl_13
       rect:
         serializedVersion: 2
-        x: 32
-        y: 231
-        width: 32
-        height: 32
+        x: 38
+        y: 235
+        width: 17
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -402,10 +402,10 @@ TextureImporter:
       name: Girl_14
       rect:
         serializedVersion: 2
-        x: 64
-        y: 231
-        width: 32
-        height: 32
+        x: 67
+        y: 237
+        width: 22
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -423,10 +423,10 @@ TextureImporter:
       name: Girl_15
       rect:
         serializedVersion: 2
-        x: 96
-        y: 231
-        width: 32
-        height: 32
+        x: 102
+        y: 235
+        width: 18
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -444,10 +444,10 @@ TextureImporter:
       name: Girl_16
       rect:
         serializedVersion: 2
-        x: 128
-        y: 231
-        width: 32
-        height: 32
+        x: 139
+        y: 235
+        width: 14
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -465,10 +465,10 @@ TextureImporter:
       name: Girl_17
       rect:
         serializedVersion: 2
-        x: 160
-        y: 231
-        width: 32
-        height: 32
+        x: 170
+        y: 237
+        width: 15
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -486,10 +486,10 @@ TextureImporter:
       name: Girl_18
       rect:
         serializedVersion: 2
-        x: 0
-        y: 199
-        width: 32
-        height: 32
+        x: 11
+        y: 203
+        width: 16
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -507,10 +507,10 @@ TextureImporter:
       name: Girl_19
       rect:
         serializedVersion: 2
-        x: 32
-        y: 199
-        width: 32
-        height: 32
+        x: 43
+        y: 204
+        width: 15
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -528,10 +528,10 @@ TextureImporter:
       name: Girl_20
       rect:
         serializedVersion: 2
-        x: 64
-        y: 199
-        width: 32
-        height: 32
+        x: 75
+        y: 203
+        width: 14
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -549,10 +549,10 @@ TextureImporter:
       name: Girl_21
       rect:
         serializedVersion: 2
-        x: 96
-        y: 199
-        width: 32
-        height: 32
+        x: 107
+        y: 203
+        width: 15
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -570,10 +570,10 @@ TextureImporter:
       name: Girl_22
       rect:
         serializedVersion: 2
-        x: 128
-        y: 199
-        width: 32
-        height: 32
+        x: 139
+        y: 204
+        width: 16
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -591,10 +591,10 @@ TextureImporter:
       name: Girl_23
       rect:
         serializedVersion: 2
-        x: 160
-        y: 199
-        width: 32
-        height: 32
+        x: 171
+        y: 203
+        width: 16
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -612,10 +612,10 @@ TextureImporter:
       name: Girl_24
       rect:
         serializedVersion: 2
-        x: 0
-        y: 167
-        width: 32
-        height: 32
+        x: 11
+        y: 170
+        width: 15
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -633,10 +633,10 @@ TextureImporter:
       name: Girl_25
       rect:
         serializedVersion: 2
-        x: 32
-        y: 167
-        width: 32
-        height: 32
+        x: 44
+        y: 170
+        width: 13
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -654,10 +654,10 @@ TextureImporter:
       name: Girl_26
       rect:
         serializedVersion: 2
-        x: 64
-        y: 167
-        width: 32
-        height: 32
+        x: 77
+        y: 170
+        width: 15
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -675,10 +675,10 @@ TextureImporter:
       name: Girl_27
       rect:
         serializedVersion: 2
-        x: 96
-        y: 167
-        width: 32
-        height: 32
+        x: 108
+        y: 170
+        width: 13
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -696,10 +696,10 @@ TextureImporter:
       name: Girl_28
       rect:
         serializedVersion: 2
-        x: 128
-        y: 167
-        width: 32
-        height: 32
+        x: 140
+        y: 169
+        width: 13
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -717,10 +717,10 @@ TextureImporter:
       name: Girl_29
       rect:
         serializedVersion: 2
-        x: 0
-        y: 135
-        width: 32
-        height: 32
+        x: 6
+        y: 139
+        width: 19
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -738,10 +738,10 @@ TextureImporter:
       name: Girl_30
       rect:
         serializedVersion: 2
-        x: 32
-        y: 135
-        width: 32
-        height: 32
+        x: 38
+        y: 139
+        width: 19
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -759,10 +759,10 @@ TextureImporter:
       name: Girl_31
       rect:
         serializedVersion: 2
-        x: 64
-        y: 135
-        width: 32
-        height: 32
+        x: 73
+        y: 139
+        width: 16
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -780,10 +780,10 @@ TextureImporter:
       name: Girl_32
       rect:
         serializedVersion: 2
-        x: 96
-        y: 135
-        width: 32
-        height: 32
+        x: 108
+        y: 139
+        width: 13
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -801,10 +801,10 @@ TextureImporter:
       name: Girl_33
       rect:
         serializedVersion: 2
-        x: 128
-        y: 135
-        width: 32
-        height: 32
+        x: 140
+        y: 139
+        width: 14
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -822,10 +822,10 @@ TextureImporter:
       name: Girl_34
       rect:
         serializedVersion: 2
-        x: 0
-        y: 103
-        width: 32
-        height: 32
+        x: 11
+        y: 109
+        width: 14
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -843,10 +843,10 @@ TextureImporter:
       name: Girl_35
       rect:
         serializedVersion: 2
-        x: 32
-        y: 103
-        width: 32
-        height: 32
+        x: 44
+        y: 109
+        width: 13
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -864,10 +864,10 @@ TextureImporter:
       name: Girl_36
       rect:
         serializedVersion: 2
-        x: 64
-        y: 103
-        width: 32
-        height: 32
+        x: 76
+        y: 109
+        width: 16
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -885,10 +885,10 @@ TextureImporter:
       name: Girl_37
       rect:
         serializedVersion: 2
-        x: 96
-        y: 103
-        width: 32
-        height: 32
+        x: 108
+        y: 109
+        width: 19
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -906,10 +906,10 @@ TextureImporter:
       name: Girl_38
       rect:
         serializedVersion: 2
-        x: 128
-        y: 103
-        width: 32
-        height: 32
+        x: 140
+        y: 109
+        width: 19
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -927,10 +927,10 @@ TextureImporter:
       name: Girl_39
       rect:
         serializedVersion: 2
-        x: 0
-        y: 71
-        width: 32
-        height: 32
+        x: 12
+        y: 74
+        width: 15
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -948,10 +948,10 @@ TextureImporter:
       name: Girl_40
       rect:
         serializedVersion: 2
-        x: 32
-        y: 71
-        width: 32
-        height: 32
+        x: 42
+        y: 74
+        width: 18
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -969,10 +969,10 @@ TextureImporter:
       name: Girl_41
       rect:
         serializedVersion: 2
-        x: 64
-        y: 71
-        width: 32
-        height: 32
+        x: 74
+        y: 74
+        width: 16
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -990,10 +990,10 @@ TextureImporter:
       name: Girl_42
       rect:
         serializedVersion: 2
-        x: 96
-        y: 71
-        width: 32
-        height: 32
+        x: 108
+        y: 74
+        width: 14
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1011,10 +1011,10 @@ TextureImporter:
       name: Girl_43
       rect:
         serializedVersion: 2
-        x: 128
-        y: 71
-        width: 32
-        height: 32
+        x: 140
+        y: 74
+        width: 14
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1032,10 +1032,10 @@ TextureImporter:
       name: Girl_44
       rect:
         serializedVersion: 2
-        x: 0
-        y: 39
-        width: 32
-        height: 32
+        x: 12
+        y: 49
+        width: 7
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1053,10 +1053,10 @@ TextureImporter:
       name: Girl_45
       rect:
         serializedVersion: 2
-        x: 32
-        y: 39
-        width: 32
-        height: 32
+        x: 27
+        y: 50
+        width: 7
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1074,10 +1074,10 @@ TextureImporter:
       name: Girl_46
       rect:
         serializedVersion: 2
-        x: 64
-        y: 39
-        width: 32
-        height: 32
+        x: 51
+        y: 58
+        width: 14
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1087,6 +1087,27 @@ TextureImporter:
       bones: []
       spriteID: 48cdf9027e85b3542958967676921d0a
       internalID: -585714938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Girl_47
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 47
+        width: 14
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4847d6b832d4bf4a9fdc5fbc227882a
+      internalID: 2098161306
       vertices: []
       indices: 
       edges: []
@@ -1132,12 +1153,13 @@ TextureImporter:
       Girl_6: 2051537934
       Girl_28: -40166282
       Girl_36: -1442533777
+      Girl_0: -340711223
       Girl_11: -1576311017
-      Girl_35: 712121213
       Girl_40: -1486643112
       Girl_31: 2115910619
       Girl_2: 482747716
-      Girl_0: -340711223
+      Girl_47: 2098161306
+      Girl_35: 712121213
       Girl_1: 2051761048
       Girl_38: 471110115
       Girl_17: 491672433

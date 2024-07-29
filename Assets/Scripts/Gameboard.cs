@@ -125,14 +125,13 @@ public class Gameboard : MonoBehaviour
         // throw new Exception("LookupTileIndex_NotFound");
     }
 
+    //Public methods
     public Vector3 GetTileCenter(int x, int y){
         return new Vector3(x * TILE_SIZE, y * TILE_SIZE, 0) +  transform.position + new Vector3(TILE_SIZE / 2, TILE_SIZE / 2, 0);
     }
-
     public Vector2Int GetCurrentHover(){
         return currentHover;
     }
-
     public TilemapRenderer GetTilemapRenderer(){
         return tilemapRenderer;
     }
