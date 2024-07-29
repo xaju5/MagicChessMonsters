@@ -119,7 +119,7 @@ public class BattleManager : MonoBehaviour
         if (true)
         {
             selectedMinion = minionUnits[x,y];
-            Debug.Log(selectedMinion.name);
+            Debug.Log($"{selectedMinion.name} Selected");
         }
     }
 

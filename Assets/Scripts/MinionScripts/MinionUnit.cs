@@ -27,12 +27,11 @@ public class MinionUnit : MonoBehaviour
     }
 
     public void MoveMinionUnit(Vector3 targetPosition, bool force = false){
+        Debug.Log($"{transform.name} commanded to move");
         if(force)
             transform.position = targetPosition;
-        else{
-            this.targetPosition = targetPosition;
-        }
 
+        this.targetPosition = targetPosition;
     }
 
 }
