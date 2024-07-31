@@ -91,7 +91,7 @@ public class Gameboard : MonoBehaviour
             //Change to other tile hover
             if (currentHover != hitPosition)
             {
-                tiles[currentHover.x, currentHover.y].layer = LayerMask.NameToLayer("Tile");
+                tiles[currentHover.x, currentHover.y].layer = RestoreTileLayer(currentHover);
                 currentHover = hitPosition;
                 tiles[hitPosition.x, hitPosition.y].layer = LayerMask.NameToLayer("Hover");
             }
@@ -101,7 +101,7 @@ public class Gameboard : MonoBehaviour
             //Remove hover
             if (currentHover != -Vector2Int.one)
             {
-                tiles[currentHover.x, currentHover.y].layer = LayerMask.NameToLayer("Tile");
+                tiles[currentHover.x, currentHover.y].layer = RestoreTileLayer(currentHover);
                 currentHover = -Vector2Int.one;
             }
         }
@@ -112,7 +112,7 @@ public class Gameboard : MonoBehaviour
         RaycastHit2D hitInfo;
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Ray ray = new Ray(mousePosition, Vector2.zero);
-        hitInfo = Physics2D.Raycast(ray.origin, ray.direction, rayLength, LayerMask.GetMask("Tile", "Hover"));
+        hitInfo = Physics2D.Raycast(ray.origin, ray.direction, rayLength, LayerMask.GetMask("Tile", "Hover", "Highlight"));
         return hitInfo;
     }
     private Vector2Int LookupTileIndex(GameObject hitInfo)
@@ -125,6 +125,12 @@ public class Gameboard : MonoBehaviour
         // throw new Exception("LookupTileIndex_NotFound");
     }
 
+    private LayerMask RestoreTileLayer(Vector2Int index){
+        if(BattleManager.Instance.IsValidMove(index))
+            return LayerMask.NameToLayer("Highlight");
+        
+        return LayerMask.NameToLayer("Tile");
+    }
     //Public methods
     public Vector3 GetTileCenter(int x, int y){
         return new Vector3(x * TILE_SIZE, y * TILE_SIZE, 0) +  transform.position + new Vector3(TILE_SIZE / 2, TILE_SIZE / 2, 0);
@@ -134,5 +140,17 @@ public class Gameboard : MonoBehaviour
     }
     public TilemapRenderer GetTilemapRenderer(){
         return tilemapRenderer;
+    }
+    public void HightlightTiles(List<Vector2Int> tilesToHightlight){
+        foreach (Vector2Int tileIndex in tilesToHightlight)
+            tiles[tileIndex.x, tileIndex.y].layer = LayerMask.NameToLayer("Highlight");
+    }
+    public void ChangeTilesLayers(List<Vector2Int> tilesToChange, string layerName){
+        foreach (Vector2Int tileIndex in tilesToChange)
+            tiles[tileIndex.x, tileIndex.y].layer = LayerMask.NameToLayer(layerName);
+    }
+    public void SetAllTilesToDefaultLayer(){
+        foreach (GameObject tile in tiles)
+            tile.layer = LayerMask.NameToLayer("Tile"); 
     }
 }

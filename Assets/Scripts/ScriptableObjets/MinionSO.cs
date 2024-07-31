@@ -13,6 +13,7 @@ public class MinionSO : ScriptableObject {
     [SerializeField] private float defense;
     [SerializeField] private float magicStrenght;
     [SerializeField] private float magicDefense;
+    [SerializeField] private int movementRangeBase;
     [SerializeField] private List<ActionSO> learnableActions;
     [SerializeField] private Sprite sprite;
     [SerializeField] private Animator animator;
@@ -26,6 +27,7 @@ public float Strength { get { return strength; } }
 public float Defense { get { return defense; } }
 public float MagicPower { get { return magicStrenght; } }
 public float MagicResistance { get { return magicDefense; } }
+public int MovementRangeBase { get { return movementRangeBase; } }
 public Sprite Sprite { get { return sprite; } }
 public Animator Animator { get { return animator; } }
 
