@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private Image selectedMinionIcon;
+    [SerializeField] private TextMeshProUGUI currentTurnText;
 
-    public UIManager Instance;
+    public static UIManager Instance;
 
     private void Awake()
     {
         SetUpSingleton();
+        UpdateTurnText(Team.Player1);
     }
     void Update()
     {
@@ -37,5 +40,8 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void UpdateTurnText(Team currentTurn){
+        currentTurnText.text = $"{currentTurn.ToString()}'s turn";
+    }
 
 }

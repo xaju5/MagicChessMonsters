@@ -189,8 +189,8 @@ public class BattleManager : MonoBehaviour
             currentPlayerTurn = Team.Player2;
         else
             currentPlayerTurn = Team.Player1;
-        Debug.Log($"Finished Turn. Next:{currentPlayerTurn}");
-
+        
+        UIManager.Instance.UpdateTurnText(currentPlayerTurn);
     }
 
     //Public methods
