@@ -107,16 +107,19 @@ public class BattleManager : MonoBehaviour
             if(Input.GetMouseButtonDown(0)){
                 if(currentHover == -Vector2Int.one)
                     DeselectMinion();
-                else
-                    if(minionUnits[currentHover.x, currentHover.y] == null)
+                else{
+                    if(minionUnits[currentHover.x, currentHover.y] == null){
                         if(IsValidMove(currentHover)){
                             MoveSelectedMinionTo(currentHover);
                             DeselectMinion();
                             FinishTurn();
                         }
-                    else
+                    }
+                    else{
                         if(minionUnits[currentHover.x, currentHover.y].Team == currentPlayerTurn)
                             SwitchSelectedMinion(currentHover);
+                    }
+                }
   
             }
             if(Input.GetKeyDown(KeyCode.Q))
@@ -173,11 +176,6 @@ public class BattleManager : MonoBehaviour
         throw new System.Exception("LookupMinionIndex_NotFound");
         // return -Vector2Int.one;
     }
-    private void HighlightAvailableMoves(){
-        availableMoves = selectedMinion.minion.GetAvailableMoves();
-        Gameboard.Instance.HightlightTiles(availableMoves);
-    }
-    
     private void MakeAttack2() {
         throw new NotImplementedException();
     }
@@ -185,13 +183,13 @@ public class BattleManager : MonoBehaviour
         throw new NotImplementedException();
     }
 
-        private void FinishTurn()
-    {
+    private void FinishTurn(){
         turnCount++;
         if(currentPlayerTurn == Team.Player1)
             currentPlayerTurn = Team.Player2;
         else
             currentPlayerTurn = Team.Player1;
+        Debug.Log($"Finished Turn. Next:{currentPlayerTurn}");
 
     }
 
