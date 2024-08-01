@@ -57,28 +57,6 @@ public class BattleManager : MonoBehaviour
         minionUnits[3,7] = SpawnSingleMinion(AllMinionSO[(int)team2[0]],Team.Player2);
         minionUnits[4,7] = SpawnSingleMinion(AllMinionSO[(int)team2[1]],Team.Player2);
         minionUnits[5,7] = SpawnSingleMinion(AllMinionSO[(int)team2[2]],Team.Player2);
-        // int i, k;
-        // foreach (MinionList minionId in team1){
-        //     i = 3;
-        //     k = 0;
-        //     minionUnits[i,k] = SpawnSingleMinion(AllMinionSO[(int)minionId],Team.Player1);
-        //     i++;
-        //     if(i > 7){
-        //         i = 0;
-        //         k += 1;
-        //     }
-        // }
-
-        // foreach (MinionList minionId in team2){
-        //     i = 3;
-        //     k = 7;
-        //     minionUnits[i,k] = SpawnSingleMinion(AllMinionSO[(int)minionId],Team.Player2);
-        //     i++;
-        //     if(i > 7){
-        //         i = 0;
-        //         k -= 1;
-        //     }
-        // }
     }
     private MinionUnit SpawnSingleMinion(MinionSO minionInfo, Team team){
         GameObject minionGO = Instantiate(minionPrefab, transform);
@@ -150,9 +128,9 @@ public class BattleManager : MonoBehaviour
     }
     private void SelectMinion(Vector2Int tileIndex){
         selectedMinion = minionUnits[tileIndex.x,tileIndex.y];
-        availableMoves = selectedMinion.minion.GetAvailableMoves();
-        Gameboard.Instance.ChangeTilesLayers(availableMoves,"Highlight");
         Debug.Log($"{selectedMinion.name} Selected");
+        availableMoves = selectedMinion.minion.GetAvailableMoves(ref minionUnits, tileIndex, Gameboard.TILE_COUNT_X, Gameboard.TILE_COUNT_Y);
+        Gameboard.Instance.ChangeTilesLayers(availableMoves,"Highlight");
     }
     private void SwitchSelectedMinion(Vector2Int tileIndex){
         DeselectMinion();
