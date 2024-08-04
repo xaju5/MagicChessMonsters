@@ -15,8 +15,8 @@ MonoBehaviour:
   minionId: 6
   description: Follow the light
   type: 5
-  healthBase: 10
-  magicBase: 10
+  healthBase: 100
+  magicBase: 100
   strength: 10
   defense: 10
   magicStrenght: 10

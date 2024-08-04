@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class MinionUnit : MonoBehaviour
 {
     [SerializeField] private Slider HealthBar;
+    [SerializeField] private Slider MagicBar;
     [SerializeField] private float movementSpeed = 10f;
     public Minion minion { get; private set; }
     public Team Team { get; private set; }
@@ -23,7 +24,8 @@ public class MinionUnit : MonoBehaviour
         
         minion = new Minion(minionInfo);
         GetComponent<SpriteRenderer>().sprite = minionInfo.Sprite;
-        HealthBar.GetComponent<FloatingHealthBar>().SetMaxHealthBar(minion.MaxHealth());
+        HealthBar.GetComponent<FloatingBar>().SetMaxHealthBar(minion.MaxHealth());
+        MagicBar.GetComponent<FloatingBar>().SetMaxHealthBar(minion.MaxMagic());
     }
 
     public void MoveMinionUnit(Vector3 targetPosition, bool force = false){

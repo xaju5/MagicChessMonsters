@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FloatingHealthBar : MonoBehaviour
+public class FloatingBar : MonoBehaviour
 {
     private Slider slider;
-    private float health, maxHealth;
+    private float currentAmount, maxAmount;
     [SerializeField] private float updateSpeed = 0.001f;
 
     void Awake()
@@ -14,13 +14,14 @@ public class FloatingHealthBar : MonoBehaviour
         slider = GetComponent<Slider>();
     }
 
+
     void Update()
     {
-        if(slider.value < health / maxHealth)
+        if(slider.value < currentAmount / maxAmount)
         {
             slider.value += updateSpeed;
         }
-        if(slider.value > health / maxHealth)
+        if(slider.value > currentAmount / maxAmount)
         {
             slider.value -= updateSpeed;
         }
@@ -28,11 +29,12 @@ public class FloatingHealthBar : MonoBehaviour
 
     public void UpdateHealthBar(float newHealth)
     {
-        health = newHealth;
+        currentAmount = newHealth;
     }
 
     public void SetMaxHealthBar(float maxHealthBar)
     {
-        maxHealth = maxHealthBar;
+        maxAmount = maxHealthBar;
+        currentAmount = maxAmount;
     }
 }

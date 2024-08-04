@@ -15,8 +15,8 @@ MonoBehaviour:
   minionId: 1
   description: A strong trainer
   type: 0
-  healthBase: 10
-  magicBase: 10
+  healthBase: 100
+  magicBase: 100
   strength: 10
   defense: 10
   magicStrenght: 10

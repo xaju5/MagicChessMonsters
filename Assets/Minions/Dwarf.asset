@@ -15,8 +15,8 @@ MonoBehaviour:
   minionId: 2
   description: Its always angry
   type: 4
-  healthBase: 10
-  magicBase: 10
+  healthBase: 100
+  magicBase: 100
   strength: 10
   defense: 10
   magicStrenght: 10

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c275cef8ebcd42b4895454814a1ff433, type: 3}
+  m_Name: Explosion
+  m_EditorClassIdentifier: 
+  name: Explosion
+  description: A huge explotion
+  type: 1
+  range: 2
+  nature: 2
+  power: 20
+  accuracy: 10
+  magicCost: 30
+  sprite: {fileID: 1077037350, guid: 74eadb46e98aadc4da757285acd5d2c7, type: 3}
+  animator: {fileID: 0}
