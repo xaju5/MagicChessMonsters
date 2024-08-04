@@ -141,10 +141,6 @@ public class Gameboard : MonoBehaviour
     public TilemapRenderer GetTilemapRenderer(){
         return tilemapRenderer;
     }
-    public void HightlightTiles(List<Vector2Int> tilesToHightlight){
-        foreach (Vector2Int tileIndex in tilesToHightlight)
-            tiles[tileIndex.x, tileIndex.y].layer = LayerMask.NameToLayer("Highlight");
-    }
     public void ChangeTilesLayers(List<Vector2Int> tilesToChange, string layerName){
         foreach (Vector2Int tileIndex in tilesToChange)
             tiles[tileIndex.x, tileIndex.y].layer = LayerMask.NameToLayer(layerName);

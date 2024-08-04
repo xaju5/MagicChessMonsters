@@ -105,8 +105,14 @@ public class BattleManager : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.W))
                 MakeAttack2();
         }
-        else if(CanMinionBeSelected(currentHover))
-            SelectMinion(currentHover);        
+        else{
+            if(availableMoves.Count < 1){
+                availableMoves = GetTeamMinionPositions();
+                Gameboard.Instance.ChangeTilesLayers(availableMoves,"Highlight");
+            }
+            if(CanMinionBeSelected(currentHover))
+                SelectMinion(currentHover);    
+        }    
     }
 
     private bool CanMinionBeSelected(Vector2Int currentHover)
@@ -127,6 +133,8 @@ public class BattleManager : MonoBehaviour
         availableMoves.Clear();
     }
     private void SelectMinion(Vector2Int tileIndex){
+        Gameboard.Instance.ChangeTilesLayers(availableMoves,"Tile");
+        availableMoves.Clear();
         selectedMinion = minionUnits[tileIndex.x,tileIndex.y];
         Debug.Log($"{selectedMinion.name} Selected");
         availableMoves = selectedMinion.minion.GetAvailableMoves(ref minionUnits, tileIndex, Gameboard.TILE_COUNT_X, Gameboard.TILE_COUNT_Y);
@@ -153,6 +161,14 @@ public class BattleManager : MonoBehaviour
 
         throw new System.Exception("LookupMinionIndex_NotFound");
         // return -Vector2Int.one;
+    }
+    private List<Vector2Int> GetTeamMinionPositions(){
+        List<Vector2Int> minionPositions = new List<Vector2Int>();
+        for (int x = 0; x < Gameboard.TILE_COUNT_X; x++)
+            for (int y = 0; y < Gameboard.TILE_COUNT_Y; y++)
+                if(minionUnits[x,y]?.Team == currentPlayerTurn)
+                    minionPositions.Add(new Vector2Int(x,y));
+        return minionPositions;
     }
     private void MakeAttack2() {
         throw new NotImplementedException();
