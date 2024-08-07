@@ -28,6 +28,7 @@ public float Defense { get { return defense; } }
 public float MagicPower { get { return magicStrenght; } }
 public float MagicResistance { get { return magicDefense; } }
 public int MovementRangeBase { get { return movementRangeBase; } }
+public List<ActionSO> LearnableActions { get { return learnableActions; } }
 public Sprite Sprite { get { return sprite; } }
 public Animator Animator { get { return animator; } }
 

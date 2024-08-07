@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
@@ -6,13 +7,19 @@ public class Minion
 {
     public MinionSO MinionInfo { get; private set; }
 
-    private float health;
-    private float magic;
+    public float health { get; private set; }
+    public float magic { get; private set; }
+
+    public Action action1 { get; private set; }
+    public Action action2 { get; private set; }
 
     public Minion(MinionSO minionInfo){
         MinionInfo = minionInfo;
         health = minionInfo.HealthBase;
         magic = minionInfo.MagicBase;
+        bool hasActions = minionInfo.LearnableActions.Count > 0;
+        action1 = hasActions? new Action(minionInfo.LearnableActions[0]) : null;
+        action2 = hasActions? new Action(minionInfo.LearnableActions[1]) : null;
     }
 
     public float MaxHealth(){

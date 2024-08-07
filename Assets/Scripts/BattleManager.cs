@@ -101,9 +101,9 @@ public class BattleManager : MonoBehaviour
   
             }
             if(Input.GetKeyDown(KeyCode.Q))
-                MakeAttack1();
+                MakeAttack(selectedMinion.minion.action1, minionUnits[currentHover.x, currentHover.y]);
             if(Input.GetKeyDown(KeyCode.W))
-                MakeAttack2();
+                MakeAttack(selectedMinion.minion.action2, minionUnits[currentHover.x, currentHover.y]);
         }
         else{
             if(availableMoves.Count < 1){
@@ -129,6 +129,7 @@ public class BattleManager : MonoBehaviour
     }
     private void DeselectMinion(){
         selectedMinion = null;
+        UIManager.Instance.RemoveSelectedMinionUI();
         Gameboard.Instance.ChangeTilesLayers(availableMoves,"Tile");
         availableMoves.Clear();
     }
@@ -137,6 +138,7 @@ public class BattleManager : MonoBehaviour
         availableMoves.Clear();
         selectedMinion = minionUnits[tileIndex.x,tileIndex.y];
         Debug.Log($"{selectedMinion.name} Selected");
+        UIManager.Instance.SetupSelectedMinionUI(selectedMinion.minion);
         availableMoves = selectedMinion.minion.GetAvailableMoves(ref minionUnits, tileIndex, Gameboard.TILE_COUNT_X, Gameboard.TILE_COUNT_Y);
         Gameboard.Instance.ChangeTilesLayers(availableMoves,"Highlight");
     }
@@ -170,10 +172,7 @@ public class BattleManager : MonoBehaviour
                     minionPositions.Add(new Vector2Int(x,y));
         return minionPositions;
     }
-    private void MakeAttack2() {
-        throw new NotImplementedException();
-    }
-    private void MakeAttack1(){
+    private void MakeAttack(Action selectedAction, MinionUnit targetMinion) {
         throw new NotImplementedException();
     }
 

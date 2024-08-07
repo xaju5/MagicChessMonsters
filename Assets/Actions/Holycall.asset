@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c275cef8ebcd42b4895454814a1ff433, type: 3}
-  m_Name: Explosion
+  m_Name: Holycall
   m_EditorClassIdentifier: 
-  name: Explosion
-  description: A huge explotion
-  type: 1
-  range: 2
-  nature: 2
+  name: Holy call
+  description: summon the power of good
+  type: 5
+  range: 1
+  nature: 1
   power: 20
   accuracy: 20
   magicCost: 20
-  sprite: {fileID: 1077037350, guid: 74eadb46e98aadc4da757285acd5d2c7, type: 3}
+  sprite: {fileID: 1922995191, guid: b63e0c1a8d65da44b85a847073e573e4, type: 3}
   animator: {fileID: 0}
