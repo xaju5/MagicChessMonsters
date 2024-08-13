@@ -14,7 +14,6 @@ public class FloatingBar : MonoBehaviour
         slider = GetComponent<Slider>();
     }
 
-
     void Update()
     {
         if(slider.value < currentAmount / maxAmount)
@@ -27,14 +26,20 @@ public class FloatingBar : MonoBehaviour
         }
     }
 
-    public void UpdateHealthBar(float newHealth)
+    public void UpdateBarValue(float amount)
     {
-        currentAmount = newHealth;
+        currentAmount = amount;
     }
 
-    public void SetMaxHealthBar(float maxHealthBar)
+    public void SetBarMaxValue(float maxAmountBar)
     {
-        maxAmount = maxHealthBar;
-        currentAmount = maxAmount;
+        maxAmount = maxAmountBar;
+        currentAmount = maxAmountBar;
+        slider.value = 1;
+    }
+
+    public void ForceBarValue(float amount){
+        currentAmount = amount;
+        slider.value = currentAmount / maxAmount;
     }
 }

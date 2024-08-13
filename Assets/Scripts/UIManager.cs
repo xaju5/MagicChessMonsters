@@ -11,7 +11,9 @@ public class UIManager : MonoBehaviour
     [Header("Selected Minion Icon")]
     [SerializeField] private Image selectedMinionIcon;
     [SerializeField] private Slider selectedMinionHealthBar;
+    [SerializeField] private TextMeshProUGUI selectedMinionHealthBarText;
     [SerializeField] private Slider selectedMinionMagicBar;
+    [SerializeField] private TextMeshProUGUI selectedMinionMagicBarText;
 
     [Header("Action 1")]
     [SerializeField] private TextMeshProUGUI Action1Text;
@@ -47,32 +49,40 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void SetUpSliderData(Slider slider, float maxAmount, float amount){
+        slider.gameObject.SetActive(true);
+        FloatingBar floatingBar = slider.GetComponent<FloatingBar>();
+        floatingBar.SetBarMaxValue(maxAmount);
+        floatingBar.ForceBarValue(amount);
+    }
+    private void UpdateSliderData(Slider slider, float maxAmount, float amount){
+        FloatingBar floatingBar = slider.GetComponent<FloatingBar>();
+        floatingBar.UpdateBarValue(amount);
+    }
+
+    private void SetUpActionData(Minion selectedMinion, TextMeshProUGUI actionName, TextMeshProUGUI actionCost, TextMeshProUGUI actionType){
+        actionName.transform.parent.gameObject.SetActive(true);
+        actionName.text = selectedMinion.action1.ActionInfo.Name;
+        actionCost.text = selectedMinion.action1.MagicCost.ToString();
+        actionType.text = selectedMinion.action1.ActionInfo.Type.ToString();
+    }
+
     public void UpdateTurnText(Team currentTurn){
         currentTurnText.text = $"{currentTurn}'s turn";
     }
 
     public void SetupSelectedMinionUI(Minion selectedMinion){
         selectedMinionIcon.enabled = true;
-        selectedMinionHealthBar.gameObject.SetActive(true);
-        selectedMinionMagicBar.gameObject.SetActive(true);
         selectedMinionIcon.sprite = selectedMinion.MinionInfo.Sprite;
-        selectedMinionHealthBar.value = selectedMinion.health / selectedMinion.MaxHealth();
-        selectedMinionMagicBar.value = selectedMinion.magic / selectedMinion.MaxMagic();
+        SetUpSliderData(selectedMinionHealthBar, selectedMinion.MaxHealth(),selectedMinion.health);
+        selectedMinionHealthBarText.text = $"{selectedMinion.health}/{selectedMinion.MaxHealth()}";
+        SetUpSliderData(selectedMinionMagicBar, selectedMinion.MaxMagic(),selectedMinion.magic);
+        selectedMinionMagicBarText.text = $"{selectedMinion.magic}/{selectedMinion.MaxMagic()}";
 
         if (selectedMinion.action1 != null)
-        {
-            Action1Text.transform.parent.gameObject.SetActive(true);
-            Action1Text.text = selectedMinion.action1.ActionInfo.Name;
-            Action1MagicCostText.text = selectedMinion.action1.MagicCost.ToString();
-            Action1TypeText.text = selectedMinion.action1.ActionInfo.Type.ToString();
-        }
+            SetUpActionData(selectedMinion, Action1Text, Action1MagicCostText, Action1TypeText);
         if (selectedMinion.action2 != null)
-        {
-            Action2Text.transform.parent.gameObject.SetActive(true);
-            Action2Text.text = selectedMinion.action2.ActionInfo.Name;
-            Action2MagicCostText.text = selectedMinion.action2.MagicCost.ToString();
-            Action2TypeText.text = selectedMinion.action2.ActionInfo.Type.ToString();
-        }
+            SetUpActionData(selectedMinion, Action2Text, Action2MagicCostText, Action2TypeText);        
     }
 
     public void RemoveSelectedMinionUI(){
@@ -83,6 +93,14 @@ public class UIManager : MonoBehaviour
 
         Action1Text.transform.parent.gameObject.SetActive(false);
         Action2Text.transform.parent.gameObject.SetActive(false);
+    }
+
+    public void UpdateFloatingBars(float health, float maxHealth, float magic, float maxMagic){
+        Debug.Log($"Updating Bar to {health}, {magic}");
+        UpdateSliderData(selectedMinionHealthBar, maxHealth, health);
+        UpdateSliderData(selectedMinionMagicBar, maxMagic, magic);
+        selectedMinionHealthBarText.text = $"{health}/{maxHealth}";
+        selectedMinionMagicBarText.text = $"{magic}/{maxMagic}";
     }
 
 }

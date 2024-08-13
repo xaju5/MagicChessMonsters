@@ -52,4 +52,50 @@ public class Minion
         }
         return availableMoves;
     }
+    
+    private float CalculateDamage(Action attackerAction, MinionSO attacker){
+        float level = 1;
+        float base_damage = 2 * level;
+        float diference = attackerAction.ActionInfo.Power * (attacker.Strength / MinionInfo.Defense);
+        float critical = UnityEngine.Random.Range(1,3);
+        float total_damage = (base_damage + diference) * critical;
+        return total_damage;
+    }
+
+    public bool TakeDamage(Action attackerAction, MinionSO attacker){
+        float damageAmount = CalculateDamage(attackerAction, attacker);
+        health -= damageAmount;
+
+        if(health <= 0){
+            health = 0;
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool Heal(float amount){
+        health += amount;
+        if(health >= MaxHealth()){
+            health = MaxHealth();
+            return true;
+        }
+        return false;
+    }
+    public bool ConsumeMagic(float amount){
+        magic -= amount;
+        if(magic <= 0){
+            magic = 0;
+            return true;
+        }
+        return false;
+    }
+    public bool RestoreMagic(float amount){
+        magic += amount;
+        if(magic >= MaxMagic()){
+            magic = MaxMagic();
+            return true;
+        }
+        return false;
+    }
 }

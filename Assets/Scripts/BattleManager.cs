@@ -100,10 +100,16 @@ public class BattleManager : MonoBehaviour
                 }
   
             }
-            if(Input.GetKeyDown(KeyCode.Q))
+            if(Input.GetKeyDown(KeyCode.Q)){
                 MakeAttack(selectedMinion.minion.action1, minionUnits[currentHover.x, currentHover.y]);
-            if(Input.GetKeyDown(KeyCode.W))
+                DeselectMinion();
+                FinishTurn();
+            }
+            if(Input.GetKeyDown(KeyCode.W)){
                 MakeAttack(selectedMinion.minion.action2, minionUnits[currentHover.x, currentHover.y]);
+                DeselectMinion();
+                FinishTurn();
+            }
         }
         else{
             if(availableMoves.Count < 1){
@@ -137,7 +143,6 @@ public class BattleManager : MonoBehaviour
         Gameboard.Instance.ChangeTilesLayers(availableMoves,"Tile");
         availableMoves.Clear();
         selectedMinion = minionUnits[tileIndex.x,tileIndex.y];
-        Debug.Log($"{selectedMinion.name} Selected");
         UIManager.Instance.SetupSelectedMinionUI(selectedMinion.minion);
         availableMoves = selectedMinion.minion.GetAvailableMoves(ref minionUnits, tileIndex, Gameboard.TILE_COUNT_X, Gameboard.TILE_COUNT_Y);
         Gameboard.Instance.ChangeTilesLayers(availableMoves,"Highlight");
@@ -173,7 +178,13 @@ public class BattleManager : MonoBehaviour
         return minionPositions;
     }
     private void MakeAttack(Action selectedAction, MinionUnit targetMinion) {
-        throw new NotImplementedException();
+        Debug.Log($"{selectedMinion} attacks {targetMinion} with {selectedAction}");
+        //TODO: Make it a corrotine?
+        selectedMinion.ConsumeMagic(selectedAction.MagicCost);
+        bool isFainted = targetMinion.TakeDamage(selectedAction,selectedMinion.minion.MinionInfo);
+        if(isFainted) Debug.Log($"{targetMinion} has Fainted!");
+        Minion minion = selectedMinion.minion;
+        UIManager.Instance.UpdateFloatingBars(minion.health, minion.MaxHealth(), minion.magic, minion.MaxMagic());
     }
 
     private void FinishTurn(){
