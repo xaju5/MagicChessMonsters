@@ -71,17 +71,59 @@ public class MinionUnit : MonoBehaviour
             transform.position = targetPosition;
     }
 
-    public FaintedOptions TakeDamage(Action attackerAction, MinionSO attacker)
+    public DamageDetails TakeDamage(Action attackerAction, MinionSO attacker)
     {
-        bool isFainted = minion.TakeDamage(attackerAction, attacker);
+        DamageDetails damageDetails = minion.TakeDamage(attackerAction, attacker);
         UpdateFloatingBars();
-        if (isFainted)
+        if (damageDetails.isFainted)
         {
             StartCoroutine(TriggerMinionDead());
-            return IsTrainer ? FaintedOptions.TrainerFainted : FaintedOptions.MinionFainted;
+            damageDetails.faintedOptions = IsTrainer ? FaintedOptions.TrainerFainted : FaintedOptions.MinionFainted;
         }
-        StartCoroutine(WriteMessageInDialogueBox("Augh!"));
-        return FaintedOptions.None;
+        else
+        {
+            StartCoroutine(WriteMessageInDialogueBox("-"+damageDetails.total_damage.ToString()));
+            damageDetails.faintedOptions = FaintedOptions.None;
+        }
+
+        return damageDetails;
+    }
+
+    public DamageDetails MakeMinonAttack(Action selectedAction, MinionUnit targetMinion){
+        if(!canMakeAttack(selectedAction)) {
+            StartCoroutine(WriteMessageInDialogueBox("I need Magic!"));
+            DamageDetails nullDetails = new DamageDetails(false,0,0);
+            nullDetails.faintedOptions = FaintedOptions.Invalid;
+            return nullDetails;
+        }
+        ConsumeMagic(selectedAction.MagicCost);
+        DamageDetails damageDetails = targetMinion.TakeDamage(selectedAction, minion.MinionInfo);
+        string text = GetAttackerMessage(damageDetails);
+        if(text!= "") StartCoroutine(WriteMessageInDialogueBox(text));
+        return damageDetails;
+
+    }
+    private bool canMakeAttack(Action selectedAction)
+    {
+        return selectedAction.MagicCost <= minion.magic;
+    }
+    private string GetAttackerMessage(DamageDetails damageDetails)
+    {
+        string text = "";
+        if(damageDetails.typeEffectivines == 0 ){
+            text = "It doesnt affect";
+            return text;
+        }
+        else if(damageDetails.typeEffectivines == 2){
+            text = "It's super effective";
+        }
+        else if(damageDetails.typeEffectivines == 0.5){
+            text = "It's not very effective...";
+        }
+        if(damageDetails.isCritical)
+            text += "Critical!";
+
+        return text;
     }
 
     public bool Heal(float amount){

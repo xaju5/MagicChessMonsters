@@ -53,25 +53,28 @@ public class Minion
         return availableMoves;
     }
     
-    private float CalculateDamage(Action attackerAction, MinionSO attacker){
+    private DamageDetails CalculateDamage(Action attackerAction, MinionSO attacker){
         float level = 1;
         float base_damage = 2 * level;
+        float typeEffectiveness = TypeChart.GetEffectiviness(attackerAction.ActionInfo.Type, MinionInfo.Type);
         float diference = attackerAction.ActionInfo.Power * (attacker.Strength / MinionInfo.Defense);
-        float critical = UnityEngine.Random.Range(1,3);
-        float total_damage = (base_damage + diference) * critical;
-        return total_damage;
+        float critical = UnityEngine.Random.value <= 0.01 ? 2 : 1;
+        float total_damage = (base_damage + diference) * critical * typeEffectiveness;
+        
+        return new DamageDetails(critical == 2, typeEffectiveness, total_damage);
     }
 
-    public bool TakeDamage(Action attackerAction, MinionSO attacker){
-        float damageAmount = CalculateDamage(attackerAction, attacker);
-        health -= damageAmount;
+    public DamageDetails TakeDamage(Action attackerAction, MinionSO attacker){
+        DamageDetails damageDetails = CalculateDamage(attackerAction, attacker);
+        health -= damageDetails.total_damage;
 
         if(health <= 0){
             health = 0;
-            return true;
+            damageDetails.isFainted = true;
+            return damageDetails;
         }
 
-        return false;
+        return damageDetails;
     }
 
     public bool Heal(float amount){
@@ -97,5 +100,21 @@ public class Minion
             return true;
         }
         return false;
+    }
+}
+
+public class DamageDetails {
+    public bool isFainted {get; set;}
+    public bool isCritical {get; set;}
+    public float typeEffectivines {get; set;}
+    public float total_damage {get; set;}
+    public FaintedOptions faintedOptions {get; set;}
+
+    public DamageDetails(bool isCrytical, float typeEffectivines, float total_damage){
+        this.isCritical = isCrytical;
+        this.typeEffectivines = typeEffectivines;
+        this.total_damage = total_damage;
+        isFainted = false;
+        faintedOptions = FaintedOptions.None;
     }
 }

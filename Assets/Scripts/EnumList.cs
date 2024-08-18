@@ -1,11 +1,31 @@
+using System;
+using System.Diagnostics;
+
 public enum Type
 {
     None,
     Fire,
     Water,
-    Plant,
     Earth,
     Light
+}
+
+public class TypeChart{
+    static float[,] typeChart =  {
+            //Fi   wa   ear  lig    
+   /*fire*/  {1f, 0.5f, 0.5f, 2f},
+   /*water*/ {2f, 1f, 2f, 1f},
+   /*earth*/ {2f, 0.5f, 1f, 0f},
+   /*light*/ {0.5f, 1f, 2f, 1f}
+};
+    public static float GetEffectiviness(Type attack, Type defense)
+    {
+        if (attack == Type.None || defense == Type.None)
+            return 1f;
+        int row = (int)attack - 1;
+        int col = (int)defense - 1;
+        return typeChart[row, col];
+    }
 }
 
 public enum Range
@@ -52,5 +72,6 @@ public enum FaintedOptions
 {
     None,
     MinionFainted,
-    TrainerFainted
+    TrainerFainted,
+    Invalid
 }

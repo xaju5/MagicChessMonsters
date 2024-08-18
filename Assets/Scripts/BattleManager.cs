@@ -101,16 +101,10 @@ public class BattleManager : MonoBehaviour
   
             }
             if(Input.GetKeyDown(KeyCode.Q)){
-                FaintedOptions faintedMinion = MakeAttack(selectedMinion.minion.action1, minionUnits[currentHover.x, currentHover.y]);
-                DeselectMinion();
-                CheckFaintedMinion(faintedMinion, minionUnits[currentHover.x, currentHover.y]);
-                FinishTurn();
+                RunAttackLogic(selectedMinion.minion.action1,currentHover);
             }
             if(Input.GetKeyDown(KeyCode.W)){
-                FaintedOptions faintedMinion = MakeAttack(selectedMinion.minion.action2, minionUnits[currentHover.x, currentHover.y]);
-                DeselectMinion();
-                CheckFaintedMinion(faintedMinion, minionUnits[currentHover.x, currentHover.y]);
-                FinishTurn();
+                RunAttackLogic(selectedMinion.minion.action2,currentHover);
             }
         }
         else{
@@ -122,7 +116,6 @@ public class BattleManager : MonoBehaviour
                 SelectMinion(currentHover);    
         }    
     }
-
     private bool CanMinionBeSelected(Vector2Int currentHover)
     {
         if(
@@ -179,18 +172,22 @@ public class BattleManager : MonoBehaviour
                     minionPositions.Add(new Vector2Int(x,y));
         return minionPositions;
     }
-    private FaintedOptions MakeAttack(Action selectedAction, MinionUnit targetMinion) {
-        Debug.Log($"{selectedMinion} attacks {targetMinion} with {selectedAction}");
-        selectedMinion.ConsumeMagic(selectedAction.MagicCost);
-        FaintedOptions faintedMinion = targetMinion.TakeDamage(selectedAction,selectedMinion.minion.MinionInfo);
+    private void RunAttackLogic(Action selectedAction, Vector2Int currentHover){
+        MinionUnit targetMinion = minionUnits[currentHover.x, currentHover.y];
+        DamageDetails damageDetails = selectedMinion.MakeMinonAttack(selectedAction, targetMinion);
+        if (damageDetails.faintedOptions == FaintedOptions.Invalid) return;
+
         Minion minion = selectedMinion.minion;
         UIManager.Instance.UpdateFloatingBars(minion.health, minion.MaxHealth(), minion.magic, minion.MaxMagic());
-        return faintedMinion;
+
+        DeselectMinion();
+        CheckFaintedMinion(damageDetails.faintedOptions, targetMinion);
+        FinishTurn();
     }
-    private void CheckFaintedMinion(FaintedOptions fainted, MinionUnit minion){
-        if(fainted == FaintedOptions.MinionFainted) 
+    private void CheckFaintedMinion(FaintedOptions faintedOptions, MinionUnit minion){
+        if(faintedOptions == FaintedOptions.MinionFainted) 
             RemoveMinionFromBattleground(minion);
-        if(fainted == FaintedOptions.TrainerFainted)
+        if(faintedOptions == FaintedOptions.TrainerFainted)
             SetWinner(currentPlayerTurn);
 
     }

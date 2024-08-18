@@ -99,7 +99,6 @@ public class UIManager : MonoBehaviour
     }
 
     public void UpdateFloatingBars(float health, float maxHealth, float magic, float maxMagic){
-        Debug.Log($"Updating Bar to {health}, {magic}");
         UpdateSliderData(selectedMinionHealthBar, maxHealth, health);
         UpdateSliderData(selectedMinionMagicBar, maxMagic, magic);
         selectedMinionHealthBarText.text = $"{health}/{maxHealth}";
