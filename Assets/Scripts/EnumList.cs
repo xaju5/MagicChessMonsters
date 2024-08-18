@@ -47,3 +47,10 @@ public enum MinionList
     Mermaid,
     Paladin
 }
+
+public enum FaintedOptions
+{
+    None,
+    MinionFainted,
+    TrainerFainted
+}

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -19,6 +20,8 @@ public class BattleManager : MonoBehaviour
     private int turnCount;
     private Team currentPlayerTurn;
 
+    private bool isGameover;
+
     private void Awake()
     {
         SetUpSingleton();
@@ -31,7 +34,8 @@ public class BattleManager : MonoBehaviour
     }
 
     void Update() {
-        RunTurnLogic();
+        if(!isGameover)
+            RunTurnLogic();
     }
 
     private void SetUpSingleton()
@@ -71,12 +75,13 @@ public class BattleManager : MonoBehaviour
     private void PositionAllMinions(){
         for (int x = 0; x < Gameboard.TILE_COUNT_X; x++)
             for (int y = 0; y < Gameboard.TILE_COUNT_Y; y++)
-                minionUnits[x,y]?.MoveMinionUnit(Gameboard.Instance.GetTileCenter(x,y), true);
+                minionUnits[x,y]?.MoveMinionUnit(new Vector2Int(x,y), true);
     } 
     private void SetUpTurn()
     {
         turnCount = 0;
         currentPlayerTurn = Team.Player1;
+        isGameover = false;
     }
     //Turn Logic
     private void RunTurnLogic(){
@@ -101,13 +106,15 @@ public class BattleManager : MonoBehaviour
   
             }
             if(Input.GetKeyDown(KeyCode.Q)){
-                MakeAttack(selectedMinion.minion.action1, minionUnits[currentHover.x, currentHover.y]);
+                FaintedOptions faintedMinion = MakeAttack(selectedMinion.minion.action1, minionUnits[currentHover.x, currentHover.y]);
                 DeselectMinion();
+                CheckFaintedMinion(faintedMinion, minionUnits[currentHover.x, currentHover.y]);
                 FinishTurn();
             }
             if(Input.GetKeyDown(KeyCode.W)){
-                MakeAttack(selectedMinion.minion.action2, minionUnits[currentHover.x, currentHover.y]);
+                FaintedOptions faintedMinion = MakeAttack(selectedMinion.minion.action2, minionUnits[currentHover.x, currentHover.y]);
                 DeselectMinion();
+                CheckFaintedMinion(faintedMinion, minionUnits[currentHover.x, currentHover.y]);
                 FinishTurn();
             }
         }
@@ -158,7 +165,7 @@ public class BattleManager : MonoBehaviour
 
         minionUnits[currentPosition.x, currentPosition.y] = null;
         minionUnits[newPosition.x, newPosition.y] = selectedMinion;
-        selectedMinion.MoveMinionUnit(Gameboard.Instance.GetTileCenter(newPosition.x,newPosition.y));
+        selectedMinion.MoveMinionUnit(new Vector2Int(newPosition.x,newPosition.y));
     }
     private Vector2Int LookupMinionIndex(MinionUnit minion){
         for (int x = 0; x < Gameboard.TILE_COUNT_X; x++)
@@ -177,17 +184,36 @@ public class BattleManager : MonoBehaviour
                     minionPositions.Add(new Vector2Int(x,y));
         return minionPositions;
     }
-    private void MakeAttack(Action selectedAction, MinionUnit targetMinion) {
+    private FaintedOptions MakeAttack(Action selectedAction, MinionUnit targetMinion) {
         Debug.Log($"{selectedMinion} attacks {targetMinion} with {selectedAction}");
-        //TODO: Make it a corrotine?
         selectedMinion.ConsumeMagic(selectedAction.MagicCost);
-        bool isFainted = targetMinion.TakeDamage(selectedAction,selectedMinion.minion.MinionInfo);
-        if(isFainted) Debug.Log($"{targetMinion} has Fainted!");
+        FaintedOptions faintedMinion = targetMinion.TakeDamage(selectedAction,selectedMinion.minion.MinionInfo);
         Minion minion = selectedMinion.minion;
         UIManager.Instance.UpdateFloatingBars(minion.health, minion.MaxHealth(), minion.magic, minion.MaxMagic());
+        return faintedMinion;
+    }
+    private void CheckFaintedMinion(FaintedOptions fainted, MinionUnit minion){
+        if(fainted == FaintedOptions.MinionFainted) 
+            RemoveMinionFromBattleground(minion);
+        if(fainted == FaintedOptions.TrainerFainted)
+            SetWinner(currentPlayerTurn);
+
+    }
+
+    private void RemoveMinionFromBattleground(MinionUnit targetMinion)
+    {
+        minionUnits[targetMinion.MinionIndex.x,targetMinion.MinionIndex.y] = null;
+    }
+
+    private void SetWinner(Team currentPlayerTurn)
+    {
+        isGameover = true;
+        UIManager.Instance.SetupWinnerScreen(currentPlayerTurn);
     }
 
     private void FinishTurn(){
+        if(isGameover) return;
+
         turnCount++;
         if(currentPlayerTurn == Team.Player1)
             currentPlayerTurn = Team.Player2;

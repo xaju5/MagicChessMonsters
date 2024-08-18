@@ -662,6 +662,7 @@ GameObject:
   - component: {fileID: 9187105822317776498}
   - component: {fileID: 9187105822317776499}
   - component: {fileID: 2943149828718027290}
+  - component: {fileID: 6083355925610321937}
   m_Layer: 0
   m_Name: Minion
   m_TagString: Untagged
@@ -752,6 +753,26 @@ MonoBehaviour:
   HealthBar: {fileID: 7616910676424697942}
   MagicBar: {fileID: 5366618474006258871}
   movementSpeed: 10
+--- !u!95 &6083355925610321937
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9187105822317776501}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c19ba5eb3f5c6d54b9742b4d4e3a5d9c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &9187105822537028054
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,6 +25,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI Action2MagicCostText;
     [SerializeField] private TextMeshProUGUI Action2TypeText;
     
+    [Header("Winner Screen")]
+    [SerializeField] private TextMeshProUGUI winnerText;
+
     [Header("Others")]
     [SerializeField] private TextMeshProUGUI currentTurnText;
 
@@ -101,6 +104,13 @@ public class UIManager : MonoBehaviour
         UpdateSliderData(selectedMinionMagicBar, maxMagic, magic);
         selectedMinionHealthBarText.text = $"{health}/{maxHealth}";
         selectedMinionMagicBarText.text = $"{magic}/{maxMagic}";
+    }
+
+    public void SetupWinnerScreen(Team winner){
+        RemoveSelectedMinionUI();
+        currentTurnText.enabled = false;
+        winnerText.transform.parent.gameObject.SetActive(true);
+        winnerText.text = winner.ToString(); 
     }
 
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Minion", menuName = "ScriptableObject/Minion", order = 1)]
@@ -16,7 +17,7 @@ public class MinionSO : ScriptableObject {
     [SerializeField] private int movementRangeBase;
     [SerializeField] private List<ActionSO> learnableActions;
     [SerializeField] private Sprite sprite;
-    [SerializeField] private Animator animator;
+    [SerializeField] private AnimatorOverrideController animator;
 
 public MinionList MinionId { get { return minionId; } }
 public string Description { get { return description; } }
@@ -30,6 +31,6 @@ public float MagicResistance { get { return magicDefense; } }
 public int MovementRangeBase { get { return movementRangeBase; } }
 public List<ActionSO> LearnableActions { get { return learnableActions; } }
 public Sprite Sprite { get { return sprite; } }
-public Animator Animator { get { return animator; } }
+public AnimatorOverrideController Animator { get { return animator; } }
 
 }

@@ -24,4 +24,4 @@ MonoBehaviour:
   movementRangeBase: 1
   learnableActions: []
   sprite: {fileID: 1328233679, guid: a61591406d2e84347b58ba198780bee0, type: 3}
-  animator: {fileID: 0}
+  animator: {fileID: 22100000, guid: a95586fc9d134cf48916b53db4785475, type: 2}

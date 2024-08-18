@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,10 @@ public class MinionUnit : MonoBehaviour
     public Minion minion { get; private set; }
     public Team Team { get; private set; }
     public bool IsTrainer { get; private set; }
-    private Vector3 targetPosition, targetScale;
+    public Vector2Int MinionIndex { get; private set; }
+    private Vector3 targetPosition;
+
+    Animator animator;
     
     void Update() {
         if(transform.position != targetPosition)
@@ -26,6 +30,14 @@ public class MinionUnit : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = minionInfo.Sprite;
         HealthBar.SetBarMaxValue(minion.MaxHealth());
         MagicBar.SetBarMaxValue(minion.MaxMagic());
+
+        SetUpAnimationController(minionInfo);
+    }
+
+    private void SetUpAnimationController(MinionSO minionInfo){
+        animator = GetComponent<Animator>();
+        animator.runtimeAnimatorController = minionInfo.Animator;
+        animator.SetBool("hasFainted",false);
     }
 
     private void UpdateFloatingBars(){
@@ -33,17 +45,35 @@ public class MinionUnit : MonoBehaviour
         MagicBar.UpdateBarValue(minion.magic);
     }
 
-    public void MoveMinionUnit(Vector3 targetPosition, bool force = false){
-        if(force)
-            transform.position = targetPosition;
-
-        this.targetPosition = targetPosition;
+    private IEnumerator TriggerMinionDead(){
+        animator.SetBool("hasFainted",true);
+        while(!HasAnimationFinished("DeadState")){
+            yield return null;
+        }
+        gameObject.SetActive(false);
     }
 
-    public bool TakeDamage(Action attackerAction, MinionSO attacker){
+    private bool HasAnimationFinished(string animationName){
+        return animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && animator.GetCurrentAnimatorStateInfo(0).IsName(animationName);
+    }
+
+    public void MoveMinionUnit(Vector2Int newMinionIndex, bool force = false){
+        MinionIndex = newMinionIndex;
+        targetPosition = Gameboard.Instance.GetTileCenter(newMinionIndex.x,newMinionIndex.y);
+        if(force)
+            transform.position = targetPosition;
+    }
+
+    public FaintedOptions TakeDamage(Action attackerAction, MinionSO attacker)
+    {
         bool isFainted = minion.TakeDamage(attackerAction, attacker);
         UpdateFloatingBars();
-        return isFainted;
+        if (isFainted)
+        {
+            StartCoroutine(TriggerMinionDead());
+            return IsTrainer ? FaintedOptions.TrainerFainted : FaintedOptions.MinionFainted;
+        }
+        return FaintedOptions.None;
     }
 
     public bool Heal(float amount){
