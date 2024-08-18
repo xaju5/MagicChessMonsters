@@ -1,14 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Animations;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MinionUnit : MonoBehaviour
 {
     [SerializeField] private FloatingBar HealthBar;
     [SerializeField] private FloatingBar MagicBar;
     [SerializeField] private float movementSpeed = 10f;
+    [SerializeField] private float dialogueboxDuration = 2f;
+    [SerializeField] private TextMeshProUGUI dialogueText;
     public Minion minion { get; private set; }
     public Team Team { get; private set; }
     public bool IsTrainer { get; private set; }
@@ -57,6 +57,13 @@ public class MinionUnit : MonoBehaviour
         return animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && animator.GetCurrentAnimatorStateInfo(0).IsName(animationName);
     }
 
+    private IEnumerator WriteMessageInDialogueBox(string message){
+        dialogueText.transform.parent.gameObject.SetActive(true);
+        dialogueText.text = message;
+        yield return new WaitForSeconds(dialogueboxDuration);
+        dialogueText.transform.parent.gameObject.SetActive(false);
+    }
+
     public void MoveMinionUnit(Vector2Int newMinionIndex, bool force = false){
         MinionIndex = newMinionIndex;
         targetPosition = Gameboard.Instance.GetTileCenter(newMinionIndex.x,newMinionIndex.y);
@@ -73,6 +80,7 @@ public class MinionUnit : MonoBehaviour
             StartCoroutine(TriggerMinionDead());
             return IsTrainer ? FaintedOptions.TrainerFainted : FaintedOptions.MinionFainted;
         }
+        StartCoroutine(WriteMessageInDialogueBox("Augh!"));
         return FaintedOptions.None;
     }
 

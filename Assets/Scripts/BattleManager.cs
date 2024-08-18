@@ -1,10 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class BattleManager : MonoBehaviour
 {
@@ -54,12 +49,12 @@ public class BattleManager : MonoBehaviour
         //TODO: Initial Position Phase
         minionUnits = new MinionUnit[Gameboard.TILE_COUNT_X,Gameboard.TILE_COUNT_Y];
 
-        minionUnits[3,0] = SpawnSingleMinion(AllMinionSO[(int)team1[0]],Team.Player1);
-        minionUnits[4,0] = SpawnSingleMinion(AllMinionSO[(int)team1[1]],Team.Player1);
+        minionUnits[3,0] = SpawnSingleMinion(AllMinionSO[(int)team1[1]],Team.Player1);
+        minionUnits[4,0] = SpawnSingleMinion(AllMinionSO[(int)team1[0]],Team.Player1);
         minionUnits[5,0] = SpawnSingleMinion(AllMinionSO[(int)team1[2]],Team.Player1);
 
-        minionUnits[3,7] = SpawnSingleMinion(AllMinionSO[(int)team2[0]],Team.Player2);
-        minionUnits[4,7] = SpawnSingleMinion(AllMinionSO[(int)team2[1]],Team.Player2);
+        minionUnits[3,7] = SpawnSingleMinion(AllMinionSO[(int)team2[1]],Team.Player2);
+        minionUnits[4,7] = SpawnSingleMinion(AllMinionSO[(int)team2[0]],Team.Player2);
         minionUnits[5,7] = SpawnSingleMinion(AllMinionSO[(int)team2[2]],Team.Player2);
     }
     private MinionUnit SpawnSingleMinion(MinionSO minionInfo, Team team){
