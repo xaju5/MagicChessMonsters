@@ -60,11 +60,11 @@ public class UIManager : MonoBehaviour
         floatingBar.UpdateBarValue(amount);
     }
 
-    private void SetUpActionData(Minion selectedMinion, TextMeshProUGUI actionName, TextMeshProUGUI actionCost, TextMeshProUGUI actionType){
+    private void SetUpActionData(Action selectedMinionAction, TextMeshProUGUI actionName, TextMeshProUGUI actionCost, TextMeshProUGUI actionType){
         actionName.transform.parent.gameObject.SetActive(true);
-        actionName.text = selectedMinion.action1.ActionInfo.Name;
-        actionCost.text = selectedMinion.action1.MagicCost.ToString();
-        actionType.text = selectedMinion.action1.ActionInfo.Type.ToString();
+        actionName.text = selectedMinionAction.ActionInfo.Name;
+        actionCost.text = selectedMinionAction.MagicCost.ToString();
+        actionType.text = selectedMinionAction.ActionInfo.Type.ToString();
     }
 
     public void UpdateTurnText(Team currentTurn){
@@ -80,9 +80,9 @@ public class UIManager : MonoBehaviour
         selectedMinionMagicBarText.text = $"{selectedMinion.magic}/{selectedMinion.MaxMagic()}";
 
         if (selectedMinion.action1 != null)
-            SetUpActionData(selectedMinion, Action1Text, Action1MagicCostText, Action1TypeText);
+            SetUpActionData(selectedMinion.action1, Action1Text, Action1MagicCostText, Action1TypeText);
         if (selectedMinion.action2 != null)
-            SetUpActionData(selectedMinion, Action2Text, Action2MagicCostText, Action2TypeText);        
+            SetUpActionData(selectedMinion.action2, Action2Text, Action2MagicCostText, Action2TypeText);        
     }
 
     public void RemoveSelectedMinionUI(){
