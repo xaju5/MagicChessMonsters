@@ -17,11 +17,13 @@ public class Minion
         MinionInfo = minionInfo;
         health = minionInfo.HealthBase;
         magic = minionInfo.MagicBase;
-        bool hasActions = minionInfo.LearnableActions.Count > 0;
-        action1 = hasActions? new Action(minionInfo.LearnableActions[0]) : null;
-        action2 = hasActions? new Action(minionInfo.LearnableActions[1]) : null;
-    }
 
+        action1 = GetAction(minionInfo.LearnableActions, 0);
+        action2 = GetAction(minionInfo.LearnableActions, 1);
+    }
+    private Action GetAction(List<ActionSO> actions, int index) {
+        return (index < actions.Count && actions[index] != null) ? new Action(actions[index]) : null;
+    }
     public float MaxHealth(){
         return MinionInfo.HealthBase;
     }

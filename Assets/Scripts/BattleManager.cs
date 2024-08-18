@@ -8,6 +8,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private GameObject minionPrefab;
     [SerializeField] private MinionList[] team1, team2;
     [SerializeField] private MinionSO[] AllMinionSO;
+    [SerializeField] float restoreMagicAmount = 15f;
 
     private MinionUnit[,] minionUnits;
     private MinionUnit selectedMinion;
@@ -89,7 +90,6 @@ public class BattleManager : MonoBehaviour
                     if(minionUnits[currentHover.x, currentHover.y] == null){
                         if(IsValidMove(currentHover)){
                             MoveSelectedMinionTo(currentHover);
-                            DeselectMinion();
                             FinishTurn();
                         }
                     }
@@ -172,6 +172,14 @@ public class BattleManager : MonoBehaviour
                     minionPositions.Add(new Vector2Int(x,y));
         return minionPositions;
     }
+    private List<MinionUnit> GetTeamMinions(){
+        List<MinionUnit> minions = new List<MinionUnit>();
+        for (int x = 0; x < Gameboard.TILE_COUNT_X; x++)
+            for (int y = 0; y < Gameboard.TILE_COUNT_Y; y++)
+                if(minionUnits[x,y]?.Team == currentPlayerTurn)
+                    minions.Add(minionUnits[x,y]);
+        return minions;
+    }
     private void RunAttackLogic(Action selectedAction, Vector2Int currentHover){
         MinionUnit targetMinion = minionUnits[currentHover.x, currentHover.y];
         DamageDetails damageDetails = selectedMinion.MakeMinonAttack(selectedAction, targetMinion);
@@ -180,7 +188,6 @@ public class BattleManager : MonoBehaviour
         Minion minion = selectedMinion.minion;
         UIManager.Instance.UpdateFloatingBars(minion.health, minion.MaxHealth(), minion.magic, minion.MaxMagic());
 
-        DeselectMinion();
         CheckFaintedMinion(damageDetails.faintedOptions, targetMinion);
         FinishTurn();
     }
@@ -204,6 +211,8 @@ public class BattleManager : MonoBehaviour
     }
 
     private void FinishTurn(){
+        RefreshUnselectedMinionMagic();
+        DeselectMinion();
         if(isGameover) return;
 
         turnCount++;
@@ -213,6 +222,14 @@ public class BattleManager : MonoBehaviour
             currentPlayerTurn = Team.Player1;
         
         UIManager.Instance.UpdateTurnText(currentPlayerTurn);
+    }
+
+    private void RefreshUnselectedMinionMagic(){
+
+        foreach (MinionUnit minionUnit in GetTeamMinions())
+        {
+            if(minionUnit != selectedMinion) minionUnit.RestoreMagic(restoreMagicAmount);
+        }
     }
 
     //Public methods

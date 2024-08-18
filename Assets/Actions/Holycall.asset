@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Holy call
   description: summon the power of good
-  type: 5
+  type: 4
   range: 1
   nature: 1
   power: 20

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minionId: 6
   description: Follow the light
-  type: 5
+  type: 4
   healthBase: 100
   magicBase: 100
   strength: 10

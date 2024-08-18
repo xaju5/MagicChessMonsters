@@ -22,6 +22,7 @@ MonoBehaviour:
   magicStrenght: 10
   magicDefense: 10
   movementRangeBase: 1
-  learnableActions: []
+  learnableActions:
+  - {fileID: 11400000, guid: 6f0fea401dfda8c45a5870aaa94db1ea, type: 2}
   sprite: {fileID: -340711223, guid: 51787679a4ba2134c8af444e6274627f, type: 3}
   animator: {fileID: 22100000, guid: a2f8cb5d59612c04a861ced04516fea5, type: 2}
