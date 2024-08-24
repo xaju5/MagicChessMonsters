@@ -112,7 +112,7 @@ public class Gameboard : MonoBehaviour
         RaycastHit2D hitInfo;
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Ray ray = new Ray(mousePosition, Vector2.zero);
-        hitInfo = Physics2D.Raycast(ray.origin, ray.direction, rayLength, LayerMask.GetMask("Tile", "Hover", "Highlight"));
+        hitInfo = Physics2D.Raycast(ray.origin, ray.direction, rayLength, LayerMask.GetMask("Tile", "Hover", "Highlight", "Danger"));
         return hitInfo;
     }
     private Vector2Int LookupTileIndex(GameObject hitInfo)
@@ -125,7 +125,11 @@ public class Gameboard : MonoBehaviour
         // throw new Exception("LookupTileIndex_NotFound");
     }
 
-    private LayerMask RestoreTileLayer(Vector2Int index){
+    private LayerMask RestoreTileLayer(Vector2Int index)
+    {
+        if(BattleManager.Instance.IsValidAttack(index))
+            return LayerMask.NameToLayer("Danger");
+
         if(BattleManager.Instance.IsValidMove(index))
             return LayerMask.NameToLayer("Highlight");
         

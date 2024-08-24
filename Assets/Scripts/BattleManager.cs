@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BattleManager : MonoBehaviour
@@ -12,8 +13,9 @@ public class BattleManager : MonoBehaviour
 
     private MinionUnit[,] minionUnits;
     private MinionUnit selectedMinion;
+    private Action selectedAction;
     private List<Vector2Int> availableMoves = new List<Vector2Int>();
-    private int turnCount;
+    private List<Vector2Int> availableAttacks = new List<Vector2Int>();
     private Team currentPlayerTurn;
 
     private bool isGameover;
@@ -75,7 +77,6 @@ public class BattleManager : MonoBehaviour
     } 
     private void SetUpTurn()
     {
-        turnCount = 0;
         currentPlayerTurn = Team.Player1;
         isGameover = false;
     }
@@ -93,23 +94,25 @@ public class BattleManager : MonoBehaviour
                             FinishTurn();
                         }
                     }
-                    else{
-                        if(minionUnits[currentHover.x, currentHover.y].Team == currentPlayerTurn)
-                            SwitchSelectedMinion(currentHover);
+                    else if(minionUnits[currentHover.x, currentHover.y].Team == currentPlayerTurn){
+                        SelectMinion(currentHover);   
+                    }
+                    else if(minionUnits[currentHover.x, currentHover.y].Team != currentPlayerTurn){
+                        if(IsValidAttack(currentHover)){
+                            MakeSelectedAttack(currentHover);
+                        }
                     }
                 }
-  
             }
-            if(Input.GetKeyDown(KeyCode.Q)){
-                RunAttackLogic(selectedMinion.minion.action1,currentHover);
-            }
-            if(Input.GetKeyDown(KeyCode.W)){
-                RunAttackLogic(selectedMinion.minion.action2,currentHover);
-            }
+            if(Input.GetKeyDown(KeyCode.Q))
+                SelectAction(selectedMinion.minion.action1);
+            
+            if(Input.GetKeyDown(KeyCode.W))
+                SelectAction(selectedMinion.minion.action2);
         }
         else{
             if(availableMoves.Count < 1){
-                availableMoves = GetTeamMinionPositions();
+                availableMoves = GetTeamMinionPositions(currentPlayerTurn);
                 Gameboard.Instance.ChangeTilesLayers(availableMoves,"Highlight");
             }
             if(CanMinionBeSelected(currentHover))
@@ -129,23 +132,31 @@ public class BattleManager : MonoBehaviour
         return false;
     }
     private void DeselectMinion(){
+        DeselectAction();
         selectedMinion = null;
         UIManager.Instance.RemoveSelectedMinionUI();
         Gameboard.Instance.ChangeTilesLayers(availableMoves,"Tile");
         availableMoves.Clear();
     }
     private void SelectMinion(Vector2Int tileIndex){
-        Gameboard.Instance.ChangeTilesLayers(availableMoves,"Tile");
-        availableMoves.Clear();
+        DeselectMinion();
         selectedMinion = minionUnits[tileIndex.x,tileIndex.y];
         UIManager.Instance.SetupSelectedMinionUI(selectedMinion.minion);
         availableMoves = selectedMinion.minion.GetAvailableMoves(ref minionUnits, tileIndex, Gameboard.TILE_COUNT_X, Gameboard.TILE_COUNT_Y);
         Gameboard.Instance.ChangeTilesLayers(availableMoves,"Highlight");
     }
-    private void SwitchSelectedMinion(Vector2Int tileIndex){
-        DeselectMinion();
-        SelectMinion(tileIndex);
-    }    
+    private void DeselectAction(){
+        selectedAction = null;
+        Gameboard.Instance.ChangeTilesLayers(availableAttacks,"Tile");
+        availableAttacks.Clear();
+    }
+
+    private void SelectAction(Action action){
+        DeselectAction();
+        selectedAction = action;
+        availableAttacks = selectedAction.GetAvailableAttackTiles(ref minionUnits, selectedMinion.MinionIndex, Gameboard.TILE_COUNT_X, Gameboard.TILE_COUNT_Y, GetEnemyTeamName());
+        Gameboard.Instance.ChangeTilesLayers(availableAttacks,"Danger");
+    }   
     private void MoveSelectedMinionTo(Vector2Int newPosition){
         Vector2Int currentPosition = LookupMinionIndex(selectedMinion);
         if(currentPosition == newPosition)
@@ -164,23 +175,23 @@ public class BattleManager : MonoBehaviour
         throw new System.Exception("LookupMinionIndex_NotFound");
         // return -Vector2Int.one;
     }
-    private List<Vector2Int> GetTeamMinionPositions(){
+    private List<Vector2Int> GetTeamMinionPositions(Team team){
         List<Vector2Int> minionPositions = new List<Vector2Int>();
         for (int x = 0; x < Gameboard.TILE_COUNT_X; x++)
             for (int y = 0; y < Gameboard.TILE_COUNT_Y; y++)
-                if(minionUnits[x,y]?.Team == currentPlayerTurn)
+                if(minionUnits[x,y]?.Team == team)
                     minionPositions.Add(new Vector2Int(x,y));
         return minionPositions;
     }
-    private List<MinionUnit> GetTeamMinions(){
+    private List<MinionUnit> GetTeamMinions(Team team){
         List<MinionUnit> minions = new List<MinionUnit>();
         for (int x = 0; x < Gameboard.TILE_COUNT_X; x++)
             for (int y = 0; y < Gameboard.TILE_COUNT_Y; y++)
-                if(minionUnits[x,y]?.Team == currentPlayerTurn)
+                if(minionUnits[x,y]?.Team == team)
                     minions.Add(minionUnits[x,y]);
         return minions;
     }
-    private void RunAttackLogic(Action selectedAction, Vector2Int currentHover){
+    private void MakeSelectedAttack(Vector2Int currentHover){
         MinionUnit targetMinion = minionUnits[currentHover.x, currentHover.y];
         DamageDetails damageDetails = selectedMinion.MakeMinonAttack(selectedAction, targetMinion);
         if (damageDetails.faintedOptions == FaintedOptions.Invalid) return;
@@ -196,9 +207,7 @@ public class BattleManager : MonoBehaviour
             RemoveMinionFromBattleground(minion);
         if(faintedOptions == FaintedOptions.TrainerFainted)
             SetWinner(currentPlayerTurn);
-
     }
-
     private void RemoveMinionFromBattleground(MinionUnit targetMinion)
     {
         minionUnits[targetMinion.MinionIndex.x,targetMinion.MinionIndex.y] = null;
@@ -214,19 +223,20 @@ public class BattleManager : MonoBehaviour
         RefreshUnselectedMinionMagic();
         DeselectMinion();
         if(isGameover) return;
-
-        turnCount++;
-        if(currentPlayerTurn == Team.Player1)
-            currentPlayerTurn = Team.Player2;
-        else
-            currentPlayerTurn = Team.Player1;
-        
+        currentPlayerTurn = GetEnemyTeamName();
         UIManager.Instance.UpdateTurnText(currentPlayerTurn);
+    }
+
+    private Team GetEnemyTeamName(){
+        if(currentPlayerTurn == Team.Player1)
+            return Team.Player2;
+        else
+            return Team.Player1;
     }
 
     private void RefreshUnselectedMinionMagic(){
 
-        foreach (MinionUnit minionUnit in GetTeamMinions())
+        foreach (MinionUnit minionUnit in GetTeamMinions(currentPlayerTurn))
         {
             if(minionUnit != selectedMinion) minionUnit.RestoreMagic(restoreMagicAmount);
         }
@@ -239,6 +249,15 @@ public class BattleManager : MonoBehaviour
 
     public bool IsValidMove(Vector2Int index){
         foreach (Vector2Int availableIndex in availableMoves){
+            if(availableIndex == index){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool IsValidAttack(Vector2Int index){
+        foreach (Vector2Int availableIndex in availableAttacks){
             if(availableIndex == index){
                 return true;
             }

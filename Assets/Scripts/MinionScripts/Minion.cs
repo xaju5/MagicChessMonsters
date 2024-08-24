@@ -33,32 +33,19 @@ public class Minion
     }
 
     public List<Vector2Int> GetAvailableMoves(ref MinionUnit[,] minionUnits, Vector2Int currentMinionIndex, int tile_count_x, int tile_count_y){
-        //TODO:Mas tipos de movimientos. Optimizar!
-        List<Vector2Int> availableMoves = new List<Vector2Int>();
-
+        //TODO:Mas tipos de movimientos.
         int moveRange = MinionInfo.MovementRangeBase; 
-        //Movimiento en estrella:
-        int[,] directions = new int[,] { {-1, 0}, {0, -1}, {0, 1}, {1, 0}, {-1, -1}, {1, -1}, {-1, 1}, {1, 1} };
-        for (int i = 1; i <= moveRange; i++)
-        {
-            for (int d = 0; d < directions.GetLength(0); d++) {
-                int newX = currentMinionIndex.x + directions[d, 0] * i;
-                int newY = currentMinionIndex.y + directions[d, 1] * i;
-
-                if (newX >= 0 && newX < tile_count_x && newY >= 0 && newY < tile_count_y) {
-                    if (minionUnits[newX, newY] == null) {
-                        availableMoves.Add(new Vector2Int(newX, newY));
-                    }
-                }
-            }
-        }
+        List<Vector2Int> availableMoves = MathUtils.GetAreaTiles(moveRange, currentMinionIndex, tile_count_x, tile_count_y);
+        for (int i = availableMoves.Count - 1; i >= 0 ; i--)
+            if (minionUnits[availableMoves[i].x, availableMoves[i].y] != null)
+                availableMoves.RemoveAt(i);
         return availableMoves;
     }
     
     private DamageDetails CalculateDamage(Action attackerAction, MinionSO attacker){
         float level = 1;
         float base_damage = 2 * level;
-        float typeEffectiveness = TypeChart.GetEffectiviness(attackerAction.ActionInfo.Type, MinionInfo.Type);
+        float typeEffectiveness = MathUtils.GetEffectiviness(attackerAction.ActionInfo.Type, MinionInfo.Type);
         float diference = attackerAction.ActionInfo.Power * (attacker.Strength / MinionInfo.Defense);
         float critical = UnityEngine.Random.value <= 0.01 ? 2 : 1;
         float total_damage = (base_damage + diference) * critical * typeEffectiveness;
