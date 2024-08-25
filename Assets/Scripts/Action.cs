@@ -13,9 +13,23 @@ public class Action
     }
 
     public List<Vector2Int> GetAvailableAttackTiles(ref MinionUnit[,] minionUnits, Vector2Int currentMinionIndex, int tile_count_x, int tile_count_y, Team enemyTeam){
-        //TODO:Mas tipos de ataques
+        List<Vector2Int> availableAttacks = null;
         int range = (int)ActionInfo.Range;
-        List<Vector2Int> availableAttacks = MathUtils.GetAreaTiles(range, currentMinionIndex, tile_count_x, tile_count_y);
+        switch (ActionInfo.RangeType)
+        {
+            case SelectableTiles.Area:
+                availableAttacks = MathUtils.GetAreaTiles(range, currentMinionIndex, tile_count_x, tile_count_y);
+                break;
+
+            case SelectableTiles.Star:
+                availableAttacks = MathUtils.GetStarTiles(range, currentMinionIndex, tile_count_x, tile_count_y);
+                break;
+
+            case SelectableTiles.None:
+                availableAttacks = null;
+                break;
+        }
+
         for (int i = availableAttacks.Count - 1; i >= 0; i--)
             if (minionUnits[availableAttacks[i].x, availableAttacks[i].y]?.Team != enemyTeam)
                 availableAttacks.RemoveAt(i);

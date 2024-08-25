@@ -16,6 +16,7 @@ MonoBehaviour:
   description: Move the rocks
   type: 4
   range: 1
+  rangeType: 1
   nature: 2
   power: 20
   accuracy: 20

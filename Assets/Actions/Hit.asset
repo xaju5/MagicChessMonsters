@@ -16,6 +16,7 @@ MonoBehaviour:
   description: Hit with strenght
   type: 0
   range: 1
+  rangeType: 1
   nature: 1
   power: 10
   accuracy: 10

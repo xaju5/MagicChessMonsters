@@ -16,6 +16,7 @@ MonoBehaviour:
   description: A huge explotion
   type: 1
   range: 2
+  rangeType: 1
   nature: 2
   power: 20
   accuracy: 20

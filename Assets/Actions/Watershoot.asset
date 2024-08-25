@@ -16,6 +16,7 @@ MonoBehaviour:
   description: Liquid arrows
   type: 2
   range: 2
+  rangeType: 1
   nature: 1
   power: 20
   accuracy: 20

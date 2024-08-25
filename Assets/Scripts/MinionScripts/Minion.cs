@@ -33,9 +33,22 @@ public class Minion
     }
 
     public List<Vector2Int> GetAvailableMoves(ref MinionUnit[,] minionUnits, Vector2Int currentMinionIndex, int tile_count_x, int tile_count_y){
-        //TODO:Mas tipos de movimientos.
+        List<Vector2Int> availableMoves = null;
         int moveRange = MinionInfo.MovementRangeBase; 
-        List<Vector2Int> availableMoves = MathUtils.GetAreaTiles(moveRange, currentMinionIndex, tile_count_x, tile_count_y);
+        switch (MinionInfo.MovementType)
+        {
+            case SelectableTiles.Area:
+                availableMoves = MathUtils.GetAreaTiles(moveRange, currentMinionIndex, tile_count_x, tile_count_y);
+                break;
+
+            case SelectableTiles.Star:
+                availableMoves = MathUtils.GetStarTiles(moveRange, currentMinionIndex, tile_count_x, tile_count_y);
+                break;
+
+            case SelectableTiles.None:
+                availableMoves = null;
+                break;
+        }
         for (int i = availableMoves.Count - 1; i >= 0 ; i--)
             if (minionUnits[availableMoves[i].x, availableMoves[i].y] != null)
                 availableMoves.RemoveAt(i);

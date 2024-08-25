@@ -57,3 +57,9 @@ public enum FaintedOptions
     TrainerFainted,
     Invalid
 }
+
+public enum SelectableTiles{
+    None,
+    Area,
+    Star
+}

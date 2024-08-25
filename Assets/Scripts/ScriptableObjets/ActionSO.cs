@@ -8,6 +8,7 @@ public class ActionSO : ScriptableObject {
     [SerializeField] private string description;
     [SerializeField] private Type type;
     [SerializeField] private Range range;
+    [SerializeField] private SelectableTiles rangeType;
     [SerializeField] private Nature nature;
     [SerializeField] private float power;
     [SerializeField] private float accuracy;
@@ -19,6 +20,7 @@ public class ActionSO : ScriptableObject {
     public string Description { get { return description; } }
     public Type Type { get { return type; } }
     public Range Range { get { return range; } }
+    public SelectableTiles RangeType { get { return rangeType; } }
     public Nature Nature { get { return nature; } }
     public float Power { get { return power; } }
     public float Accuracy { get { return accuracy; } }

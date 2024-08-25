@@ -16,6 +16,7 @@ MonoBehaviour:
   description: summon the power of good
   type: 4
   range: 1
+  rangeType: 1
   nature: 1
   power: 20
   accuracy: 20
