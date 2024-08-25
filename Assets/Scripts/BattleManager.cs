@@ -207,10 +207,20 @@ public class BattleManager : MonoBehaviour
             RemoveMinionFromBattleground(minion);
         if(faintedOptions == FaintedOptions.TrainerFainted)
             SetWinner(currentPlayerTurn);
+        if(CheckOnlyLastTrainer(GetEnemyTeamName()))
+            SetWinner(currentPlayerTurn);
+        if(CheckOnlyLastTrainer(currentPlayerTurn))
+            SetWinner(GetEnemyTeamName());
     }
     private void RemoveMinionFromBattleground(MinionUnit targetMinion)
     {
         minionUnits[targetMinion.MinionIndex.x,targetMinion.MinionIndex.y] = null;
+    }
+
+    private bool CheckOnlyLastTrainer(Team team){
+        List<MinionUnit> lastingMinions = GetTeamMinions(team);
+        if(lastingMinions.Count == 1) return true;
+        return false;
     }
 
     private void SetWinner(Team currentPlayerTurn)
