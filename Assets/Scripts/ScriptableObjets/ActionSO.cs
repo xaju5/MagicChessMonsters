@@ -14,7 +14,8 @@ public class ActionSO : ScriptableObject {
     [SerializeField] private float accuracy;
     [SerializeField] private float magicCost;
     [SerializeField] private Sprite sprite;
-    [SerializeField] private Animator animator;
+    [SerializeField] private AnimatorOverrideController animator;
+    [SerializeField] private float animationTravelSpeed;
 
     public string Name { get { return name; } }
     public string Description { get { return description; } }
@@ -26,7 +27,8 @@ public class ActionSO : ScriptableObject {
     public float Accuracy { get { return accuracy; } }
     public float MagicCost { get { return magicCost; } }
     public Sprite Sprite { get { return sprite; } }
-    public Animator Animator { get { return animator; } }
+    public AnimatorOverrideController Animator { get { return animator; } }
+    public float AnimationTravelSpeed { get { return animationTravelSpeed; } }
 }
 
 

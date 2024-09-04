@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -6,7 +7,7 @@ public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance;
 
-    [SerializeField] private GameObject minionPrefab;
+    [SerializeField] private GameObject minionPrefab, actionPrefab;
     [SerializeField] private MinionList[] team1, team2;
     [SerializeField] private MinionSO[] AllMinionSO;
     [SerializeField] float restoreMagicAmount = 15f;
@@ -16,7 +17,8 @@ public class BattleManager : MonoBehaviour
     private Action selectedAction;
     private List<Vector2Int> availableMoves = new List<Vector2Int>();
     private List<Vector2Int> availableAttacks = new List<Vector2Int>();
-    private Team currentPlayerTurn;
+    private Team currentPlayerTurn, stopedPlayerTurn;
+    private List<ActionUnit> pendingAnimations = new List<ActionUnit>();
 
     private bool isGameover;
 
@@ -79,6 +81,7 @@ public class BattleManager : MonoBehaviour
     {
         currentPlayerTurn = Team.Player1;
         isGameover = false;
+        pendingAnimations.Clear();
     }
     //Turn Logic
     private void RunTurnLogic(){
@@ -192,15 +195,46 @@ public class BattleManager : MonoBehaviour
         return minions;
     }
     private void MakeSelectedAttack(Vector2Int currentHover){
+        if (!selectedMinion.canMakeAttack(selectedAction)) return;
         MinionUnit targetMinion = minionUnits[currentHover.x, currentHover.y];
-        DamageDetails damageDetails = selectedMinion.MakeMinonAttack(selectedAction, targetMinion);
-        if (damageDetails.faintedOptions == FaintedOptions.Invalid) return;
+        pendingAnimations.Add(SpawnAction(selectedAction, targetMinion.transform.position));
+        StartCoroutine(WaitForAnimationsAndFinishTurn(selectedMinion, selectedAction, targetMinion));
+        StopTurn();
+    }
 
-        Minion minion = selectedMinion.minion;
-        UIManager.Instance.UpdateFloatingBars(minion.health, minion.MaxHealth(), minion.magic, minion.MaxMagic());
+    private ActionUnit SpawnAction(Action action, Vector3 targetPosition){
+        float movementAngle = MathUtils.GetVectorAngle(selectedMinion.transform.position - targetPosition); //TODO: Rotar ataque hacia enemigo
+        GameObject actionGO = Instantiate(actionPrefab, selectedMinion.transform.position, new Quaternion());
+        actionGO.name = action.ActionInfo.Name;
+        actionGO.GetComponent<SpriteRenderer>().sortingOrder = Gameboard.Instance.GetTilemapRenderer().sortingOrder + 3;
+        ActionUnit actionUnit = actionGO.GetComponent<ActionUnit>();
+        actionUnit.SetUpData(action, targetPosition);
+        return actionUnit;
+    }
 
+    private IEnumerator WaitForAnimationsAndFinishTurn(MinionUnit attackerMinion, Action action, MinionUnit targetMinion){
+        yield return StartCoroutine(WaitForActionAnimationEnd());
+        DamageDetails damageDetails = attackerMinion.MakeMinonAttack(action, targetMinion);
+        Minion minion = attackerMinion. minion;
+        UIManager.Instance.UpdateSelectedFloatingBars(minion.health, minion.MaxHealth(), minion.magic, minion.MaxMagic());
         CheckFaintedMinion(damageDetails.faintedOptions, targetMinion);
+        selectedMinion = attackerMinion;
         FinishTurn();
+    }
+
+    private IEnumerator WaitForActionAnimationEnd(){
+        while (pendingAnimations.Count > 0)
+        {
+            for (int i = pendingAnimations.Count - 1; i >= 0; i--)
+            {
+                if(pendingAnimations[i].HasAnimationFinished()){
+                    Destroy(pendingAnimations[i].gameObject);
+                    pendingAnimations.RemoveAt(i);
+                }
+            }
+            yield return null;
+        }
+
     }
     private void CheckFaintedMinion(FaintedOptions faintedOptions, MinionUnit minion){
         if(faintedOptions == FaintedOptions.MinionFainted) 
@@ -230,12 +264,19 @@ public class BattleManager : MonoBehaviour
     }
 
     private void FinishTurn(){
+        if(currentPlayerTurn == Team.None) currentPlayerTurn = stopedPlayerTurn;
         RefreshUnselectedMinionMagic();
         DeselectMinion();
         if(isGameover) return;
         currentPlayerTurn = GetEnemyTeamName();
         UIManager.Instance.UpdateTurnText(currentPlayerTurn);
     }
+
+    private void StopTurn(){
+        DeselectMinion();
+        stopedPlayerTurn = currentPlayerTurn;
+        currentPlayerTurn = Team.None;
+    } 
 
     private Team GetEnemyTeamName(){
         if(currentPlayerTurn == Team.Player1)

@@ -22,4 +22,5 @@ MonoBehaviour:
   accuracy: 20
   magicCost: 20
   sprite: {fileID: 21300000, guid: d50c6c9e824be504abfc486411da8b3d, type: 3}
-  animator: {fileID: 0}
+  animator: {fileID: 22100000, guid: 0e31ca38e8e672343b91de74af491e73, type: 2}
+  animationTravelSpeed: 0.5

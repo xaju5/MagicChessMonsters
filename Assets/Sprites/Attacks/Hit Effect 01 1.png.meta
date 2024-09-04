@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b63e0c1a8d65da44b85a847073e573e4
+guid: 77715b631e36b6049a9c7792a6cb1ecb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 80
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -68,7 +68,7 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fire_0
+      name: Hit Effect 01 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 81c8c2963a6b5194a9918aade4f1544e
-      internalID: -1399868209
+      spriteID: 6fb3ede7b72f24b429a012aed3cdf513
+      internalID: -1069574262
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fire_1
+      name: Hit Effect 01 1_1
       rect:
         serializedVersion: 2
-        x: 128
+        x: 48
         y: 0
-        width: 128
-        height: 128
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5df30c16d50542048a1c611668ae979b
-      internalID: -1011693534
+      spriteID: a9cce08b0cb58b34ea1bef6fde285360
+      internalID: -1135174503
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fire_2
+      name: Hit Effect 01 1_2
       rect:
         serializedVersion: 2
-        x: 256
+        x: 96
         y: 0
-        width: 128
-        height: 128
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ddb343567d6fd044a8cb9405b5ab41ba
-      internalID: -1753141705
+      spriteID: 81c4ebbb5527fe24e961305a5373a832
+      internalID: -15581410
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fire_3
+      name: Hit Effect 01 1_3
       rect:
         serializedVersion: 2
-        x: 384
+        x: 144
         y: 0
-        width: 128
-        height: 128
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,20 +182,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cad806d756d01c4f837546d80038413
-      internalID: -1710847425
+      spriteID: 190897b06edd389429bf33bee2491e1a
+      internalID: -1778407769
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fire_4
+      name: Hit Effect 01 1_4
       rect:
         serializedVersion: 2
-        x: 512
+        x: 192
         y: 0
-        width: 128
-        height: 128
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,20 +203,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 07300e141dc30d049b707de35a2ac0f0
-      internalID: 765357921
+      spriteID: 0386dfcf95fe0ee4fa066ada4d9156f8
+      internalID: 2107729958
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fire_5
+      name: Hit Effect 01 1_5
       rect:
         serializedVersion: 2
-        x: 640
+        x: 240
         y: 0
-        width: 128
-        height: 128
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,29 +224,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1f50712930dbdc48a349765900964b1
-      internalID: -268170990
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fire_6
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5c9ccf275459e3141af7511562b3ce0e
-      internalID: 1922995191
+      spriteID: eeff7afa95934eb458391b151e5fe80c
+      internalID: -929702737
       vertices: []
       indices: 
       edges: []
@@ -262,13 +241,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Fire_1: -1011693534
-      Fire_6: 1922995191
-      Fire_2: -1753141705
-      Fire_3: -1710847425
-      Fire_5: -268170990
-      Fire_4: 765357921
-      Fire_0: -1399868209
+      Hit Effect 01 1_5: -929702737
+      Hit Effect 01 1_3: -1778407769
+      Hit Effect 01 1_0: -1069574262
+      Hit Effect 01 1_1: -1135174503
+      Hit Effect 01 1_4: 2107729958
+      Hit Effect 01 1_2: -15581410
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

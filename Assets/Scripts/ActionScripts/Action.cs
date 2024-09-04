@@ -14,7 +14,7 @@ public class Action
 
     public List<Vector2Int> GetAvailableAttackTiles(ref MinionUnit[,] minionUnits, Vector2Int currentMinionIndex, int tile_count_x, int tile_count_y, Team enemyTeam){
         List<Vector2Int> availableAttacks = null;
-        int range = (int)ActionInfo.Range;
+        int range = (int)ActionInfo.Range + 5;
         switch (ActionInfo.RangeType)
         {
             case SelectableTiles.Area:

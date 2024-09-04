@@ -90,12 +90,6 @@ public class MinionUnit : MonoBehaviour
     }
 
     public DamageDetails MakeMinonAttack(Action selectedAction, MinionUnit targetMinion){
-        if(!canMakeAttack(selectedAction)) {
-            StartCoroutine(WriteMessageInDialogueBox("I need Magic!"));
-            DamageDetails nullDetails = new DamageDetails(false,0,0);
-            nullDetails.faintedOptions = FaintedOptions.Invalid;
-            return nullDetails;
-        }
         ConsumeMagic(selectedAction.MagicCost);
         DamageDetails damageDetails = targetMinion.TakeDamage(selectedAction, minion.MinionInfo);
         string text = GetAttackerMessage(damageDetails);
@@ -103,9 +97,11 @@ public class MinionUnit : MonoBehaviour
         return damageDetails;
 
     }
-    private bool canMakeAttack(Action selectedAction)
+    public bool canMakeAttack(Action selectedAction)
     {
-        return selectedAction.MagicCost <= minion.magic;
+        bool canMakeAttack = selectedAction.MagicCost <= minion.magic;
+        if(!canMakeAttack) StartCoroutine(WriteMessageInDialogueBox("I need Magic!"));
+        return canMakeAttack;
     }
     private string GetAttackerMessage(DamageDetails damageDetails)
     {

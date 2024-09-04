@@ -1428,6 +1428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minionPrefab: {fileID: 9187105822317776501, guid: d2de0fba45836ca4995b1131ec940d5c, type: 3}
+  actionPrefab: {fileID: 9187105822317776501, guid: 079290103d6f49b448900ba8b8020f90, type: 3}
   team1: 010000000500000006000000
   team2: 030000000200000004000000
   AllMinionSO:

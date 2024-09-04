@@ -98,7 +98,7 @@ public class UIManager : MonoBehaviour
         Action2Text.transform.parent.gameObject.SetActive(false);
     }
 
-    public void UpdateFloatingBars(float health, float maxHealth, float magic, float maxMagic){
+    public void UpdateSelectedFloatingBars(float health, float maxHealth, float magic, float maxMagic){
         UpdateSliderData(selectedMinionHealthBar, maxHealth, health);
         UpdateSliderData(selectedMinionMagicBar, maxMagic, magic);
         selectedMinionHealthBarText.text = $"{health}/{maxHealth}";
