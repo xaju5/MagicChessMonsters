@@ -128,22 +128,28 @@ public class UIManager : MonoBehaviour
         isGameover = true;
         RemoveSelectedMinionUI();
         currentTurnText.enabled = false;
-        winnerText.transform.parent.gameObject.SetActive(true);
         winnerText.text = winner.ToString(); 
+        winnerText.transform.parent.gameObject.SetActive(true);
+    }
+    public void RemoveWinnerScreen(){
+        isGameover = false;
+        currentTurnText.enabled = true;
+        winnerText.text = "Unknow"; 
+        winnerText.transform.parent.gameObject.SetActive(false);
     }
 
     //PauseMenu Methods
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
+        BattleManager.Instance.PauseGame(false);
         gameIsPaused = false;
     }
 
     private void Pause()
     {
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
+        BattleManager.Instance.PauseGame(true);
         gameIsPaused = true;
     }
 

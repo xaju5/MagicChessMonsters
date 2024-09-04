@@ -50,7 +50,7 @@ public class MinionUnit : MonoBehaviour
         while(!HasAnimationFinished("DeadState")){
             yield return null;
         }
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
     private bool HasAnimationFinished(string animationName){
