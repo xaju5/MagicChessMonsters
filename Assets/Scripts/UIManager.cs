@@ -132,7 +132,7 @@ public class UIManager : MonoBehaviour
         winnerText.text = winner.ToString(); 
     }
 
-    //PasueMenu Methods
+    //PauseMenu Methods
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
