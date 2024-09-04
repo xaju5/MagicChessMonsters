@@ -27,18 +27,37 @@ public class UIManager : MonoBehaviour
     
     [Header("Winner Screen")]
     [SerializeField] private TextMeshProUGUI winnerText;
+    [Header("Pause Screen")]
+    [SerializeField] private GameObject pauseMenuUI;
+
 
     [Header("Others")]
     [SerializeField] private TextMeshProUGUI currentTurnText;
 
 
     public static UIManager Instance;
+    public static bool gameIsPaused = false;
+    public static bool isGameover = false;
 
     private void Awake()
     {
         SetUpSingleton();
         UpdateTurnText(Team.Player1);
         RemoveSelectedMinionUI();
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape) && !isGameover)
+        {
+            if (gameIsPaused)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+            }
+        }
     }
 
     private void SetUpSingleton()
@@ -106,10 +125,33 @@ public class UIManager : MonoBehaviour
     }
 
     public void SetupWinnerScreen(Team winner){
+        isGameover = true;
         RemoveSelectedMinionUI();
         currentTurnText.enabled = false;
         winnerText.transform.parent.gameObject.SetActive(true);
         winnerText.text = winner.ToString(); 
+    }
+
+    //PasueMenu Methods
+    public void Resume()
+    {
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        gameIsPaused = false;
+    }
+
+    private void Pause()
+    {
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        gameIsPaused = true;
+    }
+
+
+    public void QuitGame()
+    {
+        Debug.Log("Quitting game...");
+        Application.Quit();
     }
 
 }

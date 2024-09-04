@@ -214,11 +214,11 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator WaitForAnimationsAndFinishTurn(MinionUnit attackerMinion, Action action, MinionUnit targetMinion){
         yield return StartCoroutine(WaitForActionAnimationEnd());
+        restoreTurn(attackerMinion);
         DamageDetails damageDetails = attackerMinion.MakeMinonAttack(action, targetMinion);
         Minion minion = attackerMinion. minion;
         UIManager.Instance.UpdateSelectedFloatingBars(minion.health, minion.MaxHealth(), minion.magic, minion.MaxMagic());
         CheckFaintedMinion(damageDetails.faintedOptions, targetMinion);
-        selectedMinion = attackerMinion;
         FinishTurn();
     }
 
@@ -276,6 +276,10 @@ public class BattleManager : MonoBehaviour
         DeselectMinion();
         stopedPlayerTurn = currentPlayerTurn;
         currentPlayerTurn = Team.None;
+    } 
+    private void restoreTurn(MinionUnit minion){
+        currentPlayerTurn = stopedPlayerTurn;
+        selectedMinion = minion;
     } 
 
     private Team GetEnemyTeamName(){
