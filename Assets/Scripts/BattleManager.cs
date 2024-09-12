@@ -337,6 +337,7 @@ public class BattleManager : MonoBehaviour
         PositionAllMinions();
         SetUpTurn();
         UIManager.Instance.RemoveWinnerScreen();
+        UIManager.Instance.UpdateTurnText(currentPlayerTurn);
     }
 
     public void PauseGame(bool isGamePaused){
