@@ -1,6 +1,3 @@
-using System;
-using System.Diagnostics;
-
 public enum Type
 {
     None,
