@@ -342,4 +342,8 @@ public class BattleManager : MonoBehaviour
     public void PauseGame(bool isGamePaused){
         this.isGamePaused = isGamePaused;
     }
+
+    public Team GetCurrentTurn(){
+        return currentPlayerTurn;
+    }
 }
