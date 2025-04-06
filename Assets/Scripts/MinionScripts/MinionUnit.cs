@@ -22,7 +22,7 @@ public class MinionUnit : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * movementSpeed);
     }
 
-    public void SetUpData(MinionSO minionInfo, Team team){
+    public void SetUpData(MinionSO minionInfo, Team team, Vector2Int initialIndex){
         Team = team;
         IsTrainer = (minionInfo.MinionId == MinionList.Boy) || (minionInfo.MinionId == MinionList.Girl) ? true : false;
         
@@ -30,8 +30,10 @@ public class MinionUnit : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = minionInfo.Sprite;
         HealthBar.SetBarMaxValue(minion.MaxHealth());
         MagicBar.SetBarMaxValue(minion.MaxMagic());
-
+        
         SetUpAnimationController(minionInfo);
+        
+        MoveMinionUnit(initialIndex, true);
     }
 
     private void SetUpAnimationController(MinionSO minionInfo){
