@@ -76,13 +76,13 @@ public class BattleManager : MonoBehaviour
     //         for (int y = 0; y < Gameboard.TILE_COUNT_Y; y++)
     //             minionUnits[x,y]?.MoveMinionUnit(new Vector2Int(x,y), true);
     // } 
-    private void SetUpTurn()
-    {
-        currentPlayerTurn = Team.Player1;
-        isGameover = false;
-        isGamePaused = false;
-        pendingAnimations.Clear();
-    }
+    // private void SetUpTurn()
+    // {
+    //     currentPlayerTurn = Team.Player1;
+    //     isGameover = false;
+    //     isGamePaused = false;
+    //     pendingAnimations.Clear();
+    // }
     //Turn Logic
     private void RunTurnLogic(){
         Vector2Int currentHover = Gameboard.Instance.GetCurrentHover();

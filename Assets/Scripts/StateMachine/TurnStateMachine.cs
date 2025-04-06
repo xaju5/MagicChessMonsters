@@ -15,6 +15,8 @@ public class TurnStateMachine : StateMachine
     private MinionUnit selectedMinion;
     private MinionUnit[,] minionUnits;
     private List<Vector2Int> availableMoves = new List<Vector2Int>();
+    private Team currentPlayerTurn;
+    private List<ActionUnit> pendingAnimations = new List<ActionUnit>();
 
     private void Awake()
     {
@@ -64,5 +66,20 @@ public class TurnStateMachine : StateMachine
     {
         if(force) Destroy(minion.gameObject);
         minionUnits[minion.MinionIndex.x,minion.MinionIndex.y] = null;
+    }
+
+    public MinionSO GetTeamMinionSO(int index, Team playerTeam){
+        if(playerTeam.Equals(Team.Player1))
+            return AllMinionSO[(int)team1[index]];
+        else
+            return AllMinionSO[(int)team2[index]];
+    }
+
+    public void SetUpTurn()
+    {
+        currentPlayerTurn = Team.Player1;
+        // isGameover = false;
+        // isGamePaused = false;
+        pendingAnimations.Clear();
     }
 }

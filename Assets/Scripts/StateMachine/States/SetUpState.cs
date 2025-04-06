@@ -38,13 +38,13 @@ public class SetUpState : BaseState
     {
         base.Exit();
         SpawnPlayers();
-        SetUpTurn();
+        TSM.SetUpTurn();
         // UIManager.Instance.UpdateTurnText(currentPlayerTurn);
     }
 
     private void SpawnPlayers()
     {
-        TSM.SpawnSingleMinion(AllMinionSO[(int)team1[0]],Team.Player1,new Vector2Int(4,0));
-        TSM.SpawnSingleMinion(AllMinionSO[(int)team2[0]],Team.Player1,new Vector2Int(4,7));
+        TSM.SpawnSingleMinion(TSM.GetTeamMinionSO(0,Team.Player1),Team.Player1,new Vector2Int(4,0));
+        TSM.SpawnSingleMinion(TSM.GetTeamMinionSO(0,Team.Player2),Team.Player2,new Vector2Int(4,7));
     }
 }
