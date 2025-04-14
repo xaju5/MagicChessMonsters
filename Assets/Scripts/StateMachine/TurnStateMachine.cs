@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TurnStateMachine : StateMachine
@@ -14,7 +15,7 @@ public class TurnStateMachine : StateMachine
 
     private MinionUnit selectedMinion;
     private MinionUnit[,] minionUnits;
-    private List<Vector2Int> availableMoves = new List<Vector2Int>();
+    
     private Team currentPlayerTurn;
     private List<ActionUnit> pendingAnimations = new List<ActionUnit>();
 
@@ -30,25 +31,27 @@ public class TurnStateMachine : StateMachine
         return setUpState;
     }
 
-    //Logic Funtions
+    //General Logic Funtions
     public MinionUnit GetMinionUnits(int x, int y){
+        if (minionUnits == null) return null;
         return minionUnits[x,y];
+    }
+    public ref MinionUnit[,] GetMinionUnitsArray(){
+        return ref minionUnits;
     }
 
     public void DeselectMinion(){
         selectedMinion = null;
     //     DeselectAction();
-    //     UIManager.Instance.RemoveSelectedMinionUI();
-        Gameboard.Instance.ChangeTilesLayers(availableMoves,"Tile");
-        availableMoves.Clear();
     }
 
     public void SelectMinion(Vector2Int tileIndex){
         selectedMinion = minionUnits[tileIndex.x,tileIndex.y];
-        // UIManager.Instance.SetupSelectedMinionUI(selectedMinion.minion);
-        
     }
 
+    public MinionUnit GetSelectedMinion(){
+        return selectedMinion;
+    }
     public MinionUnit SpawnSingleMinion(MinionSO minionInfo, Team team, Vector2Int initialIndex){
         GameObject minionGO = Instantiate(minionPrefab, transform);
         minionGO.name = minionInfo.MinionId.ToString();
@@ -75,11 +78,25 @@ public class TurnStateMachine : StateMachine
             return AllMinionSO[(int)team2[index]];
     }
 
-    public void SetUpTurn()
+    public void ClearLogicVariables()
     {
         currentPlayerTurn = Team.Player1;
+        minionUnits = new MinionUnit[Gameboard.TILE_COUNT_X,Gameboard.TILE_COUNT_Y];
         // isGameover = false;
         // isGamePaused = false;
         pendingAnimations.Clear();
+    }
+
+    public List<Vector2Int> GetTeamMinionPositions(Team team){
+        List<Vector2Int> minionPositions = new List<Vector2Int>();
+        for (int x = 0; x < Gameboard.TILE_COUNT_X; x++)
+            for (int y = 0; y < Gameboard.TILE_COUNT_Y; y++)
+                if(minionUnits[x,y]?.Team == team)
+                    minionPositions.Add(new Vector2Int(x,y));
+        return minionPositions;
+    }
+
+    public Team GetCurrentPlayerTurn(){
+        return currentPlayerTurn;
     }
 }

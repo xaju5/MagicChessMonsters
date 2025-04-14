@@ -5,6 +5,9 @@ using UnityEngine;
 public class MoveState : BaseState
 {
     private TurnStateMachine TSM;
+    private Vector2Int currentHover;
+    private List<Vector2Int> availableMoves;
+    private MinionUnit selectedMinion;
     public MoveState(TurnStateMachine stateMachine) : base("Move", stateMachine)
     {
         TSM = stateMachine;
@@ -13,19 +16,24 @@ public class MoveState : BaseState
     public override void Enter()
     {
         base.Enter();
-        availableMoves = selectedMinion.minion.GetAvailableMoves(ref minionUnits, tileIndex, Gameboard.TILE_COUNT_X, Gameboard.TILE_COUNT_Y);
+        selectedMinion = TSM.GetSelectedMinion();
+        availableMoves = selectedMinion.minion.GetAvailableMoves(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex, Gameboard.TILE_COUNT_X, Gameboard.TILE_COUNT_Y);
         Gameboard.Instance.ChangeTilesLayers(availableMoves,"Highlight");
     }
 
     public override void Update()
     {
         base.Update();
+        currentHover = Gameboard.Instance.GetCurrentHover();
         //IF
-        stateMachine.ChangeState(TSM.selectionState);
+        if(Input.GetMouseButtonDown(0))
+            stateMachine.ChangeState(TSM.selectionState);
     }
 
     public override void Exit()
     {
         base.Exit();
+        Gameboard.Instance.ChangeTilesLayers(availableMoves,"Tile");
+        availableMoves.Clear();
     }
 }

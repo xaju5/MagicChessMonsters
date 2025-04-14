@@ -32,10 +32,10 @@ public class BattleManager : MonoBehaviour
         SetUpTurn();
     }
 
-    // void Update() {
-    //     if(!isGameover || !isGamePaused)
-    //         RunTurnLogic();
-    // }
+    void Update() {
+        if(!isGameover || !isGamePaused)
+            RunTurnLogic();
+    }
 
     private void SetUpSingleton()
     {
@@ -47,42 +47,42 @@ public class BattleManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+
     // Set Up Minions
-    // private void SpawnAllMinions(){
-    //     //TODO: Initial Position Phase
-    //     minionUnits = new MinionUnit[Gameboard.TILE_COUNT_X,Gameboard.TILE_COUNT_Y];
+    private void SpawnAllMinions(){
+        //TODO: Initial Position Phase
+        minionUnits = new MinionUnit[Gameboard.TILE_COUNT_X,Gameboard.TILE_COUNT_Y];
 
-    //     minionUnits[3,0] = SpawnSingleMinion(AllMinionSO[(int)team1[1]],Team.Player1);
-    //     minionUnits[4,0] = SpawnSingleMinion(AllMinionSO[(int)team1[0]],Team.Player1);
-    //     minionUnits[5,0] = SpawnSingleMinion(AllMinionSO[(int)team1[2]],Team.Player1);
+        minionUnits[3,0] = SpawnSingleMinion(AllMinionSO[(int)team1[1]],Team.Player1);
+        minionUnits[4,0] = SpawnSingleMinion(AllMinionSO[(int)team1[0]],Team.Player1);
+        minionUnits[5,0] = SpawnSingleMinion(AllMinionSO[(int)team1[2]],Team.Player1);
 
-    //     minionUnits[3,7] = SpawnSingleMinion(AllMinionSO[(int)team2[1]],Team.Player2);
-    //     minionUnits[4,7] = SpawnSingleMinion(AllMinionSO[(int)team2[0]],Team.Player2);
-    //     minionUnits[5,7] = SpawnSingleMinion(AllMinionSO[(int)team2[2]],Team.Player2);
-    // }
-    // private MinionUnit SpawnSingleMinion(MinionSO minionInfo, Team team){
-    //     GameObject minionGO = Instantiate(minionPrefab, transform);
-    //     minionGO.name = minionInfo.MinionId.ToString();
-    //     minionGO.GetComponent<SpriteRenderer>().sortingOrder = Gameboard.Instance.GetTilemapRenderer().sortingOrder + 2;
+        minionUnits[3,7] = SpawnSingleMinion(AllMinionSO[(int)team2[1]],Team.Player2);
+        minionUnits[4,7] = SpawnSingleMinion(AllMinionSO[(int)team2[0]],Team.Player2);
+        minionUnits[5,7] = SpawnSingleMinion(AllMinionSO[(int)team2[2]],Team.Player2);
+    }
+    private MinionUnit SpawnSingleMinion(MinionSO minionInfo, Team team){
+        GameObject minionGO = Instantiate(minionPrefab, transform);
+        minionGO.name = minionInfo.MinionId.ToString();
+        minionGO.GetComponent<SpriteRenderer>().sortingOrder = Gameboard.Instance.GetTilemapRenderer().sortingOrder + 2;
 
-    //     MinionUnit minionUnit = minionGO.GetComponent<MinionUnit>();
-    //     minionUnit.SetUpData(minionInfo, team);
+        MinionUnit minionUnit = minionGO.GetComponent<MinionUnit>();
+        // minionUnit.SetUpData(minionInfo, team);
 
-    //     return minionUnit;
-    // }
-    // private void PositionAllMinions(){
-    //     for (int x = 0; x < Gameboard.TILE_COUNT_X; x++)
-    //         for (int y = 0; y < Gameboard.TILE_COUNT_Y; y++)
-    //             minionUnits[x,y]?.MoveMinionUnit(new Vector2Int(x,y), true);
-    // } 
-    // private void SetUpTurn()
-    // {
-    //     currentPlayerTurn = Team.Player1;
-    //     isGameover = false;
-    //     isGamePaused = false;
-    //     pendingAnimations.Clear();
-    // }
+        return minionUnit;
+    }
+    private void PositionAllMinions(){
+        for (int x = 0; x < Gameboard.TILE_COUNT_X; x++)
+            for (int y = 0; y < Gameboard.TILE_COUNT_Y; y++)
+                minionUnits[x,y]?.MoveMinionUnit(new Vector2Int(x,y), true);
+    }
+    private void SetUpTurn()
+    {
+        currentPlayerTurn = Team.Player1;
+        isGameover = false;
+        isGamePaused = false;
+        pendingAnimations.Clear();
+    }
     //Turn Logic
     private void RunTurnLogic(){
         Vector2Int currentHover = Gameboard.Instance.GetCurrentHover();
@@ -98,7 +98,7 @@ public class BattleManager : MonoBehaviour
                         }
                     }
                     else if(minionUnits[currentHover.x, currentHover.y].Team == currentPlayerTurn){
-                        SelectMinion(currentHover);   
+                        SelectMinion(currentHover);
                     }
                     else if(minionUnits[currentHover.x, currentHover.y].Team != currentPlayerTurn){
                         if(IsValidAttack(currentHover)){
@@ -109,45 +109,45 @@ public class BattleManager : MonoBehaviour
             }
             if(Input.GetKeyDown(KeyCode.Q)  && !isGamePaused)
                 SelectAction(selectedMinion.minion.action1);
-            
+
             if(Input.GetKeyDown(KeyCode.W)  && !isGamePaused)
                 SelectAction(selectedMinion.minion.action2);
         }
-        // else{
-        //     if(availableMoves.Count < 1){
-        //         availableMoves = GetTeamMinionPositions(currentPlayerTurn);
-        //         Gameboard.Instance.ChangeTilesLayers(availableMoves,"Highlight");
-        //     }
-        //     if(CanMinionBeSelected(currentHover))
-        //         SelectMinion(currentHover);    
-        // }    
+        else{
+            if(availableMoves.Count < 1){
+                availableMoves = GetTeamMinionPositions(currentPlayerTurn);
+                Gameboard.Instance.ChangeTilesLayers(availableMoves,"Highlight");
+            }
+            if(CanMinionBeSelected(currentHover))
+                SelectMinion(currentHover);
+        }
     }
-    // private bool CanMinionBeSelected(Vector2Int currentHover)
-    // {
-    //     if(
-    //         Input.GetMouseButtonDown(0) &&
-    //         currentHover != -Vector2Int.one &&
-    //         minionUnits[currentHover.x, currentHover.y] != null &&
-    //         minionUnits[currentHover.x, currentHover.y]?.Team == currentPlayerTurn
-    //         )
-    //         return true;
+    private bool CanMinionBeSelected(Vector2Int currentHover)
+    {
+        if(
+            Input.GetMouseButtonDown(0) &&
+            currentHover != -Vector2Int.one &&
+            minionUnits[currentHover.x, currentHover.y] != null &&
+            minionUnits[currentHover.x, currentHover.y]?.Team == currentPlayerTurn
+            )
+            return true;
 
-    //     return false;
-    // }
-    // private void DeselectMinion(){
-    //     DeselectAction();
-    //     selectedMinion = null;
-    //     UIManager.Instance.RemoveSelectedMinionUI();
-    //     Gameboard.Instance.ChangeTilesLayers(availableMoves,"Tile");
-    //     availableMoves.Clear();
-    // }
-    // private void SelectMinion(Vector2Int tileIndex){
-    //     DeselectMinion();
-    //     selectedMinion = minionUnits[tileIndex.x,tileIndex.y];
-    //     UIManager.Instance.SetupSelectedMinionUI(selectedMinion.minion);
-    //     availableMoves = selectedMinion.minion.GetAvailableMoves(ref minionUnits, tileIndex, Gameboard.TILE_COUNT_X, Gameboard.TILE_COUNT_Y);
-    //     Gameboard.Instance.ChangeTilesLayers(availableMoves,"Highlight");
-    // }
+        return false;
+    }
+    private void DeselectMinion(){
+        DeselectAction();
+        selectedMinion = null;
+        UIManager.Instance.RemoveSelectedMinionUI();
+        Gameboard.Instance.ChangeTilesLayers(availableMoves,"Tile");
+        availableMoves.Clear();
+    }
+    private void SelectMinion(Vector2Int tileIndex){
+        DeselectMinion();
+        selectedMinion = minionUnits[tileIndex.x,tileIndex.y];
+        UIManager.Instance.SetupSelectedMinionUI(selectedMinion.minion);
+        availableMoves = selectedMinion.minion.GetAvailableMoves(ref minionUnits, tileIndex, Gameboard.TILE_COUNT_X, Gameboard.TILE_COUNT_Y);
+        Gameboard.Instance.ChangeTilesLayers(availableMoves,"Highlight");
+    }
     private void DeselectAction(){
         selectedAction = null;
         Gameboard.Instance.ChangeTilesLayers(availableAttacks,"Tile");
@@ -159,7 +159,7 @@ public class BattleManager : MonoBehaviour
         selectedAction = action;
         availableAttacks = selectedAction.GetAvailableAttackTiles(ref minionUnits, selectedMinion.MinionIndex, Gameboard.TILE_COUNT_X, Gameboard.TILE_COUNT_Y, GetEnemyTeamName());
         Gameboard.Instance.ChangeTilesLayers(availableAttacks,"Danger");
-    }   
+    }
     private void MoveSelectedMinionTo(Vector2Int newPosition){
         Vector2Int currentPosition = LookupMinionIndex(selectedMinion);
         if(currentPosition == newPosition)
@@ -176,7 +176,7 @@ public class BattleManager : MonoBehaviour
                     return new Vector2Int(x,y);
 
         throw new System.Exception("LookupMinionIndex_NotFound");
-        // return -Vector2Int.one;
+        return -Vector2Int.one;
     }
     private List<Vector2Int> GetTeamMinionPositions(Team team){
         List<Vector2Int> minionPositions = new List<Vector2Int>();
@@ -237,7 +237,7 @@ public class BattleManager : MonoBehaviour
 
     }
     private void CheckFaintedMinion(FaintedOptions faintedOptions, MinionUnit minion){
-        if(faintedOptions == FaintedOptions.MinionFainted) 
+        if(faintedOptions == FaintedOptions.MinionFainted)
             RemoveMinionFromBattleground(minion);
         if(faintedOptions == FaintedOptions.TrainerFainted)
             SetWinner(currentPlayerTurn);
@@ -246,11 +246,11 @@ public class BattleManager : MonoBehaviour
         if(CheckOnlyLastTrainer(currentPlayerTurn))
             SetWinner(GetEnemyTeamName());
     }
-    // private void RemoveMinionFromBattleground(MinionUnit targetMinion, bool force = false)
-    // {
-    //     if(force) Destroy(targetMinion.gameObject);
-    //     minionUnits[targetMinion.MinionIndex.x,targetMinion.MinionIndex.y] = null;
-    // }
+    private void RemoveMinionFromBattleground(MinionUnit targetMinion, bool force = false)
+    {
+        if(force) Destroy(targetMinion.gameObject);
+        minionUnits[targetMinion.MinionIndex.x,targetMinion.MinionIndex.y] = null;
+    }
 
     private bool CheckOnlyLastTrainer(Team team){
         List<MinionUnit> lastingMinions = GetTeamMinions(team);
@@ -277,11 +277,11 @@ public class BattleManager : MonoBehaviour
         DeselectMinion();
         stopedPlayerTurn = currentPlayerTurn;
         currentPlayerTurn = Team.None;
-    } 
+    }
     private void restoreTurn(MinionUnit minion){
         currentPlayerTurn = stopedPlayerTurn;
         selectedMinion = minion;
-    } 
+    }
 
     private Team GetEnemyTeamName(){
         if(currentPlayerTurn == Team.Player1)
@@ -298,12 +298,12 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    // private void DestroyAllMinions(){
-    //     for (int x = 0; x < Gameboard.TILE_COUNT_X; x++)
-    //         for (int y = 0; y < Gameboard.TILE_COUNT_Y; y++)
-    //             if(minionUnits[x,y] != null)
-    //                 RemoveMinionFromBattleground(minionUnits[x,y], true);
-    // }
+    private void DestroyAllMinions(){
+        for (int x = 0; x < Gameboard.TILE_COUNT_X; x++)
+            for (int y = 0; y < Gameboard.TILE_COUNT_Y; y++)
+                if(minionUnits[x,y] != null)
+                    RemoveMinionFromBattleground(minionUnits[x,y], true);
+    }
 
     //Public methods
     public MinionUnit GetSelectedMinion(){
@@ -328,16 +328,16 @@ public class BattleManager : MonoBehaviour
         return false;
     }
 
-    // public void ResetGame(){
-    //     UIManager.Instance.Resume();
-    //     DeselectMinion();
-    //     DestroyAllMinions();
-    //     SpawnAllMinions();
-    //     PositionAllMinions();
-    //     SetUpTurn();
-    //     UIManager.Instance.RemoveWinnerScreen();
-    //     UIManager.Instance.UpdateTurnText(currentPlayerTurn);
-    // }
+    public void ResetGame(){
+        UIManager.Instance.Resume();
+        DeselectMinion();
+        DestroyAllMinions();
+        SpawnAllMinions();
+        PositionAllMinions();
+        SetUpTurn();
+        UIManager.Instance.RemoveWinnerScreen();
+        UIManager.Instance.UpdateTurnText(currentPlayerTurn);
+    }
 
     public void PauseGame(bool isGamePaused){
         this.isGamePaused = isGamePaused;

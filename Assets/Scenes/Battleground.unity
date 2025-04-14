@@ -1828,7 +1828,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 641521428}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7523994d22bb52b459280fbf3e2e6291, type: 3}
   m_Name: 
@@ -1873,6 +1873,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf57c6443cd23c44bafccf140bed049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minionPrefab: {fileID: 9187105822317776501, guid: d2de0fba45836ca4995b1131ec940d5c, type: 3}
+  actionPrefab: {fileID: 9187105822317776501, guid: 079290103d6f49b448900ba8b8020f90, type: 3}
+  team1: 010000000500000006000000
+  team2: 030000000200000004000000
+  AllMinionSO:
+  - {fileID: 0}
+  - {fileID: 11400000, guid: dfaef6159b6c78441b4064ab03d090e5, type: 2}
+  - {fileID: 11400000, guid: 5f3154f3eb218f0419990c4bb4d2078b, type: 2}
+  - {fileID: 11400000, guid: bdd78d00a7005a949b6f0f21e8e3fca3, type: 2}
+  - {fileID: 11400000, guid: 792172cece150aa4183393394332c929, type: 2}
+  - {fileID: 11400000, guid: 27301dfb4fc70eb49b8a457dbc6f923f, type: 2}
+  - {fileID: 11400000, guid: 8685f38d527e4734c82da521ccf967a4, type: 2}
 --- !u!1 &765728482
 GameObject:
   m_ObjectHideFlags: 0

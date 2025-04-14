@@ -17,6 +17,7 @@ public class SetUpState : BaseState
         // UIManager.Instance.Resume();
         TSM.DeselectMinion();
         DestroyAllMinions();
+        
         // UIManager.Instance.RemoveWinnerScreen();
     }
 
@@ -30,20 +31,20 @@ public class SetUpState : BaseState
     public override void Update()
     {
         base.Update();
-        //IF
         stateMachine.ChangeState(TSM.selectionState);
     }
 
     public override void Exit()
     {
         base.Exit();
+        TSM.ClearLogicVariables();
         SpawnPlayers();
-        TSM.SetUpTurn();
         // UIManager.Instance.UpdateTurnText(currentPlayerTurn);
     }
 
     private void SpawnPlayers()
     {
+        Debug.Log(TSM.GetTeamMinionSO(0,Team.Player1));
         TSM.SpawnSingleMinion(TSM.GetTeamMinionSO(0,Team.Player1),Team.Player1,new Vector2Int(4,0));
         TSM.SpawnSingleMinion(TSM.GetTeamMinionSO(0,Team.Player2),Team.Player2,new Vector2Int(4,7));
     }
