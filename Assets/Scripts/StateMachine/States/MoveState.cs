@@ -18,7 +18,7 @@ public class MoveState : BaseState
         base.Enter();
         selectedMinion = TSM.GetSelectedMinion();
         availableMoves = selectedMinion.minion.GetAvailableMoves(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex, Gameboard.TILE_COUNT_X, Gameboard.TILE_COUNT_Y);
-        Gameboard.Instance.ChangeTilesLayers(availableMoves,"Highlight");
+        Gameboard.Instance.ChangeTilesLayers(availableMoves,TileLayer.Highlight);
     }
 
     public override void Update()
@@ -33,7 +33,7 @@ public class MoveState : BaseState
     public override void Exit()
     {
         base.Exit();
-        Gameboard.Instance.ChangeTilesLayers(availableMoves,"Tile");
+        Gameboard.Instance.RestoreTilesLayers(availableMoves);
         availableMoves.Clear();
     }
 }

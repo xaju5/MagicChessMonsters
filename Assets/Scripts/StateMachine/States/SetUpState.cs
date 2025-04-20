@@ -44,7 +44,6 @@ public class SetUpState : BaseState
 
     private void SpawnPlayers()
     {
-        Debug.Log(TSM.GetTeamMinionSO(0,Team.Player1));
         TSM.SpawnSingleMinion(TSM.GetTeamMinionSO(0,Team.Player1),Team.Player1,new Vector2Int(4,0));
         TSM.SpawnSingleMinion(TSM.GetTeamMinionSO(0,Team.Player2),Team.Player2,new Vector2Int(4,7));
     }

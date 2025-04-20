@@ -28,7 +28,7 @@ public class SelectionState : BaseState
     private void HighlightPlayerMinions()
     {
         availableMoves = TSM.GetTeamMinionPositions(TSM.GetCurrentPlayerTurn());
-        Gameboard.Instance.ChangeTilesLayers(availableMoves,"Highlight");
+        Gameboard.Instance.ChangeTilesLayers(availableMoves,TileLayer.Highlight);
     }
 
     // UPDATE //
@@ -58,7 +58,7 @@ public class SelectionState : BaseState
     {
         base.Exit();
         TSM.SelectMinion(currentHover);
-        Gameboard.Instance.ChangeTilesLayers(availableMoves,"Tile");
+        Gameboard.Instance.RestoreTilesLayers(availableMoves);
         availableMoves.Clear();
     //     UIManager.Instance.SetupSelectedMinionUI(selectedMinion.minion);
     }

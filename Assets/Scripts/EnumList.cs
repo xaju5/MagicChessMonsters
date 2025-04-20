@@ -60,3 +60,11 @@ public enum SelectableTiles{
     Area,
     Star
 }
+
+public enum TileLayer{
+    None,
+    Tile,
+    Hover,
+    Highlight,
+    Danger
+}

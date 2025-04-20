@@ -116,7 +116,7 @@ public class BattleManager : MonoBehaviour
         else{
             if(availableMoves.Count < 1){
                 availableMoves = GetTeamMinionPositions(currentPlayerTurn);
-                Gameboard.Instance.ChangeTilesLayers(availableMoves,"Highlight");
+                // Gameboard.Instance.ChangeTilesLayers(availableMoves,"Highlight");
             }
             if(CanMinionBeSelected(currentHover))
                 SelectMinion(currentHover);
@@ -138,7 +138,7 @@ public class BattleManager : MonoBehaviour
         DeselectAction();
         selectedMinion = null;
         UIManager.Instance.RemoveSelectedMinionUI();
-        Gameboard.Instance.ChangeTilesLayers(availableMoves,"Tile");
+        // Gameboard.Instance.ChangeTilesLayers(availableMoves,"Tile");
         availableMoves.Clear();
     }
     private void SelectMinion(Vector2Int tileIndex){
@@ -146,11 +146,11 @@ public class BattleManager : MonoBehaviour
         selectedMinion = minionUnits[tileIndex.x,tileIndex.y];
         UIManager.Instance.SetupSelectedMinionUI(selectedMinion.minion);
         availableMoves = selectedMinion.minion.GetAvailableMoves(ref minionUnits, tileIndex, Gameboard.TILE_COUNT_X, Gameboard.TILE_COUNT_Y);
-        Gameboard.Instance.ChangeTilesLayers(availableMoves,"Highlight");
+        // Gameboard.Instance.ChangeTilesLayers(availableMoves,"Highlight");
     }
     private void DeselectAction(){
         selectedAction = null;
-        Gameboard.Instance.ChangeTilesLayers(availableAttacks,"Tile");
+        // Gameboard.Instance.ChangeTilesLayers(availableAttacks,"Tile");
         availableAttacks.Clear();
     }
 
@@ -158,7 +158,7 @@ public class BattleManager : MonoBehaviour
         DeselectAction();
         selectedAction = action;
         availableAttacks = selectedAction.GetAvailableAttackTiles(ref minionUnits, selectedMinion.MinionIndex, Gameboard.TILE_COUNT_X, Gameboard.TILE_COUNT_Y, GetEnemyTeamName());
-        Gameboard.Instance.ChangeTilesLayers(availableAttacks,"Danger");
+        // Gameboard.Instance.ChangeTilesLayers(availableAttacks,"Danger");
     }
     private void MoveSelectedMinionTo(Vector2Int newPosition){
         Vector2Int currentPosition = LookupMinionIndex(selectedMinion);
@@ -176,7 +176,7 @@ public class BattleManager : MonoBehaviour
                     return new Vector2Int(x,y);
 
         throw new System.Exception("LookupMinionIndex_NotFound");
-        return -Vector2Int.one;
+        // return -Vector2Int.one;
     }
     private List<Vector2Int> GetTeamMinionPositions(Team team){
         List<Vector2Int> minionPositions = new List<Vector2Int>();
