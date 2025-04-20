@@ -30,7 +30,7 @@ public class MoveState : BaseState
                 stateMachine.ChangeState(TSM.selectionState);
                 return;
             }
-            if(TSM.GetMinionUnits(currentHover.x, currentHover.y) == null){
+            if(TSM.GetMinionUnit(currentHover) == null){
                 if(IsValidMove(currentHover)){
                     MoveSelectedMinion(currentHover);
                     stateMachine.ChangeState(TSM.endTurnState);

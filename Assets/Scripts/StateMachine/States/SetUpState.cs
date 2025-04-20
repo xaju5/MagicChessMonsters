@@ -24,8 +24,8 @@ public class SetUpState : BaseState
     private void DestroyAllMinions(){
         for (int x = 0; x < Gameboard.TILE_COUNT_X; x++)
             for (int y = 0; y < Gameboard.TILE_COUNT_Y; y++)
-                if(TSM.GetMinionUnits(x,y) != null)
-                    TSM.RemoveMinionFromBattleground(TSM.GetMinionUnits(x,y), true);
+                if(TSM.GetMinionUnit(new Vector2Int(x,y)) != null)
+                    TSM.RemoveMinionFromBattleground(TSM.GetMinionUnit(new Vector2Int(x,y)), true);
     }
 
     public override void Update()

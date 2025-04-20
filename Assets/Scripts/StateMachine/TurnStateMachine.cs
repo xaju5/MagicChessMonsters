@@ -40,9 +40,9 @@ public class TurnStateMachine : StateMachine
     }
 
     //Minion Unit Array Management
-    public MinionUnit GetMinionUnits(int x, int y){
+    public MinionUnit GetMinionUnit(Vector2Int index){
         if (minionUnits == null) return null;
-        return minionUnits[x,y];
+        return minionUnits[index.x,index.y];
     }
     public ref MinionUnit[,] GetMinionUnitsArray(){
         return ref minionUnits;

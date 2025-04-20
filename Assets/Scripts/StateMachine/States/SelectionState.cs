@@ -45,8 +45,8 @@ public class SelectionState : BaseState
         if(
             Input.GetMouseButtonDown(0) &&
             currentHover != -Vector2Int.one &&
-            TSM.GetMinionUnits(currentHover.x, currentHover.y) != null &&
-            TSM.GetMinionUnits(currentHover.x, currentHover.y)?.Team == TSM.GetCurrentPlayerTurn()
+            TSM.GetMinionUnit(currentHover) != null &&
+            TSM.GetMinionUnit(currentHover)?.Team == TSM.GetCurrentPlayerTurn()
             )
             return true;
 
