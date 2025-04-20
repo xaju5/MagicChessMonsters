@@ -25,9 +25,38 @@ public class MoveState : BaseState
     {
         base.Update();
         currentHover = Gameboard.Instance.GetCurrentHover();
-        //IF
-        if(Input.GetMouseButtonDown(0))
-            stateMachine.ChangeState(TSM.selectionState);
+        if(Input.GetMouseButtonDown(0)){
+            if(currentHover == -Vector2Int.one){
+                stateMachine.ChangeState(TSM.selectionState);
+                return;
+            }
+            if(TSM.GetMinionUnits(currentHover.x, currentHover.y) == null){
+                if(IsValidMove(currentHover)){
+                    MoveSelectedMinion(currentHover);
+                    stateMachine.ChangeState(TSM.endTurnState);
+                }
+            }
+            // else if(minionUnits[currentHover.x, currentHover.y].Team == currentPlayerTurn){
+            //     SwitchSelectMinion(currentHover);
+            // }
+        }
+            
+    }
+
+    private bool IsValidMove(Vector2Int index)
+    {
+        foreach (Vector2Int availableIndex in availableMoves)
+            if (availableIndex == index)
+                return true;
+        return false;
+    }
+
+    private void MoveSelectedMinion(Vector2Int newPosition){
+        if(selectedMinion.MinionIndex == newPosition)
+            throw new System.Exception("ERROR: New Position and current position are the same.");
+        
+        TSM.UpdateMinionPositionInArray(selectedMinion, newPosition);
+        selectedMinion.MoveMinionUnit(newPosition);
     }
 
     public override void Exit()
