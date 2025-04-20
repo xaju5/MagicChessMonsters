@@ -21,7 +21,7 @@ public class SelectionState : BaseState
         base.Enter();
         TSM.DeselectMinion();
         availableMoves = new List<Vector2Int>();
-        //     UIManager.Instance.RemoveSelectedMinionUI();
+        UIManager.Instance.RemoveSelectedMinionUI();
         HighlightPlayerMinions();
     }
 
@@ -57,10 +57,10 @@ public class SelectionState : BaseState
     public override void Exit()
     {
         base.Exit();
-        TSM.SelectMinion(currentHover);
+        MinionUnit selectedMinion = TSM.SelectMinion(currentHover);
         Gameboard.Instance.RestoreTilesLayers(availableMoves);
         availableMoves.Clear();
-    //     UIManager.Instance.SetupSelectedMinionUI(selectedMinion.minion);
+        UIManager.Instance.SetupSelectedMinionUI(selectedMinion.minion);
     }
 
 }

@@ -45,8 +45,9 @@ public class TurnStateMachine : StateMachine
     //     DeselectAction();
     }
 
-    public void SelectMinion(Vector2Int tileIndex){
+    public MinionUnit SelectMinion(Vector2Int tileIndex){
         selectedMinion = minionUnits[tileIndex.x,tileIndex.y];
+        return selectedMinion;
     }
 
     public MinionUnit GetSelectedMinion(){
