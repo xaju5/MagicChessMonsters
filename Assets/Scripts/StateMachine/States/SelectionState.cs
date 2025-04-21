@@ -8,7 +8,7 @@ public class SelectionState : BaseState
     private TurnStateMachine TSM;
 
     private Vector2Int currentHover;
-    private List<Vector2Int> availableMoves;
+    private List<Vector2Int> availableSelection;
 
     public SelectionState(TurnStateMachine stateMachine) : base("Selection", stateMachine)
     {
@@ -20,15 +20,15 @@ public class SelectionState : BaseState
     {
         base.Enter();
         TSM.DeselectMinion();
-        availableMoves = new List<Vector2Int>();
+        availableSelection = new List<Vector2Int>();
         UIManager.Instance.RemoveSelectedMinionUI();
         HighlightPlayerMinions();
     }
 
     private void HighlightPlayerMinions()
     {
-        availableMoves = TSM.GetTeamMinionPositions(TSM.GetCurrentPlayerTurn());
-        Gameboard.Instance.ChangeTilesLayers(availableMoves,TileLayer.Highlight);
+        availableSelection = TSM.GetTeamMinionPositions(TSM.GetCurrentPlayerTurn());
+        Gameboard.Instance.ChangeTilesLayers(availableSelection,TileLayer.Highlight);
     }
 
     // UPDATE //
@@ -58,8 +58,8 @@ public class SelectionState : BaseState
     {
         base.Exit();
         MinionUnit selectedMinion = TSM.SelectMinion(currentHover);
-        Gameboard.Instance.RestoreTilesLayers(availableMoves);
-        availableMoves.Clear();
+        Gameboard.Instance.RestoreTilesLayers(availableSelection);
+        availableSelection.Clear();
         UIManager.Instance.SetupSelectedMinionUI(selectedMinion.minion);
     }
 

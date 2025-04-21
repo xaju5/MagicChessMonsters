@@ -22,7 +22,7 @@ public class GameoverState : BaseState
     public override void Update()
     {
         base.Update();
-        stateMachine.ChangeState(TSM.selectionState);
+        stateMachine.ChangeState(TSM.setUpState);
     }
 
     public override void Exit()

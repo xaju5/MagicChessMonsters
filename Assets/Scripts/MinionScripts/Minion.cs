@@ -11,10 +11,13 @@ public class Minion
     public Action action1 { get; private set; }
     public Action action2 { get; private set; }
 
+    private bool isFainted;
+
     public Minion(MinionSO minionInfo){
         MinionInfo = minionInfo;
         health = minionInfo.HealthBase;
         magic = minionInfo.MagicBase;
+        isFainted = false;
 
         action1 = GetAction(minionInfo.LearnableActions, 0);
         action2 = GetAction(minionInfo.LearnableActions, 1);
@@ -71,10 +74,15 @@ public class Minion
         if(health <= 0){
             health = 0;
             damageDetails.isFainted = true;
+            isFainted = damageDetails.isFainted; 
             return damageDetails;
         }
 
         return damageDetails;
+    }
+
+    public bool GetIsFainted(){
+        return isFainted;
     }
 
     public bool Heal(float amount){

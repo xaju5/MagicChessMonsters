@@ -34,11 +34,23 @@ public class MoveState : BaseState
                 if(IsValidMove(currentHover)){
                     MoveSelectedMinion(currentHover);
                     stateMachine.ChangeState(TSM.endTurnState);
+                    return;
                 }
             }
             // else if(minionUnits[currentHover.x, currentHover.y].Team == currentPlayerTurn){
             //     SwitchSelectMinion(currentHover);
             // }
+        }
+        //Instead of moving attack
+        if(Input.GetKeyDown(KeyCode.Q)){
+            TSM.SelectAction(selectedMinion.minion.action1);
+            stateMachine.ChangeState(TSM.attackState);
+            return;
+        }
+        if(Input.GetKeyDown(KeyCode.W)){
+            TSM.SelectAction(selectedMinion.minion.action2);
+            stateMachine.ChangeState(TSM.attackState);
+            return;
         }
             
     }

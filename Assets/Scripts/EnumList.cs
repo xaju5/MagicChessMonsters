@@ -68,3 +68,9 @@ public enum TileLayer{
     Highlight,
     Danger
 }
+
+public enum AnimationTimer{
+    None,
+    Waiting,
+    Finished
+}

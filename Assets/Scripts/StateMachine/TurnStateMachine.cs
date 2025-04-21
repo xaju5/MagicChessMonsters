@@ -18,11 +18,15 @@ public class TurnStateMachine : StateMachine
     [SerializeField] private MinionSO[] AllMinionSO;
 
     private MinionUnit selectedMinion;
+    private Action selectedAction;
     private MinionUnit[,] minionUnits;
     private List<MinionUnit> minionUnitList = new List<MinionUnit>();
     
     private Team currentPlayerTurn;
-    private List<ActionUnit> pendingAnimations = new List<ActionUnit>();
+
+    private AnimationTimer animationTimer;
+
+    private Team winner;
 
     private void Awake()
     {
@@ -80,6 +84,11 @@ public class TurnStateMachine : StateMachine
         return minionUnitList.Where(minionUnit => minionUnit.Team == team).ToList();      
     }
 
+    public void UpdateAllMinionUnitGraphics(){
+        foreach (MinionUnit minionUnit in minionUnitList)
+            minionUnit.UpdateMinionUnitGraphics();
+    }
+
     //General Logic Funtions
     public MinionSO GetTeamMinionSO(int index, Team playerTeam){
         if(playerTeam.Equals(Team.Player1))
@@ -92,9 +101,9 @@ public class TurnStateMachine : StateMachine
     {
         currentPlayerTurn = Team.Player1;
         minionUnits = new MinionUnit[Gameboard.TILE_COUNT_X,Gameboard.TILE_COUNT_Y];
+        winner = Team.None;
         // isGameover = false;
         // isGamePaused = false;
-        pendingAnimations.Clear();
     }
 
     public List<Vector2Int> GetTeamMinionPositions(Team team){
@@ -114,17 +123,17 @@ public class TurnStateMachine : StateMachine
         currentPlayerTurn = GetEnemyTeam();
     }
 
-    private Team GetEnemyTeam(){
+    public Team GetEnemyTeam(){
         if(currentPlayerTurn == Team.Player1)
             return Team.Player2;
         else
             return Team.Player1;
     }
 
-    //Selection
+    //Minion Selection
     public void DeselectMinion(){
         selectedMinion = null;
-    //     DeselectAction();
+        DeselectAction();
     }
 
     public MinionUnit SelectMinion(Vector2Int tileIndex){
@@ -134,6 +143,67 @@ public class TurnStateMachine : StateMachine
 
     public MinionUnit GetSelectedMinion(){
         return selectedMinion;
+    }
+
+    //Action Logic
+    public void SelectAction(Action action){
+        selectedAction = action;
+    }
+
+    public void DeselectAction(){
+        selectedAction = null;
+    }
+
+    public Action GetSelectedAction(){
+        return selectedAction;
+    }
+
+    public void SetAnimationTimer(AnimationTimer animationTimer){
+        this.animationTimer = animationTimer;
+    }
+
+    public AnimationTimer GetAnimationTimer(){
+        return animationTimer;
+    }
+
+    public ActionUnit SpawnAction(Action action, Vector3 targetPosition){
+        float movementAngle = MathUtils.GetVectorAngle(selectedMinion.transform.position - targetPosition); //TODO: Rotar ataque hacia enemigo
+        GameObject actionGO = Instantiate(actionPrefab, selectedMinion.transform.position, new Quaternion());
+        actionGO.name = action.ActionInfo.Name;
+        actionGO.GetComponent<SpriteRenderer>().sortingOrder = Gameboard.Instance.GetTilemapRenderer().sortingOrder + 3;
+        ActionUnit actionUnit = actionGO.GetComponent<ActionUnit>();
+        actionUnit.SetUpData(action, targetPosition);
+        return actionUnit;
+    }
+
+    public void StartActionAnimationTimer(List<ActionUnit> pendingAnimations){
+        SetAnimationTimer(AnimationTimer.Waiting);
+        StartCoroutine(WaitForAnimations(pendingAnimations));
+    }
+
+    private IEnumerator WaitForAnimations(List<ActionUnit> pendingAnimations){
+        while (pendingAnimations.Count > 0)
+        {
+            for (int i = pendingAnimations.Count - 1; i >= 0; i--)
+            {
+                if(pendingAnimations[i].HasAnimationFinished()){
+                    Destroy(pendingAnimations[i].gameObject);
+                    pendingAnimations.RemoveAt(i);
+                }
+            }
+            yield return null;
+        }     
+        SetAnimationTimer(AnimationTimer.Finished);
+    }
+
+    //Gameover
+    public void SetWinner(Team team)
+    {
+        winner = team;
+    }
+
+    public Team GetWinner(){
+        return winner;
     }
 
 }
