@@ -112,7 +112,7 @@ public class ChooseState : BaseState
             return;
         }
 
-        if (Input.GetMouseButtonDown(1)){
+        if (Input.GetMouseButtonDown(1)){ // Go back: Sel. < Mov. < Att.
             if(selectedOption == ChooseOptions.Move){
                 stateMachine.ChangeState(TSM.selectionState);
                 return;

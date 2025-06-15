@@ -5,8 +5,6 @@ using UnityEngine;
 public class EndTurnState : BaseState
 {
     private TurnStateMachine TSM;
-    private Vector2Int currentHover;
-    private List<Vector2Int> availableMoves;
     private MinionUnit selectedMinion;
     private float restoreMagicAmount = 15f;
     public EndTurnState(TurnStateMachine stateMachine) : base("EndTurn", stateMachine)

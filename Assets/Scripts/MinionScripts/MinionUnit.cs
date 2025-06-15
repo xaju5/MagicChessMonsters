@@ -20,12 +20,14 @@ public class MinionUnit : MonoBehaviour
     private Vector3 targetPosition;
     private List<string> pendingMessages;
 
+    private bool canTalk;
+
     Animator animator;
     
     void Update() {
         if(transform.position != targetPosition)
             transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * movementSpeed);
-        if(pendingMessages.Count > 0 )
+        if(pendingMessages.Count > 0 && canTalk )
             StartCoroutine(WriteMessagesInDialogueBox(pendingMessages));
         
     }
@@ -39,6 +41,7 @@ public class MinionUnit : MonoBehaviour
         HealthBar.SetBarMaxValue(minion.MaxHealth());
         MagicBar.SetBarMaxValue(minion.MaxMagic());
         pendingMessages = new List<string>();
+        canTalk = true;
         
         SetUpAnimationController(minionInfo);
         MoveMinionUnit(initialIndex, true);
@@ -159,6 +162,10 @@ public class MinionUnit : MonoBehaviour
 
     public void QueueMessage(string text){
         pendingMessages.Add(text);
+    }
+
+    public void SetCanTalk(bool enable){
+        canTalk = enable;
     }
 
 }

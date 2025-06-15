@@ -21,6 +21,7 @@ public class AttackState : BaseState
         selectedMinion = TSM.GetSelectedMinion();
         selectedAction = TSM.GetSelectedAction();
         targetPosition = TSM.GetTargetPosition();
+        targetMinion = TSM.GetMinionUnit(targetPosition);
         TSM.SetAnimationTimer(AnimationTimer.None);
     }
 
@@ -29,7 +30,9 @@ public class AttackState : BaseState
         base.Update();
         switch (TSM.GetAnimationTimer())
         {   
-            case AnimationTimer.None:      
+            case AnimationTimer.None:
+                selectedMinion.SetCanTalk(false);      
+                targetMinion.SetCanTalk(false);      
                 MakeSelectedAttack();  
                 return;
 
@@ -37,6 +40,8 @@ public class AttackState : BaseState
                 return;
 
             case AnimationTimer.Finished:
+                selectedMinion.SetCanTalk(true);      
+                targetMinion.SetCanTalk(true);  
                 if(TSM.GetWinner() != Team.None){
                     stateMachine.ChangeState(TSM.gameoverState);
                     return;
@@ -50,7 +55,6 @@ public class AttackState : BaseState
     }
 
     private void MakeSelectedAttack(){
-        targetMinion = TSM.GetMinionUnit(targetPosition);
         pendingAnimations.Add(TSM.SpawnAction(selectedAction, targetMinion.transform.position));
         TSM.StartActionAnimationTimer(pendingAnimations);
         DamageDetails damageDetails = selectedMinion.MakeMinonAttack(selectedAction, targetMinion);
