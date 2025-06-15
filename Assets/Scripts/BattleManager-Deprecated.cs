@@ -195,7 +195,7 @@ public class BattleManager : MonoBehaviour
         return minions;
     }
     private void MakeSelectedAttack(Vector2Int currentHover){
-        if (!selectedMinion.canMakeAttack(selectedAction)) return;
+        if (!selectedMinion.HasEnoughMagic(selectedAction)) return;
         MinionUnit targetMinion = minionUnits[currentHover.x, currentHover.y];
         pendingAnimations.Add(SpawnAction(selectedAction, targetMinion.transform.position));
         StartCoroutine(WaitForAnimationsAndFinishTurn(selectedMinion, selectedAction, targetMinion));

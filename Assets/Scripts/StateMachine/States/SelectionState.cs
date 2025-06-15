@@ -37,7 +37,7 @@ public class SelectionState : BaseState
         base.Update();
         currentHover = Gameboard.Instance.GetCurrentHover();
         if(CanMinionBeSelected())
-            stateMachine.ChangeState(TSM.moveState);
+            stateMachine.ChangeState(TSM.chooseState);
     }
 
     private bool CanMinionBeSelected()

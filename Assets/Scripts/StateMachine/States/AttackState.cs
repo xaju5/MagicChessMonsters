@@ -5,11 +5,10 @@ using UnityEngine;
 public class AttackState : BaseState
 {
     private TurnStateMachine TSM;
-    private Vector2Int currentHover;
-    private List<Vector2Int> availableAttacks;
     private MinionUnit selectedMinion;
     private MinionUnit targetMinion;
     private Action selectedAction;
+    private Vector2Int targetPosition;
     private List<ActionUnit> pendingAnimations = new List<ActionUnit>();
     public AttackState(TurnStateMachine stateMachine) : base("Attack", stateMachine)
     {
@@ -21,40 +20,17 @@ public class AttackState : BaseState
         base.Enter();
         selectedMinion = TSM.GetSelectedMinion();
         selectedAction = TSM.GetSelectedAction();
-        availableAttacks = selectedAction.GetAvailableAttackTiles(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex, Gameboard.TILE_COUNT_X, Gameboard.TILE_COUNT_Y, TSM.GetEnemyTeam());
-        Gameboard.Instance.ChangeTilesLayers(availableAttacks,TileLayer.Danger);
+        targetPosition = TSM.GetTargetPosition();
         TSM.SetAnimationTimer(AnimationTimer.None);
     }
 
     public override void Update()
     {
         base.Update();
-        currentHover = Gameboard.Instance.GetCurrentHover();
         switch (TSM.GetAnimationTimer())
         {   
-            case AnimationTimer.None:
-                if(availableAttacks.Count == 0){
-                    selectedMinion.QueueMessage("Enemy out of range!");
-                    stateMachine.ChangeState(TSM.moveState);
-                    return;
-                }
-                if (!selectedMinion.canMakeAttack(selectedAction)){
-                    stateMachine.ChangeState(TSM.moveState);
-                    return;
-                }    
-                if(!Input.GetMouseButtonDown(0)) return;
-                if(currentHover == -Vector2Int.one){
-                    stateMachine.ChangeState(TSM.moveState);
-                    return;
-                } 
-                if(!IsValidAttack(currentHover)){
-                    stateMachine.ChangeState(TSM.moveState);
-                    return;
-                } 
-                if(TSM.GetMinionUnit(currentHover) == null) return;
-                if(TSM.GetMinionUnit(currentHover).Team == TSM.GetCurrentPlayerTurn()) return;
-                
-                MakeSelectedAttack(currentHover);  
+            case AnimationTimer.None:      
+                MakeSelectedAttack();  
                 return;
 
             case AnimationTimer.Waiting:
@@ -73,17 +49,8 @@ public class AttackState : BaseState
         }         
     }
 
-    private bool IsValidAttack(Vector2Int index){
-        foreach (Vector2Int availableIndex in availableAttacks){
-            if(availableIndex == index){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void MakeSelectedAttack(Vector2Int currentHover){
-        targetMinion = TSM.GetMinionUnit(currentHover);
+    private void MakeSelectedAttack(){
+        targetMinion = TSM.GetMinionUnit(targetPosition);
         pendingAnimations.Add(TSM.SpawnAction(selectedAction, targetMinion.transform.position));
         TSM.StartActionAnimationTimer(pendingAnimations);
         DamageDetails damageDetails = selectedMinion.MakeMinonAttack(selectedAction, targetMinion);
@@ -110,14 +77,10 @@ public class AttackState : BaseState
     public override void Exit()
     {
         base.Exit();
-        Debug.Log($"Winner: {TSM.GetWinner()}");
-        Gameboard.Instance.RestoreTilesLayers(availableAttacks);
         Minion minion = selectedMinion.minion;
         UIManager.Instance.UpdateSelectedFloatingBars(minion.health, minion.MaxHealth(), minion.magic, minion.MaxMagic());
         TSM.UpdateAllMinionUnitGraphics();
-        TSM.DeselectAction();
         TSM.SetAnimationTimer(AnimationTimer.None);
         pendingAnimations.Clear();
-        availableAttacks.Clear();
     }
 }

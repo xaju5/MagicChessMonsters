@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,6 +25,9 @@ public class MinionUnit : MonoBehaviour
     void Update() {
         if(transform.position != targetPosition)
             transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * movementSpeed);
+        if(pendingMessages.Count > 0 )
+            StartCoroutine(WriteMessagesInDialogueBox(pendingMessages));
+        
     }
 
     public void SetUpData(MinionSO minionInfo, Team team, Vector2Int initialIndex){
@@ -70,9 +74,9 @@ public class MinionUnit : MonoBehaviour
         while(pendingMessages.Count > 0){
             dialogueText.transform.parent.gameObject.SetActive(true);
             dialogueText.text = pendingMessages[0];
+            pendingMessages.RemoveAt(0);
             yield return new WaitForSeconds(dialogueboxDuration);
             dialogueText.transform.parent.gameObject.SetActive(false);
-            pendingMessages.RemoveAt(0);
         }
     }
 
@@ -108,7 +112,7 @@ public class MinionUnit : MonoBehaviour
         return damageDetails;
     }
 
-    public bool canMakeAttack(Action selectedAction)
+    public bool HasEnoughMagic(Action selectedAction)
     {
         bool canMakeAttack = selectedAction.MagicCost <= minion.magic;
         if(!canMakeAttack) pendingMessages.Add("I need Magic!");
@@ -148,8 +152,6 @@ public class MinionUnit : MonoBehaviour
 
     public void UpdateMinionUnitGraphics(){
         UpdateFloatingBars();
-        if(pendingMessages.Count > 0) 
-            StartCoroutine(WriteMessagesInDialogueBox(pendingMessages));
         if(minion.GetIsFainted())
             StartCoroutine(TriggerMinionDead());
 

@@ -5,8 +5,7 @@ using UnityEngine;
 public class MoveState : BaseState
 {
     private TurnStateMachine TSM;
-    private Vector2Int currentHover;
-    private List<Vector2Int> availableMoves;
+    private Vector2Int targetPosition;
     private MinionUnit selectedMinion;
     public MoveState(TurnStateMachine stateMachine) : base("Move", stateMachine)
     {
@@ -17,64 +16,26 @@ public class MoveState : BaseState
     {
         base.Enter();
         selectedMinion = TSM.GetSelectedMinion();
-        availableMoves = selectedMinion.minion.GetAvailableMoves(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex, Gameboard.TILE_COUNT_X, Gameboard.TILE_COUNT_Y);
-        Gameboard.Instance.ChangeTilesLayers(availableMoves,TileLayer.Highlight);
+        targetPosition = TSM.GetTargetPosition();
     }
 
     public override void Update()
     {
         base.Update();
-        currentHover = Gameboard.Instance.GetCurrentHover();
-        if(Input.GetMouseButtonDown(0)){
-            if(currentHover == -Vector2Int.one){
-                stateMachine.ChangeState(TSM.selectionState);
-                return;
-            }
-            if(TSM.GetMinionUnit(currentHover) == null){
-                if(IsValidMove(currentHover)){
-                    MoveSelectedMinion(currentHover);
-                    stateMachine.ChangeState(TSM.endTurnState);
-                    return;
-                }
-            }
-            // else if(minionUnits[currentHover.x, currentHover.y].Team == currentPlayerTurn){
-            //     SwitchSelectMinion(currentHover);
-            // }
-        }
-        //Instead of moving attack
-        if(Input.GetKeyDown(KeyCode.Q)){
-            TSM.SelectAction(selectedMinion.minion.action1);
-            stateMachine.ChangeState(TSM.attackState);
-            return;
-        }
-        if(Input.GetKeyDown(KeyCode.W)){
-            TSM.SelectAction(selectedMinion.minion.action2);
-            stateMachine.ChangeState(TSM.attackState);
-            return;
-        }
-            
+        MoveSelectedMinion();
+        stateMachine.ChangeState(TSM.endTurnState);    
     }
 
-    private bool IsValidMove(Vector2Int index)
-    {
-        foreach (Vector2Int availableIndex in availableMoves)
-            if (availableIndex == index)
-                return true;
-        return false;
-    }
-
-    private void MoveSelectedMinion(Vector2Int newPosition){
-        if(selectedMinion.MinionIndex == newPosition)
+    private void MoveSelectedMinion(){
+        if(selectedMinion.MinionIndex == targetPosition)
             throw new System.Exception("ERROR: New Position and current position are the same.");
         
-        TSM.UpdateMinionPositionInArray(selectedMinion, newPosition);
-        selectedMinion.MoveMinionUnit(newPosition);
+        TSM.UpdateMinionPositionInArray(selectedMinion, targetPosition);
+        selectedMinion.MoveMinionUnit(targetPosition);
     }
 
     public override void Exit()
     {
         base.Exit();
-        Gameboard.Instance.RestoreTilesLayers(availableMoves);
-        availableMoves.Clear();
     }
 }

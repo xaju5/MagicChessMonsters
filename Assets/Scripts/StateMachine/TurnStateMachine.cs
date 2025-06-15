@@ -8,6 +8,7 @@ public class TurnStateMachine : StateMachine
 {
     [HideInInspector] public SetUpState setUpState;
     [HideInInspector] public SelectionState selectionState;
+    [HideInInspector] public ChooseState chooseState;
     [HideInInspector] public MoveState moveState;
     [HideInInspector] public AttackState attackState;
     [HideInInspector] public EndTurnState endTurnState;
@@ -22,16 +23,15 @@ public class TurnStateMachine : StateMachine
     private MinionUnit[,] minionUnits;
     private List<MinionUnit> minionUnitList = new List<MinionUnit>();
     
+    private Vector2Int TargetPosition;
     private Team currentPlayerTurn;
-
     private AnimationTimer animationTimer;
-
     private Team winner;
-
     private void Awake()
     {
         setUpState = new SetUpState(this);
         selectionState = new SelectionState(this);
+        chooseState = new ChooseState(this);
         moveState = new MoveState(this);
         attackState = new AttackState(this);
         endTurnState = new EndTurnState(this);
@@ -146,6 +146,13 @@ public class TurnStateMachine : StateMachine
     }
 
     //Action Logic
+    public void SetTargetPosition(Vector2Int target){
+        TargetPosition = target;
+    }
+    public Vector2Int GetTargetPosition(){
+        return TargetPosition;
+    }
+
     public void SelectAction(Action action){
         selectedAction = action;
     }
