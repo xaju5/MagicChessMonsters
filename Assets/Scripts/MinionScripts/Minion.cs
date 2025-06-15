@@ -81,7 +81,7 @@ public class Minion
         return damageDetails;
     }
 
-    public bool GetIsFainted(){
+    public bool IsFainted(){
         return isFainted;
     }
 

@@ -16,6 +16,9 @@ public class SetUpState : BaseState
         base.Enter();
         // UIManager.Instance.Resume();
         TSM.DeselectMinion();
+        TSM.DeselectAction();
+        TSM.DeselectTargetPosition();
+        TSM.SetAnimationTimer(AnimationTimer.None);
         DestroyAllMinions();
         
         // UIManager.Instance.RemoveWinnerScreen();

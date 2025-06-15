@@ -20,6 +20,7 @@ public class SelectionState : BaseState
     {
         base.Enter();
         TSM.DeselectMinion();
+        TSM.DeselectAction();
         availableSelection = new List<Vector2Int>();
         UIManager.Instance.RemoveSelectedMinionUI();
         HighlightPlayerMinions();
@@ -27,7 +28,7 @@ public class SelectionState : BaseState
 
     private void HighlightPlayerMinions()
     {
-        availableSelection = TSM.GetTeamMinionPositions(TSM.GetCurrentPlayerTurn());
+        availableSelection = TSM.GetTeamAliveMinionPositions(TSM.GetCurrentPlayerTurn());
         Gameboard.Instance.ChangeTilesLayers(availableSelection,TileLayer.Highlight);
     }
 
@@ -46,7 +47,8 @@ public class SelectionState : BaseState
             Input.GetMouseButtonDown(0) &&
             currentHover != -Vector2Int.one &&
             TSM.GetMinionUnit(currentHover) != null &&
-            TSM.GetMinionUnit(currentHover)?.Team == TSM.GetCurrentPlayerTurn()
+            TSM.GetMinionUnit(currentHover)?.Team == TSM.GetCurrentPlayerTurn() &&
+            TSM.GetMinionUnit(currentHover)?.minion.IsFainted() == false
             )
             return true;
 

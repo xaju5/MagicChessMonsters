@@ -20,10 +20,10 @@ public class TurnStateMachine : StateMachine
 
     private MinionUnit selectedMinion;
     private Action selectedAction;
+    private Vector2Int targetPosition;
     private MinionUnit[,] minionUnits;
     private List<MinionUnit> minionUnitList = new List<MinionUnit>();
     
-    private Vector2Int TargetPosition;
     private Team currentPlayerTurn;
     private AnimationTimer animationTimer;
     private Team winner;
@@ -73,9 +73,9 @@ public class TurnStateMachine : StateMachine
 
     public void RemoveMinionFromBattleground(MinionUnit minion, bool force = false)
     {
-        if(force) Destroy(minion.gameObject);
         minionUnits[minion.MinionIndex.x,minion.MinionIndex.y] = null;
         minionUnitList.Remove(minion);
+        if(force) Destroy(minion.gameObject);
     }
 
     public List<MinionUnit> GetMinionUnitList(Team team = Team.None){
@@ -106,11 +106,11 @@ public class TurnStateMachine : StateMachine
         // isGamePaused = false;
     }
 
-    public List<Vector2Int> GetTeamMinionPositions(Team team){
+    public List<Vector2Int> GetTeamAliveMinionPositions(Team team, bool alive = true){
         List<Vector2Int> minionPositions = new List<Vector2Int>();
         for (int x = 0; x < Gameboard.TILE_COUNT_X; x++)
             for (int y = 0; y < Gameboard.TILE_COUNT_Y; y++)
-                if(minionUnits[x,y]?.Team == team)
+                if(minionUnits[x,y]?.Team == team && minionUnits[x,y]?.minion.IsFainted() == false)
                     minionPositions.Add(new Vector2Int(x,y));
         return minionPositions;
     }
@@ -133,7 +133,6 @@ public class TurnStateMachine : StateMachine
     //Minion Selection
     public void DeselectMinion(){
         selectedMinion = null;
-        DeselectAction();
     }
 
     public MinionUnit SelectMinion(Vector2Int tileIndex){
@@ -147,11 +146,15 @@ public class TurnStateMachine : StateMachine
 
     //Action Logic
     public void SetTargetPosition(Vector2Int target){
-        TargetPosition = target;
+        targetPosition = target;
     }
     public Vector2Int GetTargetPosition(){
-        return TargetPosition;
+        return targetPosition;
     }
+    public void DeselectTargetPosition(){
+        targetPosition = -Vector2Int.one;
+    }
+
 
     public void SelectAction(Action action){
         selectedAction = action;

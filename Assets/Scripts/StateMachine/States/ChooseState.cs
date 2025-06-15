@@ -32,6 +32,7 @@ public class ChooseState : BaseState
         selectedOption = ChooseOptions.Move;
         GetAvailableTiles();
         Gameboard.Instance.ChangeTilesLayers(availableMovement,TileLayer.Highlight);
+        TSM.DeselectTargetPosition();
     }
 
     private void GetAvailableTiles(){

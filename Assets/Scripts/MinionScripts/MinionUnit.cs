@@ -58,6 +58,11 @@ public class MinionUnit : MonoBehaviour
         MagicBar.UpdateBarValue(minion.magic);
     }
 
+    private void EnableFloatingBars(bool enable){
+        HealthBar.gameObject.SetActive(enable);
+        MagicBar.gameObject.SetActive(enable);
+    }
+
     private IEnumerator TriggerMinionDead(){
         while(pendingMessages.Count > 0){
             yield return null;
@@ -66,7 +71,8 @@ public class MinionUnit : MonoBehaviour
         while(!HasAnimationFinished("DeadState")){
             yield return null;
         }
-        Destroy(gameObject);
+        // Destroy(gameObject);
+        
     }
 
     private bool HasAnimationFinished(string animationName){
@@ -155,8 +161,10 @@ public class MinionUnit : MonoBehaviour
 
     public void UpdateMinionUnitGraphics(){
         UpdateFloatingBars();
-        if(minion.GetIsFainted())
+        if(minion.IsFainted()){
+            EnableFloatingBars(false);
             StartCoroutine(TriggerMinionDead());
+        }
 
     }
 

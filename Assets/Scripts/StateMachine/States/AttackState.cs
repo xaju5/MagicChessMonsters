@@ -58,25 +58,25 @@ public class AttackState : BaseState
         pendingAnimations.Add(TSM.SpawnAction(selectedAction, targetMinion.transform.position));
         TSM.StartActionAnimationTimer(pendingAnimations);
         DamageDetails damageDetails = selectedMinion.MakeMinonAttack(selectedAction, targetMinion);
-        CheckFaintedMinion(damageDetails.faintedOptions, targetMinion);
+        CheckFaintedMinion(damageDetails.faintedOptions);
     }
 
-    private void CheckFaintedMinion(FaintedOptions faintedOptions, MinionUnit minion){
-        if(faintedOptions == FaintedOptions.MinionFainted)
-            TSM.RemoveMinionFromBattleground(minion);
+    private void CheckFaintedMinion(FaintedOptions faintedOptions){
         if(faintedOptions == FaintedOptions.TrainerFainted)
             TSM.SetWinner(TSM.GetCurrentPlayerTurn());
-        if(CheckOnlyLastTrainer(TSM.GetEnemyTeam()))
-            TSM.SetWinner(TSM.GetCurrentPlayerTurn());
-        if(CheckOnlyLastTrainer(TSM.GetCurrentPlayerTurn()))
-            TSM.SetWinner(TSM.GetEnemyTeam());
+        // if(faintedOptions == FaintedOptions.MinionFainted)
+        //     TSM.RemoveMinionFromBattleground(targetMinion);
+        // if(CheckOnlyLastTrainer(TSM.GetEnemyTeam()))
+        //     TSM.SetWinner(TSM.GetCurrentPlayerTurn());
+        // if(CheckOnlyLastTrainer(TSM.GetCurrentPlayerTurn()))
+        //     TSM.SetWinner(TSM.GetEnemyTeam());
     }
 
-    private bool CheckOnlyLastTrainer(Team team){
-        List<MinionUnit> lastingMinions = TSM.GetMinionUnitList(team);
-        if(lastingMinions.Count == 1) return true;
-        return false;
-    }
+    // private bool CheckOnlyLastTrainer(Team team){
+    //     List<MinionUnit> lastingMinions = TSM.GetMinionUnitList(team);
+    //     if(lastingMinions.Count == 1) return true;
+    //     return false;
+    // }
 
     public override void Exit()
     {
