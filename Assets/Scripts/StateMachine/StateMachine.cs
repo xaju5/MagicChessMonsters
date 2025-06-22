@@ -6,9 +6,12 @@ using UnityEngine;
 public class StateMachine : MonoBehaviour
 {
     BaseState currentState;
+    protected bool isGamePaused;
 
     void Start()
     {
+        isGamePaused = false;
+        UIManager.Instance.resumeEvent.AddListener(TogglePause);
         currentState = GetInitialState();
         if (currentState != null)
             currentState.Enter();
@@ -16,7 +19,9 @@ public class StateMachine : MonoBehaviour
 
     void Update()
     {
-        if (currentState != null)
+        if (Input.GetKeyDown(KeyCode.Escape) && !currentState.name.Equals("GameOver"))
+            TogglePause();
+        if (currentState != null && !isGamePaused)
             currentState.Update();
     }
 
@@ -33,7 +38,19 @@ public class StateMachine : MonoBehaviour
 
     private void OUI()
     {
-        string content = currentState != null ? currentState.name : "(no current state)";    
-        GUILayout.Label($"<color='black'><size=40>{content}</size></color>");    
+        string content = currentState != null ? currentState.name : "(no current state)";
+        GUILayout.Label($"<color='black'><size=40>{content}</size></color>");
     }
+
+    //Pause
+    protected void TogglePause()
+    {
+        SetIsGamePaused(!isGamePaused);
+    }
+    private void SetIsGamePaused(bool isGamePaused)
+    {
+        this.isGamePaused = isGamePaused;
+        UIManager.Instance.EnablePauseMenu(isGamePaused);
+    }
+
 }

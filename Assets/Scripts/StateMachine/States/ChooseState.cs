@@ -20,7 +20,7 @@ public class ChooseState : BaseState
         Action2,
         Summon
     }
-    public ChooseState(TurnStateMachine stateMachine) : base("Move", stateMachine)
+    public ChooseState(TurnStateMachine stateMachine) : base("Choose", stateMachine)
     {
         TSM = stateMachine;
     }

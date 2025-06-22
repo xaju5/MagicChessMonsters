@@ -558,7 +558,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 401696575}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: Resume
+        m_MethodName: ResumeButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -664,7 +664,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exit
+  m_text: Quit Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1010,7 +1010,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exit
+  m_text: Quit Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1670,6 +1670,12 @@ MonoBehaviour:
   winnerText: {fileID: 400758322}
   pauseMenuUI: {fileID: 1383985059}
   currentTurnText: {fileID: 373558192}
+  resumeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  resetEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &401696576
 Transform:
   m_ObjectHideFlags: 0
@@ -2070,8 +2076,8 @@ RectTransform:
   m_Children:
   - {fileID: 7126365}
   - {fileID: 400758320}
-  - {fileID: 1461869231}
   - {fileID: 1354805100}
+  - {fileID: 1461869231}
   m_Father: {fileID: 1870368910}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2553,7 +2559,7 @@ GameObject:
   - component: {fileID: 955029392}
   - component: {fileID: 955029391}
   m_Layer: 5
-  m_Name: ExitButton
+  m_Name: QuitGameButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2626,14 +2632,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 401696575}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_MethodName: QuitGameButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: QuitGame()
+          m_StringArgument: QuitGameButton()
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &955029392
@@ -2940,7 +2946,7 @@ GameObject:
   - component: {fileID: 1148603235}
   - component: {fileID: 1148603234}
   m_Layer: 5
-  m_Name: WinnerTitle
+  m_Name: PauseTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3147,16 +3153,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
-        m_MethodName: ResetGame
+      - m_Target: {fileID: 401696575}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ResetButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: resume()
+          m_StringArgument: ResetButton()
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1157959818
@@ -3740,7 +3746,7 @@ RectTransform:
   m_Children:
   - {fileID: 1227420804}
   m_Father: {fileID: 798989978}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3791,16 +3797,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
-        m_MethodName: ResetGame
+      - m_Target: {fileID: 401696575}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ResetButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: resume()
+          m_StringArgument: ResetGame()
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1354805102
@@ -4069,7 +4075,7 @@ GameObject:
   - component: {fileID: 1461869233}
   - component: {fileID: 1461869232}
   m_Layer: 5
-  m_Name: ExitButton
+  m_Name: QuitGameButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4089,7 +4095,7 @@ RectTransform:
   m_Children:
   - {fileID: 223970812}
   m_Father: {fileID: 798989978}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4142,7 +4148,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 401696575}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_MethodName: QuitGameButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

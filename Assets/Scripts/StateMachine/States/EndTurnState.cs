@@ -28,7 +28,6 @@ public class EndTurnState : BaseState
     public override void Update()
     {
         base.Update();
-        // if(isGameover) return;
         stateMachine.ChangeState(TSM.selectionState);
     }
 

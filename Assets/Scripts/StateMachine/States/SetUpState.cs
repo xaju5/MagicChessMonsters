@@ -14,21 +14,30 @@ public class SetUpState : BaseState
     public override void Enter()
     {
         base.Enter();
-        // UIManager.Instance.Resume();
         TSM.DeselectMinion();
         TSM.DeselectAction();
         TSM.DeselectTargetPosition();
         TSM.SetAnimationTimer(AnimationTimer.None);
         DestroyAllMinions();
-        
-        // UIManager.Instance.RemoveWinnerScreen();
+        TSM.ClearLogicVariables();
+        SpawnPlayers();
+        UIManager.Instance.UpdateTurnText(TSM.GetCurrentPlayerTurn());
     }
 
-    private void DestroyAllMinions(){
+    private void DestroyAllMinions()
+    {
         for (int x = 0; x < Gameboard.TILE_COUNT_X; x++)
             for (int y = 0; y < Gameboard.TILE_COUNT_Y; y++)
-                if(TSM.GetMinionUnit(new Vector2Int(x,y)) != null)
-                    TSM.RemoveMinionFromBattleground(TSM.GetMinionUnit(new Vector2Int(x,y)), true);
+                if (TSM.GetMinionUnit(new Vector2Int(x, y)) != null)
+                    TSM.RemoveMinionFromBattleground(TSM.GetMinionUnit(new Vector2Int(x, y)), true);
+    }
+    
+    private void SpawnPlayers()
+    {
+        TSM.SpawnSingleMinion(TSM.GetTeamMinionSO(0, Team.Player1), Team.Player1, new Vector2Int(4, 0));
+        TSM.SpawnSingleMinion(TSM.GetTeamMinionSO(1, Team.Player1), Team.Player1, new Vector2Int(4, 1));
+        TSM.SpawnSingleMinion(TSM.GetTeamMinionSO(0, Team.Player2), Team.Player2, new Vector2Int(4, 7));
+        TSM.SpawnSingleMinion(TSM.GetTeamMinionSO(1, Team.Player2), Team.Player2, new Vector2Int(4, 6));
     }
 
     public override void Update()
@@ -40,16 +49,5 @@ public class SetUpState : BaseState
     public override void Exit()
     {
         base.Exit();
-        TSM.ClearLogicVariables();
-        SpawnPlayers();
-        // UIManager.Instance.UpdateTurnText(currentPlayerTurn);
-    }
-
-    private void SpawnPlayers()
-    {
-        TSM.SpawnSingleMinion(TSM.GetTeamMinionSO(0,Team.Player1),Team.Player1,new Vector2Int(4,0));
-        TSM.SpawnSingleMinion(TSM.GetTeamMinionSO(1,Team.Player1),Team.Player1,new Vector2Int(4,1));
-        TSM.SpawnSingleMinion(TSM.GetTeamMinionSO(0,Team.Player2),Team.Player2,new Vector2Int(4,7));
-        TSM.SpawnSingleMinion(TSM.GetTeamMinionSO(1,Team.Player2),Team.Player2,new Vector2Int(4,6));
     }
 }

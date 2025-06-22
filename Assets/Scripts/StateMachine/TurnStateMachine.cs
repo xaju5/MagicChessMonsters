@@ -36,6 +36,7 @@ public class TurnStateMachine : StateMachine
         attackState = new AttackState(this);
         endTurnState = new EndTurnState(this);
         gameoverState = new GameoverState(this);
+        UIManager.Instance.resetEvent.AddListener(ResetGame);
     }
 
     protected override BaseState GetInitialState()
@@ -108,8 +109,6 @@ public class TurnStateMachine : StateMachine
         currentPlayerTurn = Team.Player1;
         minionUnits = new MinionUnit[Gameboard.TILE_COUNT_X, Gameboard.TILE_COUNT_Y];
         winner = Team.None;
-        // isGameover = false;
-        // isGamePaused = false;
     }
 
     public List<Vector2Int> GetTeamAliveMinionPositions(Team team, bool alive = true)
@@ -240,6 +239,12 @@ public class TurnStateMachine : StateMachine
     public Team GetWinner()
     {
         return winner;
+    }
+
+    private void ResetGame()
+    {
+        ChangeState(setUpState);
+        if(isGamePaused) TogglePause();
     }
 
 }

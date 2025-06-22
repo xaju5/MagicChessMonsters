@@ -37,8 +37,12 @@ public class SelectionState : BaseState
     {
         base.Update();
         currentHover = Gameboard.Instance.GetCurrentHover();
-        if(CanMinionBeSelected())
+        if (CanMinionBeSelected())
+        {
+            MinionUnit selectedMinion = TSM.SelectMinion(currentHover);
+            UIManager.Instance.SetupSelectedMinionUI(selectedMinion.minion);
             stateMachine.ChangeState(TSM.chooseState);
+        }
     }
 
     private bool CanMinionBeSelected()
@@ -59,10 +63,8 @@ public class SelectionState : BaseState
     public override void Exit()
     {
         base.Exit();
-        MinionUnit selectedMinion = TSM.SelectMinion(currentHover);
         Gameboard.Instance.RestoreTilesLayers(availableSelection);
-        availableSelection.Clear();
-        UIManager.Instance.SetupSelectedMinionUI(selectedMinion.minion);
+        availableSelection.Clear();   
     }
 
 }

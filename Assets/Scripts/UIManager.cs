@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class UIManager : MonoBehaviour
 {
@@ -32,32 +33,15 @@ public class UIManager : MonoBehaviour
     [Header("Others")]
     [SerializeField] private TextMeshProUGUI currentTurnText;
 
-
     public static UIManager Instance;
-    public static bool gameIsPaused = false;
-    public static bool isGameover = false;
+    public UnityEvent resumeEvent, resetEvent;
 
     private void Awake()
     {
         SetUpSingleton();
-        UpdateTurnText(Team.Player1);
         RemoveSelectedMinionUI();
+        UpdateTurnText(Team.Player1);
     }
-
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape) && !isGameover)
-        {
-            if (gameIsPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
-        }
-    }
-
     private void SetUpSingleton()
     {
         if(Instance == null){
@@ -69,40 +53,38 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void UpdateTurnText(Team currentTurn){
+        currentTurnText.text = $"{currentTurn}'s turn";
+    }
+
+    //Selected Minion UI
+    public void SetupSelectedMinionUI(Minion selectedMinion)
+    {
+        selectedMinionIcon.enabled = true;
+        selectedMinionIcon.sprite = selectedMinion.MinionInfo.Sprite;
+        SetUpSliderData(selectedMinionHealthBar, selectedMinion.MaxHealth(), selectedMinion.health);
+        selectedMinionHealthBarText.text = $"{selectedMinion.health}/{selectedMinion.MaxHealth()}";
+        SetUpSliderData(selectedMinionMagicBar, selectedMinion.MaxMagic(), selectedMinion.magic);
+        selectedMinionMagicBarText.text = $"{selectedMinion.magic}/{selectedMinion.MaxMagic()}";
+
+        if (selectedMinion.action1 != null)
+            SetUpActionData(selectedMinion.action1, Action1Text, Action1MagicCostText, Action1TypeText);
+        if (selectedMinion.action2 != null)
+            SetUpActionData(selectedMinion.action2, Action2Text, Action2MagicCostText, Action2TypeText);
+    }
     private void SetUpSliderData(Slider slider, float maxAmount, float amount){
         slider.gameObject.SetActive(true);
         FloatingBar floatingBar = slider.GetComponent<FloatingBar>();
         floatingBar.SetBarMaxValue(maxAmount);
         floatingBar.ForceBarValue(amount);
     }
-    private void UpdateSliderData(Slider slider, float maxAmount, float amount){
-        FloatingBar floatingBar = slider.GetComponent<FloatingBar>();
-        floatingBar.UpdateBarValue(amount);
-    }
-
-    private void SetUpActionData(Action selectedMinionAction, TextMeshProUGUI actionName, TextMeshProUGUI actionCost, TextMeshProUGUI actionType){
+    
+    private void SetUpActionData(Action selectedMinionAction, TextMeshProUGUI actionName, TextMeshProUGUI actionCost, TextMeshProUGUI actionType)
+    {
         actionName.transform.parent.gameObject.SetActive(true);
         actionName.text = selectedMinionAction.ActionInfo.Name;
         actionCost.text = selectedMinionAction.MagicCost.ToString();
         actionType.text = selectedMinionAction.ActionInfo.Type.ToString();
-    }
-
-    public void UpdateTurnText(Team currentTurn){
-        currentTurnText.text = $"{currentTurn}'s turn";
-    }
-
-    public void SetupSelectedMinionUI(Minion selectedMinion){
-        selectedMinionIcon.enabled = true;
-        selectedMinionIcon.sprite = selectedMinion.MinionInfo.Sprite;
-        SetUpSliderData(selectedMinionHealthBar, selectedMinion.MaxHealth(),selectedMinion.health);
-        selectedMinionHealthBarText.text = $"{selectedMinion.health}/{selectedMinion.MaxHealth()}";
-        SetUpSliderData(selectedMinionMagicBar, selectedMinion.MaxMagic(),selectedMinion.magic);
-        selectedMinionMagicBarText.text = $"{selectedMinion.magic}/{selectedMinion.MaxMagic()}";
-
-        if (selectedMinion.action1 != null)
-            SetUpActionData(selectedMinion.action1, Action1Text, Action1MagicCostText, Action1TypeText);
-        if (selectedMinion.action2 != null)
-            SetUpActionData(selectedMinion.action2, Action2Text, Action2MagicCostText, Action2TypeText);        
     }
 
     public void RemoveSelectedMinionUI(){
@@ -121,38 +103,39 @@ public class UIManager : MonoBehaviour
         selectedMinionHealthBarText.text = $"{health}/{maxHealth}";
         selectedMinionMagicBarText.text = $"{magic}/{maxMagic}";
     }
-
-    public void SetupWinnerScreen(Team winner){
-        isGameover = true;
-        RemoveSelectedMinionUI();
-        currentTurnText.enabled = false;
-        winnerText.text = winner.ToString(); 
-        winnerText.transform.parent.gameObject.SetActive(true);
+    private void UpdateSliderData(Slider slider, float maxAmount, float amount){
+        FloatingBar floatingBar = slider.GetComponent<FloatingBar>();
+        floatingBar.UpdateBarValue(amount);
     }
-    public void RemoveWinnerScreen(){
-        isGameover = false;
-        currentTurnText.enabled = true;
-        winnerText.text = "Unknow"; 
-        winnerText.transform.parent.gameObject.SetActive(false);
+
+    //Game Over Methods
+    public void EnableWinnerMenu(bool enabled, Team winner = Team.None)
+    {
+        currentTurnText.enabled = !enabled;
+        winnerText.text = winner.ToString();
+        winnerText.transform.parent.gameObject.SetActive(enabled);
     }
 
     //PauseMenu Methods
-    public void Resume()
+    public void EnablePauseMenu(bool enabled)
     {
-        pauseMenuUI.SetActive(false);
-        BattleManager.Instance.PauseGame(false);
-        gameIsPaused = false;
+        pauseMenuUI.SetActive(enabled);
     }
 
-    private void Pause()
+    //Buttons
+    public void ResumeButton()
     {
-        pauseMenuUI.SetActive(true);
-        BattleManager.Instance.PauseGame(true);
-        gameIsPaused = true;
+        Debug.Log("Resume button pressed.");
+        resumeEvent.Invoke();
     }
 
+    public void ResetButton()
+    {
+        Debug.Log("Reset button pressed.");
+        resetEvent.Invoke();
+    }
 
-    public void QuitGame()
+    public void QuitGameButton()
     {
         Debug.Log("Quitting game...");
         Application.Quit();

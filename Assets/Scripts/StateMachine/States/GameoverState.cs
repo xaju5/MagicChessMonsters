@@ -5,28 +5,30 @@ using UnityEngine;
 public class GameoverState : BaseState
 {
     private TurnStateMachine TSM;
-    private Vector2Int currentHover;
-    private List<Vector2Int> availableMoves;
-    private MinionUnit selectedMinion;
-    public GameoverState(TurnStateMachine stateMachine) : base("Attack", stateMachine)
+
+    public GameoverState(TurnStateMachine stateMachine) : base("GameOver", stateMachine)
     {
         TSM = stateMachine;
+        
     }
 
     public override void Enter()
     {
         base.Enter();
-
+        Team winner = TSM.GetWinner();
+        UIManager.Instance.RemoveSelectedMinionUI();
+        UIManager.Instance.EnableWinnerMenu(true, winner);
     }
 
     public override void Update()
     {
         base.Update();
-        stateMachine.ChangeState(TSM.setUpState);
     }
 
     public override void Exit()
     {
         base.Exit();
+        UIManager.Instance.EnableWinnerMenu(false);
     }
+
 }
