@@ -23,35 +23,25 @@ public class AttackState : BaseState
         targetPosition = TSM.GetTargetPosition();
         targetMinion = TSM.GetMinionUnit(targetPosition);
         TSM.SetAnimationTimer(AnimationTimer.None);
+        selectedMinion.SetCanTalk(false);      
+        targetMinion.SetCanTalk(false);      
+        MakeSelectedAttack(); 
     }
 
     public override void Update()
     {
         base.Update();
-        switch (TSM.GetAnimationTimer())
-        {   
-            case AnimationTimer.None:
-                selectedMinion.SetCanTalk(false);      
-                targetMinion.SetCanTalk(false);      
-                MakeSelectedAttack();  
+        if (TSM.GetAnimationTimer() == AnimationTimer.Finished) {
+            selectedMinion.SetCanTalk(true);
+            targetMinion.SetCanTalk(true);
+            if (TSM.GetWinner() != Team.None)
+            {
+                stateMachine.ChangeState(TSM.gameoverState);
                 return;
-
-            case AnimationTimer.Waiting:
-                return;
-
-            case AnimationTimer.Finished:
-                selectedMinion.SetCanTalk(true);      
-                targetMinion.SetCanTalk(true);  
-                if(TSM.GetWinner() != Team.None){
-                    stateMachine.ChangeState(TSM.gameoverState);
-                    return;
-                }
-                stateMachine.ChangeState(TSM.endTurnState);
-                return;
-            
-            default:
-                throw new System.Exception("Error: Wrong Animation Timer.");
-        }         
+            }
+            stateMachine.ChangeState(TSM.endTurnState);
+            return;
+        }       
     }
 
     private void MakeSelectedAttack(){
