@@ -79,10 +79,6 @@ public class UIManager : MonoBehaviour
         floatingBar.SetBarMaxValue(maxAmount);
         floatingBar.ForceBarValue(amount);
     }
-    private void UpdateSliderData(Slider slider, float maxAmount, float amount){
-        FloatingBar floatingBar = slider.GetComponent<FloatingBar>();
-        floatingBar.UpdateBarValue(amount);
-    }
 
     private void SetUpActionData(Action selectedMinionAction, TextMeshProUGUI actionName, TextMeshProUGUI actionCost, TextMeshProUGUI actionType){
         actionName.transform.parent.gameObject.SetActive(true);
