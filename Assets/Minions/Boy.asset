@@ -22,6 +22,7 @@ MonoBehaviour:
   magicStrenght: 10
   magicDefense: 10
   movementRangeBase: 2
+  summonRangeBase: 1
   movementType: 1
   learnableActions:
   - {fileID: 11400000, guid: 6f0fea401dfda8c45a5870aaa94db1ea, type: 2}

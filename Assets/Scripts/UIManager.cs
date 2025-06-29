@@ -1,6 +1,8 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
+using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
 {
@@ -23,6 +25,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI Action2MagicCostText;
     [SerializeField] private TextMeshProUGUI Action2TypeText;
     
+    [Header("Summon Minion")]
+    [SerializeField] private GameObject[] summonButton;
     [Header("Winner Screen")]
     [SerializeField] private TextMeshProUGUI winnerText;
     [Header("Pause Screen")]
@@ -121,19 +125,29 @@ public class UIManager : MonoBehaviour
         selectedMinionHealthBarText.text = $"{health}/{maxHealth}";
         selectedMinionMagicBarText.text = $"{magic}/{maxMagic}";
     }
-
-    public void SetupWinnerScreen(Team winner){
-        isGameover = true;
-        RemoveSelectedMinionUI();
-        currentTurnText.enabled = false;
-        winnerText.text = winner.ToString(); 
-        winnerText.transform.parent.gameObject.SetActive(true);
+    private void UpdateSliderData(Slider slider, float maxAmount, float amount){
+        FloatingBar floatingBar = slider.GetComponent<FloatingBar>();
+        floatingBar.UpdateBarValue(amount);
     }
-    public void RemoveWinnerScreen(){
-        isGameover = false;
-        currentTurnText.enabled = true;
-        winnerText.text = "Unknow"; 
-        winnerText.transform.parent.gameObject.SetActive(false);
+
+    //Summon Minion UI
+    public void SetupSummonMinionUI(List<MinionUnit> summonableTeamMinions)
+    {
+        summonButton[0].transform.parent.gameObject.SetActive(true);
+        for (int i = 0; i < summonableTeamMinions.Count; i++)
+        {
+            summonButton[i].SetActive(true);
+            summonButton[i].GetComponentInChildren<TextMeshProUGUI>().text = summonableTeamMinions[i].minion.MinionInfo.Type.ToString();
+            summonButton[i].GetComponent<Image>().sprite = summonableTeamMinions[i].minion.MinionInfo.Sprite;
+        }
+    }
+
+    //Game Over Methods
+    public void EnableWinnerMenu(bool enabled, Team winner = Team.None)
+    {
+        currentTurnText.enabled = !enabled;
+        winnerText.text = winner.ToString();
+        winnerText.transform.parent.gameObject.SetActive(enabled);
     }
 
     //PauseMenu Methods
