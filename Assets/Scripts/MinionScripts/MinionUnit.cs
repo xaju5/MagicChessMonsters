@@ -1,6 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MinionUnit : MonoBehaviour
 {
@@ -14,15 +18,21 @@ public class MinionUnit : MonoBehaviour
     public bool IsTrainer { get; private set; }
     public Vector2Int MinionIndex { get; private set; }
     private Vector3 targetPosition;
+    private List<string> pendingMessages;
+
+    private bool canTalk;
 
     Animator animator;
     
     void Update() {
         if(transform.position != targetPosition)
             transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * movementSpeed);
+        if(pendingMessages.Count > 0 && canTalk )
+            StartCoroutine(WriteMessagesInDialogueBox(pendingMessages));
+        
     }
 
-    public void SetUpData(MinionSO minionInfo, Team team){
+    public void SetUpData(MinionSO minionInfo, Team team, Vector2Int initialIndex){
         Team = team;
         IsTrainer = (minionInfo.MinionId == MinionList.Boy) || (minionInfo.MinionId == MinionList.Girl) ? true : false;
         
@@ -30,8 +40,11 @@ public class MinionUnit : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = minionInfo.Sprite;
         HealthBar.SetBarMaxValue(minion.MaxHealth());
         MagicBar.SetBarMaxValue(minion.MaxMagic());
-
+        pendingMessages = new List<string>();
+        canTalk = true;
+        
         SetUpAnimationController(minionInfo);
+        MoveMinionUnit(initialIndex, true);
     }
 
     private void SetUpAnimationController(MinionSO minionInfo){
@@ -45,23 +58,35 @@ public class MinionUnit : MonoBehaviour
         MagicBar.UpdateBarValue(minion.magic);
     }
 
+    private void EnableFloatingBars(bool enable){
+        HealthBar.gameObject.SetActive(enable);
+        MagicBar.gameObject.SetActive(enable);
+    }
+
     private IEnumerator TriggerMinionDead(){
+        while(pendingMessages.Count > 0){
+            yield return null;
+        }
         animator.SetBool("hasFainted",true);
         while(!HasAnimationFinished("DeadState")){
             yield return null;
         }
-        Destroy(gameObject);
+        // Destroy(gameObject);
+        
     }
 
     private bool HasAnimationFinished(string animationName){
         return animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && animator.GetCurrentAnimatorStateInfo(0).IsName(animationName);
     }
 
-    private IEnumerator WriteMessageInDialogueBox(string message){
-        dialogueText.transform.parent.gameObject.SetActive(true);
-        dialogueText.text = message;
-        yield return new WaitForSeconds(dialogueboxDuration);
-        dialogueText.transform.parent.gameObject.SetActive(false);
+    private IEnumerator WriteMessagesInDialogueBox(List<string> pendingMessages){
+        while(pendingMessages.Count > 0){
+            dialogueText.transform.parent.gameObject.SetActive(true);
+            dialogueText.text = pendingMessages[0];
+            pendingMessages.RemoveAt(0);
+            yield return new WaitForSeconds(dialogueboxDuration);
+            dialogueText.transform.parent.gameObject.SetActive(false);
+        }
     }
 
     public void MoveMinionUnit(Vector2Int newMinionIndex, bool force = false){
@@ -71,36 +96,35 @@ public class MinionUnit : MonoBehaviour
             transform.position = targetPosition;
     }
 
+    public DamageDetails MakeMinonAttack(Action selectedAction, MinionUnit targetMinion)
+    {
+        ConsumeMagic(selectedAction.MagicCost);
+        DamageDetails damageDetails = targetMinion.TakeDamage(selectedAction, minion.MinionInfo);
+        string text = GetAttackerMessage(damageDetails);
+        if (text != "") pendingMessages.Add(text);
+        return damageDetails;
+    }
+
     public DamageDetails TakeDamage(Action attackerAction, MinionSO attacker)
     {
         DamageDetails damageDetails = minion.TakeDamage(attackerAction, attacker);
-        UpdateFloatingBars();
         if (damageDetails.isFainted)
         {
-            StartCoroutine(TriggerMinionDead());
             damageDetails.faintedOptions = IsTrainer ? FaintedOptions.TrainerFainted : FaintedOptions.MinionFainted;
         }
         else
         {
-            StartCoroutine(WriteMessageInDialogueBox("-"+damageDetails.total_damage.ToString()));
+            pendingMessages.Add("-"+damageDetails.total_damage.ToString());
             damageDetails.faintedOptions = FaintedOptions.None;
         }
 
         return damageDetails;
     }
 
-    public DamageDetails MakeMinonAttack(Action selectedAction, MinionUnit targetMinion){
-        ConsumeMagic(selectedAction.MagicCost);
-        DamageDetails damageDetails = targetMinion.TakeDamage(selectedAction, minion.MinionInfo);
-        string text = GetAttackerMessage(damageDetails);
-        if(text!= "") StartCoroutine(WriteMessageInDialogueBox(text));
-        return damageDetails;
-
-    }
-    public bool canMakeAttack(Action selectedAction)
+    public bool HasEnoughMagic(Action selectedAction)
     {
         bool canMakeAttack = selectedAction.MagicCost <= minion.magic;
-        if(!canMakeAttack) StartCoroutine(WriteMessageInDialogueBox("I need Magic!"));
+        if(!canMakeAttack) pendingMessages.Add("I need Magic!");
         return canMakeAttack;
     }
     private string GetAttackerMessage(DamageDetails damageDetails)
@@ -124,18 +148,32 @@ public class MinionUnit : MonoBehaviour
 
     public bool Heal(float amount){
         bool isFullyHealed = minion.Heal(amount);
-        UpdateFloatingBars();
         return isFullyHealed;
     }
     public bool ConsumeMagic(float amount){
         bool isMagicDrained = minion.ConsumeMagic(amount);
-        UpdateFloatingBars();
         return isMagicDrained;
     }
     public bool RestoreMagic(float amount){
         bool isMagicFull = minion.RestoreMagic(amount);
-        UpdateFloatingBars();
         return isMagicFull;
+    }
+
+    public void UpdateMinionUnitGraphics(){
+        UpdateFloatingBars();
+        if(minion.IsFainted()){
+            EnableFloatingBars(false);
+            StartCoroutine(TriggerMinionDead());
+        }
+
+    }
+
+    public void QueueMessage(string text){
+        pendingMessages.Add(text);
+    }
+
+    public void SetCanTalk(bool enable){
+        canTalk = enable;
     }
 
 }

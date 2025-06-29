@@ -60,3 +60,17 @@ public enum SelectableTiles{
     Area,
     Star
 }
+
+public enum TileLayer{
+    None,
+    Tile,
+    Hover,
+    Highlight,
+    Danger
+}
+
+public enum AnimationTimer{
+    None,
+    Waiting,
+    Finished
+}

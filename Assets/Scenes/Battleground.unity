@@ -558,7 +558,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 401696575}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: Resume
+        m_MethodName: ResumeButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -664,7 +664,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exit
+  m_text: Quit Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1010,7 +1010,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exit
+  m_text: Quit Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1487,9 +1487,9 @@ RectTransform:
   m_Father: {fileID: 1870368910}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -384.13, y: 447}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 126.13, y: -25}
   m_SizeDelta: {x: 252.2504, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &400758319
@@ -1670,6 +1670,12 @@ MonoBehaviour:
   winnerText: {fileID: 400758322}
   pauseMenuUI: {fileID: 1383985059}
   currentTurnText: {fileID: 373558192}
+  resumeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  resetEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &401696576
 Transform:
   m_ObjectHideFlags: 0
@@ -1812,7 +1818,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 641521431}
-  - component: {fileID: 641521429}
+  - component: {fileID: 641521432}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -1820,31 +1826,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &641521429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 641521428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7523994d22bb52b459280fbf3e2e6291, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minionPrefab: {fileID: 9187105822317776501, guid: d2de0fba45836ca4995b1131ec940d5c, type: 3}
-  actionPrefab: {fileID: 9187105822317776501, guid: 079290103d6f49b448900ba8b8020f90, type: 3}
-  team1: 010000000500000006000000
-  team2: 030000000200000004000000
-  AllMinionSO:
-  - {fileID: 0}
-  - {fileID: 11400000, guid: dfaef6159b6c78441b4064ab03d090e5, type: 2}
-  - {fileID: 11400000, guid: 5f3154f3eb218f0419990c4bb4d2078b, type: 2}
-  - {fileID: 11400000, guid: bdd78d00a7005a949b6f0f21e8e3fca3, type: 2}
-  - {fileID: 11400000, guid: 792172cece150aa4183393394332c929, type: 2}
-  - {fileID: 11400000, guid: 27301dfb4fc70eb49b8a457dbc6f923f, type: 2}
-  - {fileID: 11400000, guid: 8685f38d527e4734c82da521ccf967a4, type: 2}
-  restoreMagicAmount: 15
 --- !u!4 &641521431
 Transform:
   m_ObjectHideFlags: 0
@@ -1860,6 +1841,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &641521432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641521428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cf57c6443cd23c44bafccf140bed049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minionPrefab: {fileID: 9187105822317776501, guid: d2de0fba45836ca4995b1131ec940d5c, type: 3}
+  actionPrefab: {fileID: 9187105822317776501, guid: 079290103d6f49b448900ba8b8020f90, type: 3}
+  team1_enum: 010000000500000006000000
+  team2_enum: 030000000200000004000000
+  AllMinionSO:
+  - {fileID: 0}
+  - {fileID: 11400000, guid: dfaef6159b6c78441b4064ab03d090e5, type: 2}
+  - {fileID: 11400000, guid: 5f3154f3eb218f0419990c4bb4d2078b, type: 2}
+  - {fileID: 11400000, guid: bdd78d00a7005a949b6f0f21e8e3fca3, type: 2}
+  - {fileID: 11400000, guid: 792172cece150aa4183393394332c929, type: 2}
+  - {fileID: 11400000, guid: 27301dfb4fc70eb49b8a457dbc6f923f, type: 2}
+  - {fileID: 11400000, guid: 8685f38d527e4734c82da521ccf967a4, type: 2}
 --- !u!1 &765728482
 GameObject:
   m_ObjectHideFlags: 0
@@ -2071,8 +2076,8 @@ RectTransform:
   m_Children:
   - {fileID: 7126365}
   - {fileID: 400758320}
-  - {fileID: 1461869231}
   - {fileID: 1354805100}
+  - {fileID: 1461869231}
   m_Father: {fileID: 1870368910}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2554,7 +2559,7 @@ GameObject:
   - component: {fileID: 955029392}
   - component: {fileID: 955029391}
   m_Layer: 5
-  m_Name: ExitButton
+  m_Name: QuitGameButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2627,14 +2632,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 401696575}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_MethodName: QuitGameButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: QuitGame()
+          m_StringArgument: QuitGameButton()
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &955029392
@@ -2924,9 +2929,9 @@ RectTransform:
   m_Father: {fileID: 1870368910}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -72, y: -374}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -113, y: 64}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1148603232
@@ -2941,7 +2946,7 @@ GameObject:
   - component: {fileID: 1148603235}
   - component: {fileID: 1148603234}
   m_Layer: 5
-  m_Name: WinnerTitle
+  m_Name: PauseTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3148,16 +3153,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 641521429}
-        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
-        m_MethodName: ResetGame
+      - m_Target: {fileID: 401696575}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ResetButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: resume()
+          m_StringArgument: ResetButton()
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1157959818
@@ -3741,7 +3746,7 @@ RectTransform:
   m_Children:
   - {fileID: 1227420804}
   m_Father: {fileID: 798989978}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3792,16 +3797,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 641521429}
-        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
-        m_MethodName: ResetGame
+      - m_Target: {fileID: 401696575}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ResetButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: resume()
+          m_StringArgument: ResetGame()
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1354805102
@@ -4070,7 +4075,7 @@ GameObject:
   - component: {fileID: 1461869233}
   - component: {fileID: 1461869232}
   m_Layer: 5
-  m_Name: ExitButton
+  m_Name: QuitGameButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4090,7 +4095,7 @@ RectTransform:
   m_Children:
   - {fileID: 223970812}
   m_Father: {fileID: 798989978}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4143,7 +4148,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 401696575}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_MethodName: QuitGameButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4229,9 +4234,9 @@ RectTransform:
   m_Father: {fileID: 1870368910}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 153, y: -374}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 113, y: 64}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1507545555
@@ -9512,9 +9517,9 @@ RectTransform:
   m_Father: {fileID: 1870368910}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -265, y: -334}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -290, y: 106}
   m_SizeDelta: {x: 70, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2130041226
