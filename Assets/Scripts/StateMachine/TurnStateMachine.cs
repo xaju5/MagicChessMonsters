@@ -60,19 +60,46 @@ public class TurnStateMachine : StateMachine
         minionUnits[newPosition.x, newPosition.y] = minion;
     }
 
-    public MinionUnit SpawnSingleMinion(MinionSO minionInfo, Team team, Vector2Int initialIndex)
+    public MinionUnit SpawnSingleMinion(MinionSO minionInfo, Team team)
     {
         GameObject minionGO = Instantiate(minionPrefab, transform);
         minionGO.name = minionInfo.MinionId.ToString();
         minionGO.GetComponent<SpriteRenderer>().sortingOrder = Gameboard.Instance.GetTilemapRenderer().sortingOrder + 2;
+        minionGO.SetActive(false);
 
         MinionUnit minionUnit = minionGO.GetComponent<MinionUnit>();
-        minionUnit.SetUpData(minionInfo, team, initialIndex);
-
-        minionUnits[initialIndex.x, initialIndex.y] = minionUnit;
+        minionUnit.SetUpData(minionInfo, team, -Vector2Int.one);
         minionUnitList.Add(minionUnit);
 
         return minionUnit;
+    }
+
+    public void SpawnAllMinions()
+    {
+        for (int i = 0; i < team1_enum.Length; i++)
+        {
+            SpawnSingleMinion(GetTeamMinionSO(i, Team.Player1), Team.Player1);
+        }
+        for (int i = 0; i < team2_enum.Length; i++)
+        {
+            SpawnSingleMinion(GetTeamMinionSO(i, Team.Player2), Team.Player2);
+        }
+    }
+
+    private MinionSO GetTeamMinionSO(int index, Team playerTeam)
+    {
+        if (playerTeam.Equals(Team.Player1))
+            return AllMinionSO[(int)team1_enum[index]];
+        else
+            return AllMinionSO[(int)team2_enum[index]];
+    }
+
+    public void SummonMinion(MinionUnit minionUnit, Vector2Int initialIndex)
+    {
+        minionUnit.gameObject.SetActive(true);
+        minionUnit.minion.SummonMinion();
+        minionUnit.MoveMinionUnit(initialIndex, true);
+        minionUnits[initialIndex.x, initialIndex.y] = minionUnit;
     }
 
     public void RemoveMinionFromBattleground(MinionUnit minion, bool force = false)
@@ -89,6 +116,11 @@ public class TurnStateMachine : StateMachine
         return minionUnitList.Where(minionUnit => minionUnit.Team == team).ToList();
     }
 
+    public List<MinionUnit> GetTrainers()
+    {
+        return minionUnitList.Where(minionUnit => minionUnit.IsTrainer).ToList();
+    }
+
     public void UpdateAllMinionUnitGraphics()
     {
         foreach (MinionUnit minionUnit in minionUnitList)
@@ -96,14 +128,6 @@ public class TurnStateMachine : StateMachine
     }
 
     //General Logic Funtions
-    public MinionSO GetTeamMinionSO(int index, Team playerTeam)
-    {
-        if (playerTeam.Equals(Team.Player1))
-            return AllMinionSO[(int)team1_enum[index]];
-        else
-            return AllMinionSO[(int)team2_enum[index]];
-    }
-
     public void ClearLogicVariables()
     {
         currentPlayerTurn = Team.Player1;

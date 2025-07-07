@@ -7,6 +7,7 @@ public class ChooseState : BaseState
 {
     private readonly KeyCode ACTION1_KEY = KeyCode.Q;
     private readonly KeyCode ACTION2_KEY = KeyCode.W;
+    private readonly KeyCode SUMMON_KEY = KeyCode.S;
     private TurnStateMachine TSM;
     private Vector2Int currentHover;
     private List<Vector2Int> availableMovement, availableAction1, availableAction2, availableSummon;
@@ -35,20 +36,23 @@ public class ChooseState : BaseState
         TSM.DeselectTargetPosition();
     }
 
-    private void GetAvailableTiles(){
-        availableMovement = selectedMinion.minion.GetAvailableMoves(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex, Gameboard.TILE_COUNT_X, Gameboard.TILE_COUNT_Y);
+    private void GetAvailableTiles()
+    {
+        availableMovement = selectedMinion.minion.GetAvailableMoves(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex);
         Action action1 = selectedMinion.minion.action1;
         Action action2 = selectedMinion.minion.action2;
-        availableAction1 = action1 != null ? action1.GetAvailableAttackTiles(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex, Gameboard.TILE_COUNT_X, Gameboard.TILE_COUNT_Y, TSM.GetEnemyTeam()) : null;
-        availableAction2 = action2 != null ? action2.GetAvailableAttackTiles(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex, Gameboard.TILE_COUNT_X, Gameboard.TILE_COUNT_Y, TSM.GetEnemyTeam()) : null;
+        availableAction1 = action1 != null ? action1.GetAvailableAttackTiles(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex, TSM.GetEnemyTeam()) : null;
+        availableAction2 = action2 != null ? action2.GetAvailableAttackTiles(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex, TSM.GetEnemyTeam()) : null;
+        availableSummon = selectedMinion.IsTrainer ? selectedMinion.minion.GetAvailableSummons(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex) : null;
     }
 
     public override void Update()
     {
         base.Update();
         currentHover = Gameboard.Instance.GetCurrentHover();
-        if(Input.GetMouseButtonDown(0)){
-            if(currentHover == -Vector2Int.one){ //Select another Minion
+        
+        if(Input.GetMouseButtonDown(0)){ //Left click
+            if(currentHover == -Vector2Int.one){ //Invalid Tile: Select another Minion
                 stateMachine.ChangeState(TSM.selectionState);
                 return;
             }
@@ -112,8 +116,17 @@ public class ChooseState : BaseState
             Debug.Log(selectedOption);
             return;
         }
+        
+        if(Input.GetKeyDown(SUMMON_KEY))
+        {
+            if(!IsSummonPossible()){
+                selectedOption = ChooseOptions.Move;
+                UpdateTileVisuals();
+                return;
+            }
+        }
 
-        if (Input.GetMouseButtonDown(1)){ // Go back: Sel. < Mov. < Att.
+        if (Input.GetMouseButtonDown(1)){ //Right clik -> Go back: Sel. < Mov. < Att.
             if(selectedOption == ChooseOptions.Move){
                 stateMachine.ChangeState(TSM.selectionState);
                 return;
@@ -170,32 +183,50 @@ public class ChooseState : BaseState
 
         return true;
     }
+    
+    private bool IsSummonPossible()
+    {
+        if (!selectedMinion.IsTrainer)
+        {
+            selectedMinion.QueueMessage("I can't summon!");
+            return false;
+        }
+        if (availableSummon.Count < 1)
+        {
+            selectedMinion.QueueMessage("No available tiles to summon!");
+            return false;
+        }
+        
+        return true;
+    }
 
-    private void UpdateTileVisuals(){
+    private void UpdateTileVisuals()
+    {
         Gameboard.Instance.SetAllTilesToDefaultLayer();
         switch (selectedOption)
-            {
-                case ChooseOptions.None:
-                    return;
-                case ChooseOptions.Move:
-                    if(availableMovement.Count < 1) throw new System.Exception("Empty availableMovement");
-                    Gameboard.Instance.ChangeTilesLayers(availableMovement,TileLayer.Highlight);
-                    return;
-                case ChooseOptions.Action1:
-                    if(availableAction1.Count < 1) throw new System.Exception("Empty availableAction1");
-                    Gameboard.Instance.ChangeTilesLayers(availableAction1,TileLayer.Danger);
-                    return;
-                case ChooseOptions.Action2:
-                    if(availableAction2.Count < 1) throw new System.Exception("Empty availableAction2");
-                    Gameboard.Instance.ChangeTilesLayers(availableAction2,TileLayer.Danger);
-                    return;
-                case ChooseOptions.Summon:
-                    // Gameboard.Instance.ChangeTilesLayers(availableSummon,TileLayer.Highlight);
-                    throw new System.Exception("NOT IMPLEMENTED");
-                
-                default:
-                    throw new System.Exception("Error: Wrong Choose Options.");
-            }
+        {
+            case ChooseOptions.None:
+                return;
+            case ChooseOptions.Move:
+                if (availableMovement.Count < 1) throw new System.Exception("Empty availableMovement");
+                Gameboard.Instance.ChangeTilesLayers(availableMovement, TileLayer.Highlight);
+                return;
+            case ChooseOptions.Action1:
+                if (availableAction1.Count < 1) throw new System.Exception("Empty availableAction1");
+                Gameboard.Instance.ChangeTilesLayers(availableAction1, TileLayer.Danger);
+                return;
+            case ChooseOptions.Action2:
+                if (availableAction2.Count < 1) throw new System.Exception("Empty availableAction2");
+                Gameboard.Instance.ChangeTilesLayers(availableAction2, TileLayer.Danger);
+                return;
+            case ChooseOptions.Summon:
+                if (availableSummon.Count < 1) throw new System.Exception("Empty availableAction2");
+                Gameboard.Instance.ChangeTilesLayers(availableSummon, TileLayer.Danger);
+                return;
+
+            default:
+                throw new System.Exception("Error: Wrong Choose Options.");
+        }
     }
 
     public override void Exit()

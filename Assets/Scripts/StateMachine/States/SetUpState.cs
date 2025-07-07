@@ -20,7 +20,8 @@ public class SetUpState : BaseState
         TSM.SetAnimationTimer(AnimationTimer.None);
         DestroyAllMinions();
         TSM.ClearLogicVariables();
-        SpawnPlayers();
+        TSM.SpawnAllMinions();
+        SummonPlayers();
         UIManager.Instance.UpdateTurnText(TSM.GetCurrentPlayerTurn());
     }
 
@@ -30,14 +31,12 @@ public class SetUpState : BaseState
             for (int y = 0; y < Gameboard.TILE_COUNT_Y; y++)
                 if (TSM.GetMinionUnit(new Vector2Int(x, y)) != null)
                     TSM.RemoveMinionFromBattleground(TSM.GetMinionUnit(new Vector2Int(x, y)), true);
-    }
-    
-    private void SpawnPlayers()
+    }    
+    private void SummonPlayers()
     {
-        TSM.SpawnSingleMinion(TSM.GetTeamMinionSO(0, Team.Player1), Team.Player1, new Vector2Int(4, 0));
-        TSM.SpawnSingleMinion(TSM.GetTeamMinionSO(1, Team.Player1), Team.Player1, new Vector2Int(4, 1));
-        TSM.SpawnSingleMinion(TSM.GetTeamMinionSO(0, Team.Player2), Team.Player2, new Vector2Int(4, 7));
-        TSM.SpawnSingleMinion(TSM.GetTeamMinionSO(1, Team.Player2), Team.Player2, new Vector2Int(4, 6));
+        List<MinionUnit> trainers = TSM.GetTrainers();
+        TSM.SummonMinion(trainers[0], new Vector2Int(4, 0));
+        TSM.SummonMinion(trainers[1], new Vector2Int(4, 7));
     }
 
     public override void Update()

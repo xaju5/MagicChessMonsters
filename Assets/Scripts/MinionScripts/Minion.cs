@@ -11,18 +11,25 @@ public class Minion
     public Action action1 { get; private set; }
     public Action action2 { get; private set; }
 
-    private bool isFainted;
+    public AliveOptions aliveStatus { get; private set; }  
 
     public Minion(MinionSO minionInfo){
         MinionInfo = minionInfo;
         health = minionInfo.HealthBase;
         magic = minionInfo.MagicBase;
-        isFainted = false;
+        aliveStatus = AliveOptions.Unsummoned;
 
         action1 = GetAction(minionInfo.LearnableActions, 0);
         action2 = GetAction(minionInfo.LearnableActions, 1);
     }
-    private Action GetAction(List<ActionSO> actions, int index) {
+
+    public void SummonMinion()
+    {
+        aliveStatus = AliveOptions.Alive;
+    }
+    
+    private Action GetAction(List<ActionSO> actions, int index)
+    {
         return (index < actions.Count && actions[index] != null) ? new Action(actions[index]) : null;
     }
     public float MaxHealth(){
@@ -33,17 +40,17 @@ public class Minion
         return MinionInfo.MagicBase;
     }
 
-    public List<Vector2Int> GetAvailableMoves(ref MinionUnit[,] minionUnits, Vector2Int currentMinionIndex, int tile_count_x, int tile_count_y){
+    public List<Vector2Int> GetAvailableMoves(ref MinionUnit[,] minionUnits, Vector2Int currentMinionIndex){
         List<Vector2Int> availableMoves = null;
         int moveRange = MinionInfo.MovementRangeBase; 
         switch (MinionInfo.MovementType)
         {
             case SelectableTiles.Area:
-                availableMoves = MathUtils.GetAreaTiles(moveRange, currentMinionIndex, tile_count_x, tile_count_y);
+                availableMoves = MathUtils.GetAreaTiles(moveRange, currentMinionIndex);
                 break;
 
             case SelectableTiles.Star:
-                availableMoves = MathUtils.GetStarTiles(moveRange, currentMinionIndex, tile_count_x, tile_count_y);
+                availableMoves = MathUtils.GetStarTiles(moveRange, currentMinionIndex);
                 break;
 
             case SelectableTiles.None:
@@ -55,15 +62,23 @@ public class Minion
                 availableMoves.RemoveAt(i);
         return availableMoves;
     }
+
+    public List<Vector2Int> GetAvailableSummons(ref MinionUnit[,] minionUnits, Vector2Int currentMinionIndex)
+    {
+        int summonRange = MinionInfo.SummonRangeBase;
+        List<Vector2Int> availableSummons = MathUtils.GetAreaTiles(summonRange, currentMinionIndex);
+        return availableSummons;
+    }
     
-    private DamageDetails CalculateDamage(Action attackerAction, MinionSO attacker){
+    private DamageDetails CalculateDamage(Action attackerAction, MinionSO attacker)
+    {
         float level = 1;
         float base_damage = 2 * level;
         float typeEffectiveness = MathUtils.GetEffectiviness(attackerAction.ActionInfo.Type, MinionInfo.Type);
         float diference = attackerAction.ActionInfo.Power * (attacker.Strength / MinionInfo.Defense);
         float critical = UnityEngine.Random.value <= 0.01 ? 2 : 1;
         float total_damage = (base_damage + diference) * critical * typeEffectiveness;
-        
+
         return new DamageDetails(critical == 2, typeEffectiveness, total_damage);
     }
 
@@ -74,7 +89,7 @@ public class Minion
         if(health <= 0){
             health = 0;
             damageDetails.isFainted = true;
-            isFainted = damageDetails.isFainted; 
+            aliveStatus = damageDetails.isFainted ? AliveOptions.Fainted : AliveOptions.Alive; 
             return damageDetails;
         }
 
@@ -82,7 +97,7 @@ public class Minion
     }
 
     public bool IsFainted(){
-        return isFainted;
+        return aliveStatus == AliveOptions.Fainted;
     }
 
     public bool Heal(float amount){

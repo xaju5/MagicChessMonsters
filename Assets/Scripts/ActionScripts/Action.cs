@@ -11,17 +11,17 @@ public class Action
         MagicCost = actionInfo.MagicCost;
     }
 
-    public List<Vector2Int> GetAvailableAttackTiles(ref MinionUnit[,] minionUnits, Vector2Int currentMinionIndex, int tile_count_x, int tile_count_y, Team enemyTeam){
+    public List<Vector2Int> GetAvailableAttackTiles(ref MinionUnit[,] minionUnits, Vector2Int currentMinionIndex, Team enemyTeam){
         List<Vector2Int> availableAttacks = null;
         int range = (int)ActionInfo.Range;
         switch (ActionInfo.RangeType)
         {
             case SelectableTiles.Area:
-                availableAttacks = MathUtils.GetAreaTiles(range, currentMinionIndex, tile_count_x, tile_count_y);
+                availableAttacks = MathUtils.GetAreaTiles(range, currentMinionIndex);
                 break;
 
             case SelectableTiles.Star:
-                availableAttacks = MathUtils.GetStarTiles(range, currentMinionIndex, tile_count_x, tile_count_y);
+                availableAttacks = MathUtils.GetStarTiles(range, currentMinionIndex);
                 break;
 
             case SelectableTiles.None:

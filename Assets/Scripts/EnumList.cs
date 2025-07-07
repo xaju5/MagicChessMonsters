@@ -69,8 +69,17 @@ public enum TileLayer{
     Danger
 }
 
-public enum AnimationTimer{
+public enum AnimationTimer
+{
     None,
     Waiting,
     Finished
+}
+
+public enum AliveOptions
+{
+    None,
+    Unsummoned,
+    Alive,
+    Fainted
 }

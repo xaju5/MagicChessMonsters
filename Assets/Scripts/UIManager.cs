@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI Action2MagicCostText;
     [SerializeField] private TextMeshProUGUI Action2TypeText;
     
+    [Header("Summon Minion")]
+    [SerializeField] private GameObject[] summonButton;
     [Header("Winner Screen")]
     [SerializeField] private TextMeshProUGUI winnerText;
     [Header("Pause Screen")]
@@ -53,6 +56,20 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void SetUpSliderData(Slider slider, float maxAmount, float amount){
+        slider.gameObject.SetActive(true);
+        FloatingBar floatingBar = slider.GetComponent<FloatingBar>();
+        floatingBar.SetBarMaxValue(maxAmount);
+        floatingBar.ForceBarValue(amount);
+    }
+
+    private void SetUpActionData(Action selectedMinionAction, TextMeshProUGUI actionName, TextMeshProUGUI actionCost, TextMeshProUGUI actionType){
+        actionName.transform.parent.gameObject.SetActive(true);
+        actionName.text = selectedMinionAction.ActionInfo.Name;
+        actionCost.text = selectedMinionAction.MagicCost.ToString();
+        actionType.text = selectedMinionAction.ActionInfo.Type.ToString();
+    }
+    
     public void UpdateTurnText(Team currentTurn){
         currentTurnText.text = $"{currentTurn}'s turn";
     }
@@ -106,6 +123,18 @@ public class UIManager : MonoBehaviour
     private void UpdateSliderData(Slider slider, float maxAmount, float amount){
         FloatingBar floatingBar = slider.GetComponent<FloatingBar>();
         floatingBar.UpdateBarValue(amount);
+    }
+
+    //Summon Minion UI
+    public void SetupSummonMinionUI(List<MinionUnit> summonableTeamMinions)
+    {
+        summonButton[0].transform.parent.gameObject.SetActive(true);
+        for (int i = 0; i < summonableTeamMinions.Count; i++)
+        {
+            summonButton[i].SetActive(true);
+            summonButton[i].GetComponentInChildren<TextMeshProUGUI>().text = summonableTeamMinions[i].minion.MinionInfo.Type.ToString();
+            summonButton[i].GetComponent<Image>().sprite = summonableTeamMinions[i].minion.MinionInfo.Sprite;
+        }
     }
 
     //Game Over Methods
