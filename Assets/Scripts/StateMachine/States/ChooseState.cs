@@ -50,6 +50,7 @@ public class ChooseState : BaseState
     {
         base.Update();
         currentHover = Gameboard.Instance.GetCurrentHover();
+        
         if(Input.GetMouseButtonDown(0)){ //Left click
             if(currentHover == -Vector2Int.one){ //Invalid Tile: Select another Minion
                 stateMachine.ChangeState(TSM.selectionState);
@@ -115,6 +116,7 @@ public class ChooseState : BaseState
             Debug.Log(selectedOption);
             return;
         }
+        
         if(Input.GetKeyDown(SUMMON_KEY))
         {
             if(!IsSummonPossible()){

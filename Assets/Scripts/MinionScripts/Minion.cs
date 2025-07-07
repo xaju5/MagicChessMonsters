@@ -11,7 +11,7 @@ public class Minion
     public Action action1 { get; private set; }
     public Action action2 { get; private set; }
 
-    public AliveOptions aliveStatus { get; private set; }
+    public AliveOptions aliveStatus { get; private set; }  
 
     public Minion(MinionSO minionInfo){
         MinionInfo = minionInfo;

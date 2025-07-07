@@ -121,7 +121,6 @@ public class TurnStateMachine : StateMachine
         return minionUnitList.Where(minionUnit => minionUnit.IsTrainer).ToList();
     }
 
-
     public void UpdateAllMinionUnitGraphics()
     {
         foreach (MinionUnit minionUnit in minionUnitList)

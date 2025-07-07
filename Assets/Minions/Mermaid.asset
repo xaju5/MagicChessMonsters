@@ -15,7 +15,7 @@ MonoBehaviour:
   minionId: 5
   description: water arrows
   type: 2
-  healthBase: 100
+  healthBase: 50
   magicBase: 100
   strength: 10
   defense: 10

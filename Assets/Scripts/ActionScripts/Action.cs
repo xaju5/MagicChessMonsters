@@ -30,7 +30,7 @@ public class Action
         }
 
         for (int i = availableAttacks.Count - 1; i >= 0; i--)
-            if (minionUnits[availableAttacks[i].x, availableAttacks[i].y]?.Team != enemyTeam)
+            if (minionUnits[availableAttacks[i].x, availableAttacks[i].y]?.Team != enemyTeam || minionUnits[availableAttacks[i].x, availableAttacks[i].y]?.minion.IsFainted() == true)
                 availableAttacks.RemoveAt(i);
         return availableAttacks;
     }

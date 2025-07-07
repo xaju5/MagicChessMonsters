@@ -77,9 +77,9 @@ public enum AnimationTimer
 }
 
 public enum AliveOptions
-    {
-        None,
-        Unsummoned,
-        Alive,
-        Fainted
-    }
+{
+    None,
+    Unsummoned,
+    Alive,
+    Fainted
+}

@@ -14,6 +14,7 @@ public class Gameboard : MonoBehaviour
     public static readonly int TILE_COUNT_Y = 8;
     private GameObject[,] tiles;
     private Vector2Int currentHover;
+    private Dictionary<Vector2Int, TileLayer> storedTileLayers = new Dictionary<Vector2Int, TileLayer>();
 
     private void Awake()
     {
@@ -65,7 +66,7 @@ public class Gameboard : MonoBehaviour
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
 
-        tileObject.layer = LayerMask.NameToLayer("Tile");
+        tileObject.layer = LayerMask.NameToLayer(TileLayer.Tile.ToString());
         tileObject.AddComponent<BoxCollider2D>();
 
         return tileObject;
@@ -83,14 +84,14 @@ public class Gameboard : MonoBehaviour
             if (currentHover == -Vector2Int.one)
             {
                 currentHover = hitPosition;
-                tiles[hitPosition.x, hitPosition.y].layer = LayerMask.NameToLayer("Hover");
+                tiles[hitPosition.x, hitPosition.y].layer = LayerMask.NameToLayer(TileLayer.Hover.ToString());
             }
             //Change to other tile hover
             if (currentHover != hitPosition)
             {
                 tiles[currentHover.x, currentHover.y].layer = RestoreTileLayer(currentHover);
                 currentHover = hitPosition;
-                tiles[hitPosition.x, hitPosition.y].layer = LayerMask.NameToLayer("Hover");
+                tiles[hitPosition.x, hitPosition.y].layer = LayerMask.NameToLayer(TileLayer.Hover.ToString());
             }
         }
         else
@@ -109,7 +110,7 @@ public class Gameboard : MonoBehaviour
         RaycastHit2D hitInfo;
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Ray ray = new Ray(mousePosition, Vector2.zero);
-        hitInfo = Physics2D.Raycast(ray.origin, ray.direction, rayLength, LayerMask.GetMask("Tile", "Hover", "Highlight", "Danger"));
+        hitInfo = Physics2D.Raycast(ray.origin, ray.direction, rayLength, LayerMask.GetMask(TileLayer.Tile.ToString(), TileLayer.Hover.ToString(), TileLayer.Highlight.ToString(), TileLayer.Danger.ToString()));
         return hitInfo;
     }
     private Vector2Int LookupTileIndex(GameObject hitInfo)
@@ -124,14 +125,12 @@ public class Gameboard : MonoBehaviour
 
     private LayerMask RestoreTileLayer(Vector2Int index)
     {
-        if(BattleManager.Instance.IsValidAttack(index))
-            return LayerMask.NameToLayer("Danger");
-
-        if(BattleManager.Instance.IsValidMove(index))
-            return LayerMask.NameToLayer("Highlight");
-        
-        return LayerMask.NameToLayer("Tile");
+        TileLayer foundType;
+        bool isStored = GetStoredTileLayer(index, out foundType);
+        if(!isStored) return LayerMask.NameToLayer(TileLayer.Tile.ToString());
+        return LayerMask.NameToLayer(foundType.ToString());           
     }
+
     //Public methods
     public Vector3 GetTileCenter(int x, int y){
         return new Vector3(x * TILE_SIZE, y * TILE_SIZE, 0) +  transform.position + new Vector3(TILE_SIZE / 2, TILE_SIZE / 2, 0);
@@ -142,12 +141,51 @@ public class Gameboard : MonoBehaviour
     public TilemapRenderer GetTilemapRenderer(){
         return tilemapRenderer;
     }
-    public void ChangeTilesLayers(List<Vector2Int> tilesToChange, string layerName){
-        foreach (Vector2Int tileIndex in tilesToChange)
-            tiles[tileIndex.x, tileIndex.y].layer = LayerMask.NameToLayer(layerName);
+    public void ChangeTilesLayers(List<Vector2Int> tilesToChange, TileLayer layer){
+        foreach (Vector2Int tileIndex in tilesToChange){
+            tiles[tileIndex.x, tileIndex.y].layer = LayerMask.NameToLayer(layer.ToString());
+            AddStoredTileLayer(tileIndex,layer);
+        }
+    }
+    public void RestoreTilesLayers(List<Vector2Int> tilesToRestore){
+        foreach (Vector2Int tileIndex in tilesToRestore){
+            tiles[tileIndex.x, tileIndex.y].layer = LayerMask.NameToLayer(TileLayer.Tile.ToString());
+            RemoveStoredTileLayer(tileIndex);
+        }
     }
     public void SetAllTilesToDefaultLayer(){
         foreach (GameObject tile in tiles)
-            tile.layer = LayerMask.NameToLayer("Tile"); 
+            tile.layer = LayerMask.NameToLayer(TileLayer.Tile.ToString()); 
+        ClearAllStoredTileLayers();
+    }
+
+    //Stored Tile Layers
+    private void AddStoredTileLayer(Vector2Int position, TileLayer type)
+    {
+        storedTileLayers[position] = type; // Automatically overrides if position exists
+    }
+
+    private void RemoveStoredTileLayer(Vector2Int position)
+    {
+        storedTileLayers.Remove(position);
+    }
+
+    private bool GetStoredTileLayer(Vector2Int position, out TileLayer type)
+    {
+        return storedTileLayers.TryGetValue(position, out type);
+    }
+
+    private void ClearAllStoredTileLayers()
+    {
+        storedTileLayers.Clear();
+    }
+
+    private void PrintAllStoredTileLayers()
+    {
+        foreach (var tileLayers in storedTileLayers)
+        {
+            Debug.Log($"Position: {tileLayers.Key} Type: {tileLayers.Value}");
+        }
     }
 }
+

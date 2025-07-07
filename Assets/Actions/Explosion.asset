@@ -18,7 +18,7 @@ MonoBehaviour:
   range: 2
   rangeType: 1
   nature: 2
-  power: 20
+  power: 30
   accuracy: 20
   magicCost: 20
   sprite: {fileID: 1077037350, guid: 74eadb46e98aadc4da757285acd5d2c7, type: 3}
