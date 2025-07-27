@@ -13,6 +13,7 @@ public class TurnStateMachine : StateMachine
     [HideInInspector] public AttackState attackState;
     [HideInInspector] public EndTurnState endTurnState;
     [HideInInspector] public GameoverState gameoverState;
+    [HideInInspector] public SummonState summonState;
 
     [SerializeField] private GameObject minionPrefab, actionPrefab;
     [SerializeField] private MinionList[] team1_enum, team2_enum;
@@ -36,6 +37,7 @@ public class TurnStateMachine : StateMachine
         attackState = new AttackState(this);
         endTurnState = new EndTurnState(this);
         gameoverState = new GameoverState(this);
+        summonState = new SummonState(this);
         UIManager.Instance.resetEvent.AddListener(ResetGame);
     }
 

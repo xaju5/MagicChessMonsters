@@ -6,8 +6,6 @@ using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
 {
-    
-
     [Header("Selected Minion Icon")]
     [SerializeField] private Image selectedMinionIcon;
     [SerializeField] private Slider selectedMinionHealthBar;
@@ -37,7 +35,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentTurnText;
 
     public static UIManager Instance;
-    public UnityEvent resumeEvent, resetEvent;
+    public UnityEvent resumeEvent, resetEvent, closeSummonEvent, summonEvent;
 
     private void Awake()
     {
@@ -55,21 +53,7 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void SetUpSliderData(Slider slider, float maxAmount, float amount){
-        slider.gameObject.SetActive(true);
-        FloatingBar floatingBar = slider.GetComponent<FloatingBar>();
-        floatingBar.SetBarMaxValue(maxAmount);
-        floatingBar.ForceBarValue(amount);
-    }
-
-    private void SetUpActionData(Action selectedMinionAction, TextMeshProUGUI actionName, TextMeshProUGUI actionCost, TextMeshProUGUI actionType){
-        actionName.transform.parent.gameObject.SetActive(true);
-        actionName.text = selectedMinionAction.ActionInfo.Name;
-        actionCost.text = selectedMinionAction.MagicCost.ToString();
-        actionType.text = selectedMinionAction.ActionInfo.Type.ToString();
-    }
-    
+ 
     public void UpdateTurnText(Team currentTurn){
         currentTurnText.text = $"{currentTurn}'s turn";
     }
@@ -129,11 +113,20 @@ public class UIManager : MonoBehaviour
     public void SetupSummonMinionUI(List<MinionUnit> summonableTeamMinions)
     {
         summonButton[0].transform.parent.gameObject.SetActive(true);
-        for (int i = 0; i < summonableTeamMinions.Count; i++)
+        for (int i = 1; i < summonableTeamMinions.Count; i++)
         {
-            summonButton[i].SetActive(true);
-            summonButton[i].GetComponentInChildren<TextMeshProUGUI>().text = summonableTeamMinions[i].minion.MinionInfo.Type.ToString();
-            summonButton[i].GetComponent<Image>().sprite = summonableTeamMinions[i].minion.MinionInfo.Sprite;
+            summonButton[i - 1].SetActive(true);
+            summonButton[i - 1].GetComponentInChildren<TextMeshProUGUI>().text = summonableTeamMinions[i].minion.MinionInfo.Type.ToString();
+            summonButton[i - 1].GetComponent<Image>().sprite = summonableTeamMinions[i].minion.MinionInfo.Sprite;
+        }
+    }
+
+    public void DisableSummonMinionUI()
+    {
+        summonButton[0].transform.parent.gameObject.SetActive(false);
+        foreach (GameObject button in summonButton)
+        {
+            button.SetActive(false);
         }
     }
 
@@ -163,7 +156,17 @@ public class UIManager : MonoBehaviour
         Debug.Log("Reset button pressed.");
         resetEvent.Invoke();
     }
-
+    public void CloseSummonButton()
+    {
+        Debug.Log("Close Summon button pressed.");
+        closeSummonEvent.Invoke();
+    }
+    public void SummonButton()
+    {
+        Debug.Log("Close Summon button pressed.");
+        summonEvent.Invoke();
+    }
+    
     public void QuitGameButton()
     {
         Debug.Log("Quitting game...");
