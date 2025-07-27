@@ -66,16 +66,6 @@ public class Minion
                 availableMoves.RemoveAt(i);
         return availableMoves;
     }
-
-    public List<Vector2Int> GetAvailableSummons(ref MinionUnit[,] minionUnits, Vector2Int currentMinionIndex)
-    {
-        int summonRange = MinionInfo.SummonRangeBase;
-        List<Vector2Int> availableSummons = MathUtils.GetAreaTiles(summonRange, currentMinionIndex);
-        for (int i = availableSummons.Count - 1; i >= 0 ; i--)
-            if (minionUnits[availableSummons[i].x, availableSummons[i].y] != null)
-                availableSummons.RemoveAt(i);
-        return availableSummons;
-    }
     
     private DamageDetails CalculateDamage(Action attackerAction, MinionSO attacker)
     {

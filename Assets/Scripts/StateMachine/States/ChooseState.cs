@@ -49,9 +49,16 @@ public class ChooseState : BaseState
         availableMovement = selectedMinion.minion.GetAvailableMoves(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex);
         action1 = selectedMinion.minion.action1;
         action2 = selectedMinion.minion.action2;
-        availableAction1 = action1 != null ? action1.GetAvailableAttackTiles(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex, TSM.GetEnemyTeam()) : null;
-        availableAction2 = action2 != null ? action2.GetAvailableAttackTiles(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex, TSM.GetEnemyTeam()) : null;
-        availableSummon = selectedMinion.IsTrainer ? selectedMinion.minion.GetAvailableSummons(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex) : null;
+        if (action1 != null)
+        {
+            availableAction1 = action1.GetAvailableAttackTiles(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex, TSM.GetEnemyTeam());
+            availableSummon = action1.ActionInfo.Name == "Summon" ? action1.GetAvailableSummonTiles(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex) : null;
+            
+        }
+        if (action2 != null) {
+            availableAction2 = action2.GetAvailableAttackTiles(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex, TSM.GetEnemyTeam());
+            availableSummon = action2.ActionInfo.Name == "Summon" ? action2.GetAvailableSummonTiles(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex) : null;
+        }
     }
 
     public override void Update()
