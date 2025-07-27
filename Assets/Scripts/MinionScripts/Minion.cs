@@ -27,6 +27,10 @@ public class Minion
     {
         aliveStatus = AliveOptions.Alive;
     }
+    public bool IsSummoned()
+    {
+        return aliveStatus != AliveOptions.Unsummoned && aliveStatus != AliveOptions.None;
+    }
     
     private Action GetAction(List<ActionSO> actions, int index)
     {

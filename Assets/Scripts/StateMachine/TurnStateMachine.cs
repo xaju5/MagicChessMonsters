@@ -269,6 +269,11 @@ public class TurnStateMachine : StateMachine
         return minionToSummon;
     }
 
+    public void DeselectMinionToSummon()
+    {
+        minionToSummon = null;
+    }
+
     //Gameover
     public void SetWinner(Team team)
     {

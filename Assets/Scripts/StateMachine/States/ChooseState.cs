@@ -132,6 +132,7 @@ public class ChooseState : BaseState
             if (IsSummonPossible(1))
             {
                 SetUpSummonPanel();
+                TSM.SelectAction(selectedMinion.minion.action1);
                 return;
             }
             if (!IsActionElegible(ChooseOptions.Action1))
@@ -150,6 +151,7 @@ public class ChooseState : BaseState
             if (IsSummonPossible(2))
             {
                 SetUpSummonPanel();
+                TSM.SelectAction(selectedMinion.minion.action2);
                 return;
             }
             if (!IsActionElegible(ChooseOptions.Action2))

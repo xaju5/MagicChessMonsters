@@ -127,6 +127,7 @@ public class UIManager : MonoBehaviour
             summonButtons[i - 1].SetActive(true);
             summonButtons[i - 1].GetComponentInChildren<TextMeshProUGUI>().text = summonableTeamMinions[i].minion.MinionInfo.Type.ToString();
             summonButtons[i - 1].GetComponent<Image>().sprite = summonableTeamMinions[i].minion.MinionInfo.Sprite;
+            summonButtons[i - 1].GetComponent<Button>().interactable = !summonableTeamMinions[i].minion.IsSummoned();
         }
     }
 
