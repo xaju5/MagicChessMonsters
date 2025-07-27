@@ -24,10 +24,11 @@ public class TurnStateMachine : StateMachine
     private Vector2Int targetPosition;
     private MinionUnit[,] minionUnits;
     private List<MinionUnit> minionUnitList = new List<MinionUnit>();
-
     private Team currentPlayerTurn;
     private AnimationTimer animationTimer;
     private Team winner;
+    private MinionUnit minionToSummon;
+
     private void Awake()
     {
         setUpState = new SetUpState(this);
@@ -254,6 +255,18 @@ public class TurnStateMachine : StateMachine
             yield return null;
         }
         SetAnimationTimer(AnimationTimer.Finished);
+    }
+
+    // Summon
+
+    public void SetMinionToSummon(MinionUnit minion)
+    {
+        minionToSummon = minion;
+    }
+
+    public MinionUnit GetMinionToSummon()
+    {
+        return minionToSummon;
     }
 
     //Gameover

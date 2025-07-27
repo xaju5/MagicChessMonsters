@@ -11,6 +11,7 @@ public class ChooseState : BaseState
     private TurnStateMachine TSM;
     private Vector2Int currentHover;
     private List<Vector2Int> availableMovement, availableAction1, availableAction2, availableSummon;
+    private List<MinionUnit> currentTeamMinionUnitList;
     private MinionUnit selectedMinion;
     private ChooseOptions chooseOption;
     private Action action1, action2;
@@ -32,12 +33,15 @@ public class ChooseState : BaseState
     {
         base.Enter();
         selectedMinion = TSM.GetSelectedMinion();
+        currentTeamMinionUnitList = TSM.GetMinionUnitList(TSM.GetCurrentPlayerTurn());
         chooseOption = ChooseOptions.Move;
         GetAvailableTiles();
         Gameboard.Instance.ChangeTilesLayers(availableMovement, TileLayer.Highlight);
         TSM.DeselectTargetPosition();
         isSummonPanelEnabled = false;
-        UIManager.Instance.closeSummonEvent.AddListener(CloseSummonPanel);
+        UIManager.Instance.closeSummonEvent.AddListener(OnCloseSummonPanel);
+        UIManager.Instance.summonEvent.AddListener(OnSummonButton);
+
     }
 
     private void GetAvailableTiles()
@@ -57,8 +61,7 @@ public class ChooseState : BaseState
         
         if (Input.GetMouseButtonDown(1)){ //Right clik -> Go back: Sel. < Mov. < Att.
             Debug.Log(chooseOption);
-            isSummonPanelEnabled = false;
-            UIManager.Instance.DisableSummonMinionUI();
+            CloseSummonPanel();
             if (chooseOption == ChooseOptions.Move)
             {
                 stateMachine.ChangeState(TSM.selectionState);
@@ -111,7 +114,12 @@ public class ChooseState : BaseState
                         }
                         return;
                     case ChooseOptions.Summon:
-                        throw new System.Exception("NOT IMPLEMENTED");
+                        if (IsValidSummon(currentHover))
+                        {
+                            TSM.SetTargetPosition(currentHover);
+                            stateMachine.ChangeState(TSM.summonState);
+                        }
+                        return;
 
                     default:
                         throw new System.Exception("Error: Wrong Choose Options.");
@@ -156,21 +164,6 @@ public class ChooseState : BaseState
             UIManager.Instance.DisableSummonMinionUI();
             return;
         }
-
-        // if (Input.GetKeyDown(SUMMON_KEY))
-        // {
-        //     if (!IsSummonPossible())
-        //     {
-        //         UIManager.Instance.DisableSummonMinionUI();
-        //         chooseOption = ChooseOptions.Move;
-        //         UpdateTileVisuals();
-        //         return;
-        //     }
-        //     UIManager.Instance.SetupSummonMinionUI(TSM.GetMinionUnitList(TSM.GetCurrentPlayerTurn()));
-        //     chooseOption = ChooseOptions.Summon;
-        //     UpdateTileVisuals();
-        //     Debug.Log(chooseOption);
-        // } 
     }
 
     private bool IsValidMovement(Vector2Int index)
@@ -244,23 +237,50 @@ public class ChooseState : BaseState
         
         return true;
     }
+    private bool IsValidSummon(Vector2Int index)
+    {
+        if (TSM.GetMinionUnit(currentHover) != null)
+        {
+            selectedMinion.QueueMessage("There is already someone there!");
+            return false;
+        }
+        if (availableSummon.Contains(index))
+        {
+            return true;
+        }
+        selectedMinion.QueueMessage("I can't summon there!");
+        return false;
+    }
 
     private void SetUpSummonPanel()
     {
         isSummonPanelEnabled = true;
-        UIManager.Instance.SetupSummonMinionUI(TSM.GetMinionUnitList(TSM.GetCurrentPlayerTurn()));
+        UIManager.Instance.SetupSummonMinionUI(currentTeamMinionUnitList);
         chooseOption = ChooseOptions.Summon;
         UpdateTileVisuals();
         Debug.Log(chooseOption);
         return;
     }
 
+    void OnSummonButton(int index)
+    {
+        MinionUnit minion = currentTeamMinionUnitList[index];
+        Debug.Log(index + " " + minion.name);
+        TSM.SetMinionToSummon(minion);
+        CloseSummonPanel();
+    }
+
+    private void OnCloseSummonPanel()
+    {
+        CloseSummonPanel();
+        chooseOption = ChooseOptions.Move;
+        UpdateTileVisuals();
+    }
+
     private void CloseSummonPanel()
     {
         isSummonPanelEnabled = false;
         UIManager.Instance.DisableSummonMinionUI();
-        chooseOption = ChooseOptions.Move;
-        UpdateTileVisuals();
     }
 
     private void UpdateTileVisuals()
