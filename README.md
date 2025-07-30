@@ -16,7 +16,7 @@ All the art is a placeholder and it lacks sound effects.
 
 In the initial position all the trainers are positioned in the center of their sides. It starts the first player.
 
-<video src="/mdcontent/MagicChessMonsters-v0.0.2.mp4" width="320" height="240" controls></video>
+![Gameplay](/mdcontent/MagicChessMonsters-v0.0.2.gif)
 
 After a character is selected, a new UI will appear with :
 - The selected Character portrait.
