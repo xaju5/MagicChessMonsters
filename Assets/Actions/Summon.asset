@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c275cef8ebcd42b4895454814a1ff433, type: 3}
+  m_Name: Summon
+  m_EditorClassIdentifier: 
+  name: Summon
+  description: Sumon a minion
+  type: 0
+  range: 2
+  rangeType: 1
+  nature: 2
+  power: 0
+  accuracy: 10
+  magicCost: 20
+  sprite: {fileID: 21300000, guid: bdb4013c267cc764993827620dc9b7fc, type: 3}
+  animator: {fileID: 22100000, guid: 61871ab400f126e4f97c74a0f4b97b92, type: 2}
+  animationTravelSpeed: 1

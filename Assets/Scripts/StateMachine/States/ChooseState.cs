@@ -1,18 +1,18 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ChooseState : BaseState
 {
     private readonly KeyCode ACTION1_KEY = KeyCode.Q;
     private readonly KeyCode ACTION2_KEY = KeyCode.W;
-    private readonly KeyCode SUMMON_KEY = KeyCode.S;
     private TurnStateMachine TSM;
     private Vector2Int currentHover;
     private List<Vector2Int> availableMovement, availableAction1, availableAction2, availableSummon;
+    private List<MinionUnit> currentTeamMinionUnitList;
     private MinionUnit selectedMinion;
-    private ChooseOptions selectedOption; 
+    private ChooseOptions chooseOption;
+    private Action action1, action2;
+    private bool isSummonPanelEnabled;
     private enum ChooseOptions
     {
         None,
@@ -30,20 +30,32 @@ public class ChooseState : BaseState
     {
         base.Enter();
         selectedMinion = TSM.GetSelectedMinion();
-        selectedOption = ChooseOptions.Move;
+        currentTeamMinionUnitList = TSM.GetMinionUnitList(TSM.GetCurrentPlayerTurn());
+        chooseOption = ChooseOptions.Move;
         GetAvailableTiles();
-        Gameboard.Instance.ChangeTilesLayers(availableMovement,TileLayer.Highlight);
+        Gameboard.Instance.ChangeTilesLayers(availableMovement, TileLayer.Highlight);
         TSM.DeselectTargetPosition();
+        isSummonPanelEnabled = false;
+        UIManager.Instance.closeSummonEvent.AddListener(OnCloseSummonPanel);
+        UIManager.Instance.summonEvent.AddListener(OnSummonButton);
+
     }
 
     private void GetAvailableTiles()
     {
         availableMovement = selectedMinion.minion.GetAvailableMoves(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex);
-        Action action1 = selectedMinion.minion.action1;
-        Action action2 = selectedMinion.minion.action2;
-        availableAction1 = action1 != null ? action1.GetAvailableAttackTiles(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex, TSM.GetEnemyTeam()) : null;
-        availableAction2 = action2 != null ? action2.GetAvailableAttackTiles(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex, TSM.GetEnemyTeam()) : null;
-        availableSummon = selectedMinion.IsTrainer ? selectedMinion.minion.GetAvailableSummons(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex) : null;
+        action1 = selectedMinion.minion.action1;
+        action2 = selectedMinion.minion.action2;
+        if (action1 != null)
+        {
+            availableAction1 = action1.GetAvailableAttackTiles(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex, TSM.GetEnemyTeam());
+            availableSummon = action1.ActionInfo.Name == "Summon" ? action1.GetAvailableSummonTiles(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex) : null;
+            
+        }
+        if (action2 != null) {
+            availableAction2 = action2.GetAvailableAttackTiles(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex, TSM.GetEnemyTeam());
+            availableSummon = action2.ActionInfo.Name == "Summon" ? action2.GetAvailableSummonTiles(ref TSM.GetMinionUnitsArray(), selectedMinion.MinionIndex) : null;
+        }
     }
 
     public override void Update()
@@ -51,102 +63,124 @@ public class ChooseState : BaseState
         base.Update();
         currentHover = Gameboard.Instance.GetCurrentHover();
         
-        if(Input.GetMouseButtonDown(0)){ //Left click
-            if(currentHover == -Vector2Int.one){ //Invalid Tile: Select another Minion
+        if (Input.GetMouseButtonDown(1)){ //Right clik -> Go back: Sel. < Mov. < Att.
+            Debug.Log(chooseOption);
+            CloseSummonPanel();
+            if (chooseOption == ChooseOptions.Move)
+            {
                 stateMachine.ChangeState(TSM.selectionState);
                 return;
             }
-            switch (selectedOption)
+            else
             {
-                case ChooseOptions.None:
-                    return;
-                case ChooseOptions.Move:
-                    if(IsValidMovement(currentHover)){
-                        TSM.SetTargetPosition(currentHover);
-                        stateMachine.ChangeState(TSM.moveState);
-                        return;
-                    }
-                    return;
-                case ChooseOptions.Action1:
-                    if(IsValidAttack(currentHover)){
-                        TSM.SetTargetPosition(currentHover);
-                        TSM.SelectAction(selectedMinion.minion.action1);
-                        stateMachine.ChangeState(TSM.attackState);
-                    }
-                    return;
-                case ChooseOptions.Action2:
-                    if(IsValidAttack(currentHover)){
-                        TSM.SetTargetPosition(currentHover);
-                        TSM.SelectAction(selectedMinion.minion.action2);
-                        stateMachine.ChangeState(TSM.attackState);
-                    }
-                    return;
-                case ChooseOptions.Summon:
-                    throw new System.Exception("NOT IMPLEMENTED");
-                
-                default:
-                    throw new System.Exception("Error: Wrong Choose Options.");
+                chooseOption = ChooseOptions.Move;
+                UpdateTileVisuals();
+                return;
             }
-            
-            
-            // else if(minionUnits[currentHover.x, currentHover.y].Team == currentPlayerTurn){
-            //     SwitchSelectMinion(currentHover);
-            // }
         }
+        if (isSummonPanelEnabled)
+            return;
+        
+        if (Input.GetMouseButtonDown(0))
+            { //Left click
+                if (currentHover == -Vector2Int.one)
+                { //Invalid Tile: Select another Minion
+                    stateMachine.ChangeState(TSM.selectionState);
+                    UIManager.Instance.DisableSummonMinionUI();
+                    return;
+                }
+                switch (chooseOption)
+                {
+                    case ChooseOptions.None:
+                        return;
+                    case ChooseOptions.Move:
+                        if (IsValidMovement(currentHover))
+                        {
+                            TSM.SetTargetPosition(currentHover);
+                            stateMachine.ChangeState(TSM.moveState);
+                            return;
+                        }
+                        return;
+                    case ChooseOptions.Action1:
+                        if (IsValidAttack(currentHover))
+                        {
+                            TSM.SetTargetPosition(currentHover);
+                            TSM.SelectAction(selectedMinion.minion.action1);
+                            stateMachine.ChangeState(TSM.attackState);
+                        }
+                        return;
+                    case ChooseOptions.Action2:
+                        if (IsValidAttack(currentHover))
+                        {
+                            TSM.SetTargetPosition(currentHover);
+                            TSM.SelectAction(selectedMinion.minion.action2);
+                            stateMachine.ChangeState(TSM.attackState);
+                        }
+                        return;
+                    case ChooseOptions.Summon:
+                        if (IsValidSummon(currentHover))
+                        {
+                            TSM.SetTargetPosition(currentHover);
+                            stateMachine.ChangeState(TSM.summonState);
+                        }
+                        return;
+
+                    default:
+                        throw new System.Exception("Error: Wrong Choose Options.");
+                }
+                // else if(minionUnits[currentHover.x, currentHover.y].Team == currentPlayerTurn){
+                //     SwitchSelectMinion(currentHover);
+                // }
+            }
         if(Input.GetKeyDown(ACTION1_KEY)){
-            if (!IsActionElegible(ChooseOptions.Action1)){
-                selectedOption = ChooseOptions.Move;
+            if (IsSummonPossible(1))
+            {
+                SetUpSummonPanel();
+                TSM.SelectAction(selectedMinion.minion.action1);
+                return;
+            }
+            if (!IsActionElegible(ChooseOptions.Action1))
+            {
+                chooseOption = ChooseOptions.Move;
                 UpdateTileVisuals();
                 return;
             } 
-            selectedOption = ChooseOptions.Action1;
+            chooseOption = ChooseOptions.Action1;
             UpdateTileVisuals();
-            Debug.Log(selectedOption);
+            Debug.Log(chooseOption);
             return;
         }
         if(Input.GetKeyDown(ACTION2_KEY))
         {
-            if (!IsActionElegible(ChooseOptions.Action2)){
-                selectedOption = ChooseOptions.Move;
+            if (IsSummonPossible(2))
+            {
+                SetUpSummonPanel();
+                TSM.SelectAction(selectedMinion.minion.action2);
+                return;
+            }
+            if (!IsActionElegible(ChooseOptions.Action2))
+            {
+                chooseOption = ChooseOptions.Move;
                 UpdateTileVisuals();
                 return;
             } 
-            selectedOption = ChooseOptions.Action2;
+            chooseOption = ChooseOptions.Action2;
             UpdateTileVisuals();
-            Debug.Log(selectedOption);
+            Debug.Log(chooseOption);
+            UIManager.Instance.DisableSummonMinionUI();
             return;
         }
-        
-        if(Input.GetKeyDown(SUMMON_KEY))
-        {
-            if(!IsSummonPossible()){
-                selectedOption = ChooseOptions.Move;
-                UpdateTileVisuals();
-                return;
-            }
-        }
-
-        if (Input.GetMouseButtonDown(1)){ //Right clik -> Go back: Sel. < Mov. < Att.
-            if(selectedOption == ChooseOptions.Move){
-                stateMachine.ChangeState(TSM.selectionState);
-                return;
-            }
-            else{
-                selectedOption = ChooseOptions.Move;
-                UpdateTileVisuals();
-                return;
-            }
-        }
-            
     }
 
     private bool IsValidMovement(Vector2Int index)
     {
-        if(TSM.GetMinionUnit(currentHover) != null){
+        if (TSM.GetMinionUnit(currentHover) != null)
+        {
             selectedMinion.QueueMessage("There is already someone there!");
             return false;
         }
-        if(availableMovement.Contains(index)){
+        if (availableMovement.Contains(index))
+        {
             return true;
         }
         selectedMinion.QueueMessage("I can't go there!");
@@ -157,7 +191,7 @@ public class ChooseState : BaseState
         if(TSM.GetMinionUnit(currentHover) == null) return false;
         if(TSM.GetMinionUnit(currentHover).Team == TSM.GetCurrentPlayerTurn()) return false;
 
-        List<Vector2Int> availableTiles = selectedOption == ChooseOptions.Action1? availableAction1 : availableAction2;
+        List<Vector2Int> availableTiles = chooseOption == ChooseOptions.Action1? availableAction1 : availableAction2;
         if(availableTiles.Contains(index)){
             return true;
         }
@@ -184,7 +218,7 @@ public class ChooseState : BaseState
         return true;
     }
     
-    private bool IsSummonPossible()
+    private bool IsSummonPossible(int actionNumber)
     {
         if (!selectedMinion.IsTrainer)
         {
@@ -193,17 +227,72 @@ public class ChooseState : BaseState
         }
         if (availableSummon.Count < 1)
         {
-            selectedMinion.QueueMessage("No available tiles to summon!");
+            selectedMinion.QueueMessage("No enough tiles!");
             return false;
         }
+        if (actionNumber == 1 && action1.ActionInfo.Name != "Summon")
+        {
+            selectedMinion.QueueMessage("I can't summon 1!");
+            return false;
+        }
+        if (actionNumber == 2 && action2.ActionInfo.Name != "Summon")
+        {
+            selectedMinion.QueueMessage("I can't summon 2!");
+            return false;
+        }      
         
         return true;
+    }
+    private bool IsValidSummon(Vector2Int index)
+    {
+        if (TSM.GetMinionUnit(currentHover) != null)
+        {
+            selectedMinion.QueueMessage("There is already someone there!");
+            return false;
+        }
+        if (availableSummon.Contains(index))
+        {
+            return true;
+        }
+        selectedMinion.QueueMessage("I can't summon there!");
+        return false;
+    }
+
+    private void SetUpSummonPanel()
+    {
+        isSummonPanelEnabled = true;
+        UIManager.Instance.SetupSummonMinionUI(currentTeamMinionUnitList);
+        chooseOption = ChooseOptions.Summon;
+        UpdateTileVisuals();
+        Debug.Log(chooseOption);
+        return;
+    }
+
+    void OnSummonButton(int index)
+    {
+        MinionUnit minion = currentTeamMinionUnitList[index];
+        Debug.Log(index + " " + minion.name);
+        TSM.SetMinionToSummon(minion);
+        CloseSummonPanel();
+    }
+
+    private void OnCloseSummonPanel()
+    {
+        CloseSummonPanel();
+        chooseOption = ChooseOptions.Move;
+        UpdateTileVisuals();
+    }
+
+    private void CloseSummonPanel()
+    {
+        isSummonPanelEnabled = false;
+        UIManager.Instance.DisableSummonMinionUI();
     }
 
     private void UpdateTileVisuals()
     {
         Gameboard.Instance.SetAllTilesToDefaultLayer();
-        switch (selectedOption)
+        switch (chooseOption)
         {
             case ChooseOptions.None:
                 return;
@@ -233,5 +322,6 @@ public class ChooseState : BaseState
     {
         base.Exit();
         Gameboard.Instance.SetAllTilesToDefaultLayer();
+        UIManager.Instance.DisableSummonMinionUI();
     }
 }

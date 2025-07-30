@@ -27,6 +27,10 @@ public class Minion
     {
         aliveStatus = AliveOptions.Alive;
     }
+    public bool IsSummoned()
+    {
+        return aliveStatus != AliveOptions.Unsummoned && aliveStatus != AliveOptions.None;
+    }
     
     private Action GetAction(List<ActionSO> actions, int index)
     {
@@ -61,13 +65,6 @@ public class Minion
             if (minionUnits[availableMoves[i].x, availableMoves[i].y] != null)
                 availableMoves.RemoveAt(i);
         return availableMoves;
-    }
-
-    public List<Vector2Int> GetAvailableSummons(ref MinionUnit[,] minionUnits, Vector2Int currentMinionIndex)
-    {
-        int summonRange = MinionInfo.SummonRangeBase;
-        List<Vector2Int> availableSummons = MathUtils.GetAreaTiles(summonRange, currentMinionIndex);
-        return availableSummons;
     }
     
     private DamageDetails CalculateDamage(Action attackerAction, MinionSO attacker)

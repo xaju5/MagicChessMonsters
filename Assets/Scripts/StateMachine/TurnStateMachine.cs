@@ -13,6 +13,7 @@ public class TurnStateMachine : StateMachine
     [HideInInspector] public AttackState attackState;
     [HideInInspector] public EndTurnState endTurnState;
     [HideInInspector] public GameoverState gameoverState;
+    [HideInInspector] public SummonState summonState;
 
     [SerializeField] private GameObject minionPrefab, actionPrefab;
     [SerializeField] private MinionList[] team1_enum, team2_enum;
@@ -23,10 +24,11 @@ public class TurnStateMachine : StateMachine
     private Vector2Int targetPosition;
     private MinionUnit[,] minionUnits;
     private List<MinionUnit> minionUnitList = new List<MinionUnit>();
-
     private Team currentPlayerTurn;
     private AnimationTimer animationTimer;
     private Team winner;
+    private MinionUnit minionToSummon;
+
     private void Awake()
     {
         setUpState = new SetUpState(this);
@@ -36,6 +38,7 @@ public class TurnStateMachine : StateMachine
         attackState = new AttackState(this);
         endTurnState = new EndTurnState(this);
         gameoverState = new GameoverState(this);
+        summonState = new SummonState(this);
         UIManager.Instance.resetEvent.AddListener(ResetGame);
     }
 
@@ -252,6 +255,23 @@ public class TurnStateMachine : StateMachine
             yield return null;
         }
         SetAnimationTimer(AnimationTimer.Finished);
+    }
+
+    // Summon
+
+    public void SetMinionToSummon(MinionUnit minion)
+    {
+        minionToSummon = minion;
+    }
+
+    public MinionUnit GetMinionToSummon()
+    {
+        return minionToSummon;
+    }
+
+    public void DeselectMinionToSummon()
+    {
+        minionToSummon = null;
     }
 
     //Gameover

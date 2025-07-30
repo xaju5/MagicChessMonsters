@@ -17,6 +17,7 @@ public class SetUpState : BaseState
         TSM.DeselectMinion();
         TSM.DeselectAction();
         TSM.DeselectTargetPosition();
+        TSM.DeselectMinionToSummon();
         TSM.SetAnimationTimer(AnimationTimer.None);
         DestroyAllMinions();
         TSM.ClearLogicVariables();
